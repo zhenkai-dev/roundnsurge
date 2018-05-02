@@ -1,0 +1,20 @@
+footer {
+  .wrapper {
+    background-color: #4C4C4C;
+    color: #FFF;
+    overflow: hidden;
+
+    a {
+      color: #FFF;
+    }
+
+    .box-right {
+      background-color: #3A3A3A;
+      padding: 0 9999px 9999px 15px;
+      margin: 0 -9999px -9999px -15px;
+      display: flex;
+      height: 100%;
+      flex-direction: column;
+    }
+  }
+}

@@ -1,0 +1,37 @@
+.page-view {
+  .banner {
+    background-size: cover;
+    background: transparent no-repeat center center;
+    position: relative;
+    color: #FFF;
+    min-height: 400px;
+    display: flex;
+
+    &:before {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-color: #000;
+      opacity: 0.4;
+      content: ' ';
+      display: block;
+    }
+
+    .container {
+      padding-top: 30px;
+      padding-bottom: 30px;
+      position: relative;
+      justify-content: center;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+
+      p {
+        font-family: 'Georgia', serif;
+        font-style: italic;
+      }
+    }
+  }
+}

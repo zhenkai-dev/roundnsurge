@@ -1,0 +1,59 @@
+header {
+  .navbar-brand {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .navbar {
+    background-color: $header-bg-color;
+    color: $header-color;
+
+    .navbar-toggler {
+      border-color: #FFF;
+
+      .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,<svg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'><path stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/></svg>");
+      }
+    }
+
+    .navbar-nav {
+      > li > a {
+        color: $header-color;
+      }
+
+      .nav-link.dropdown-toggle {
+        // padding-right: 40px;
+      }
+
+      .mobile-toggle {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 40px;
+        width: 40px;
+        cursor: pointer;
+        border-left: 1px solid #FFF;
+
+        &:after {
+          content: "\F067";
+          font-family: FontAwesome, serif;
+          display: block;
+        }
+      }
+
+      .nav-item.dropdown.show {
+        .mobile-toggle:after {
+          content: "\F068";
+        }
+      }
+
+      .dropdown-menu.show .dropdown-menu {
+        display: block;
+      }
+    }
+
+    img {
+      image-rendering: -webkit-optimize-contrast;
+    }
+  }
+}
