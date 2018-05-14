@@ -3504,16 +3504,16 @@
         },
         {
             "name": "torann/currency",
-            "version": "1.0.11",
+            "version": "1.0.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Torann/laravel-currency.git",
-                "reference": "416e9b82aac8951829f2ad5d265f25f76203c174"
+                "reference": "c7efe50649babb5efd61d9e776aeab37ecb9bd83"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Torann/laravel-currency/zipball/416e9b82aac8951829f2ad5d265f25f76203c174",
-                "reference": "416e9b82aac8951829f2ad5d265f25f76203c174",
+                "url": "https://api.github.com/repos/Torann/laravel-currency/zipball/c7efe50649babb5efd61d9e776aeab37ecb9bd83",
+                "reference": "c7efe50649babb5efd61d9e776aeab37ecb9bd83",
                 "shasum": ""
             },
             "require": {
@@ -3525,11 +3525,6 @@
                 "illuminate/database": "Allows for storing of currencies in the database"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
             "autoload": {
                 "files": [
                     "src/helpers.php"
@@ -3555,10 +3550,9 @@
                 "finance",
                 "laravel",
                 "money",
-                "openexchangerates",
-                "yahoo finance"
+                "openexchangerates"
             ],
-            "time": "2017-10-06T14:13:46+00:00"
+            "time": "2017-11-27T14:45:14+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

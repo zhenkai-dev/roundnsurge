@@ -6,6 +6,7 @@ use App\Banner;
 use App\Member;
 use App\Menu;
 use App\News;
+use App\Package;
 use App\Page;
 use App\Setting;
 use App\User;
@@ -27,6 +28,8 @@ class AuthServiceProvider extends ServiceProvider
         Page::class => 'App\Policies\Admin\PagePolicy',
         Setting::class => 'App\Policies\Admin\SettingPolicy',
         User::class => 'App\Policies\Admin\UserPolicy',
+
+        Package::class => 'App\Policies\Admin\PackagePolicy',
     ];
 
     /**

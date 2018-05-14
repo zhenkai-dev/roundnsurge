@@ -21,7 +21,7 @@
                                 // $banner with [banner_name, banner_description, friendly_url_name, friendly_url_module]
                             @endphp
 
-                            <div class="swiper-slide">
+                            <div class="swiper-slide" style="background-image: url({{ $banner->getPhotoFullUrl() }})">
                                 <div class="container">
                                     @if (!empty($banner['banner_name']))
                                         <h1>{{ $banner['banner_name'] }}</h1>
@@ -46,237 +46,178 @@
         </div>
     @endif
 
-    <div class="about home-section bg-white">
+    <div class="chart home-section">
         <div class="container py-5">
             <div class="row">
-                <div class="col-md-3 col-lg-2 mb-3">
+                <div class="col-lg-4 mb-3">
                     <div class="heading">
-                        About <span class="d-md-block">OWL</span>
+                        R&S PORTFOLIO
                     </div>
+                    <p>Lorem ipsum dolor sit
+                        amet, consectetur
+                        adipiscing elit. Non autem
+                        hoc: igitur ne illud quidem.</p>
                 </div>
-                <div class="col-md-9 col-lg-10">
-                    <h2>We are a Digital Agency for Retail</h2>
-                    <p>From strategic planning, web system development, eCommerce, branding and
-                        creative development, marketing services to omni-channel integration, we help
-                        our clients to move business online as well as providing seamless shopping
-                        experience for their customers. </p>
-                    <a href="" class="btn btn-theme">Read More</a>
+                <div class="col-lg-8">
+                    [EMBED CHART API]
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 mb-3">
+                    <div class="heading">
+                        R&S PORTFOLIO
+                    </div>
+                    <p>Lorem ipsum dolor sit
+                        amet, consectetur
+                        adipiscing elit. Non autem
+                        hoc: igitur ne illud quidem.</p>
+                </div>
+                <div class="col-lg-8">
+                    [EMBED CHART API]
 
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="what-we-do home-section bg-light">
+    <div class="middle-banner home-section">
         <div class="container py-5">
-            <div class="row">
-                <div class="col-md-3 col-lg-2 mb-3 order-md-1">
-                    <div class="heading">
-                        What <span class="d-md-block">We Do</span>
-                    </div>
-                </div>
-                <div class="col-md-9 col-lg-10">
-                    <div class="service">
-                        <div class="row">
-                            <div class="col-sm-6 item">
-                                <h3 class="title">
-                                    Strategic Planning
-                                </h3>
-                                <div class="description">
-                                    Provide you IT and creative solutions
-                                    that work best for your business.
-                                </div>
-                            </div>
-                            <div class="col-sm-6 item">
-                                <h3 class="title">
-                                    PHOTOGRAPHY
-                                </h3>
-                                <div class="description">
-                                    We take professional photos of products
-                                    and models for your brand and business.
-                                </div>
-                            </div>
-                            <div class="col-sm-6 item">
-                                <h3 class="title">
-                                    Branding & Design
-                                </h3>
-                                <div class="description">
-                                    We create the best user interface design, logo and
-                                    branding visual identity for business.
-                                </div>
-                            </div>
-                            <div class="col-sm-6 item">
-                                <h3 class="title">
-                                    Web Development
-                                </h3>
-                                <div class="description">
-                                    From content management system to CRM,
-                                    we can develop all you want.
-                                </div>
-                            </div>
-                            <div class="col-sm-6 item">
-                                <h3 class="title">
-                                    eCommerce Development
-                                </h3>
-                                <div class="description">
-                                    We are experienced in Shopify, Bigcommerce,
-                                    Magento as well as build your shop from scratch.
-                                </div>
-                            </div>
-                            <div class="col-sm-6 item">
-                                <h3 class="title">
-                                    System Integration
-                                </h3>
-                                <div class="description">
-                                    New retail is the future, we provide seamless
-                                    integration between online and retail business.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <img class="img-fluid" src="{{ asset('web/images/banner.jpg') }}">
         </div>
     </div>
 
-    <div class="happy-client bg-white">
+    <div class="package-section">
         <div class="container py-5">
-            <h2 class="text-center mb-3">Happy Clients</h2>
-            <div class="logos">
+            <h3 class="heading text-center">Training</h3>
+
+            <div class="packages">
                 <div class="row">
-                    <div class="col-6 col-sm-4 col-lg-2 mb-4">
-                        <div class="item h-100 align-items-center d-flex justify-content-center">
-                            <img class="img-fluid" src="{{ asset('web/images/clients/180.png') }}" title="" alt="">
+                    <div class="col-md-4 item">
+                        <div class="item-container text-center px-lg-5 px-3">
+                            <div>Basic use</div>
+                            <div class="price">FREE</div>
+                            <p class="description">
+                                Lorem Ipsum
+                                Vivamus elementum semper .
+                                hasellus viverra nulla
+                            </p>
+                            <a class="text-uppercase btn btn-theme" href="">Sign Up</a>
                         </div>
                     </div>
-                    <div class="col-6 col-sm-4 col-lg-2 mb-4">
-                        <div class="item h-100 align-items-center d-flex justify-content-center">
-                            <img class="img-fluid" src="{{ asset('web/images/clients/tapir.png') }}" title="" alt="">
+                    <div class="col-md-4 item highlight">
+                        <div class="item-container text-center px-lg-5 px-3">
+                            <div>Member</div>
+                            <div class="price">RM 3,888</div>
+                            <p class="description">
+                                Take control of your trading!
+                                The Day Trading
+                                Indicators Silver Package
+                                provides traders
+                                with the trading indicators
+                                and training needed
+                                to be successful in
+                                today’s markets.
+                            </p>
+                            <a class="text-uppercase btn btn-theme" href="">Sign Up</a>
                         </div>
                     </div>
-                    <div class="col-6 col-sm-4 col-lg-2 mb-4">
-                        <div class="item h-100 align-items-center d-flex justify-content-center">
-                            <img class="img-fluid" src="{{ asset('web/images/clients/lensvillage.png') }}" title=""
-                                 alt="">
-                        </div>
-                    </div>
-                    <div class="col-6 col-sm-4 col-lg-2 mb-4">
-                        <div class="item h-100 align-items-center d-flex justify-content-center">
-                            <img class="img-fluid" src="{{ asset('web/images/clients/hspace.png') }}" title="" alt="">
-                        </div>
-                    </div>
-                    <div class="col-6 col-sm-4 col-lg-2 mb-4">
-                        <div class="item h-100 align-items-center d-flex justify-content-center">
-                            <img class="img-fluid" src="{{ asset('web/images/clients/desensez.png') }}" title="" alt="">
-                        </div>
-                    </div>
-                    <div class="col-6 col-sm-4 col-lg-2 mb-4">
-                        <div class="item h-100 align-items-center d-flex justify-content-center">
-                            <img class="img-fluid" src="{{ asset('web/images/clients/oldtown.png') }}" title="" alt="">
+                    <div class="col-md-4 item">
+                        <div class="item-container text-center px-lg-5 px-3">
+                            <div>Pro</div>
+                            <div class="price">RM 6,888</div>
+                            <p class="description">
+                                Take control of your trading!
+                                The Day Trading
+                                Indicators Silver Package
+                                provides traders
+                                with the trading indicators
+                                and training needed
+                                to be successful in
+                                today’s markets.
+                            </p>
+                            <a class="text-uppercase btn btn-theme" href="">Sign Up</a>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="testimonial-section">
+        <div class="container py-5">
+            <div class="mb-5">
+                <h3 class="heading text-center">TESTIMONIAL</h3>
+                <h4 class="sub-heading text-center">
+                    Over 3,000 people have already taken the course and
+                    are getting results. Here's what a few of them had to say...
+                </h4>
+            </div>
+
+            <div class="testimonials">
                 <div class="row">
-                    <div class="col-6 col-sm-4 col-lg-2 mb-4">
-                        <div class="item h-100 align-items-center d-flex justify-content-center">
-                            <img class="img-fluid" src="{{ asset('web/images/clients/eco-tropic.png') }}" title=""
-                                 alt="">
-                        </div>
-                    </div>
-                    <div class="col-6 col-sm-4 col-lg-2 mb-4">
-                        <div class="item h-100 align-items-center d-flex justify-content-center">
-                            <img class="img-fluid" src="{{ asset('web/images/clients/waiko.png') }}" title="" alt="">
-                        </div>
-                    </div>
-                    <div class="col-6 col-sm-4 col-lg-2 mb-4">
-                        <div class="item h-100 align-items-center d-flex justify-content-center">
-                            <img class="img-fluid" src="{{ asset('web/images/clients/fuji-pacific.png') }}" title=""
-                                 alt="">
-                        </div>
-                    </div>
-                    <div class="col-6 col-sm-4 col-lg-2 mb-4">
-                        <div class="item h-100 align-items-center d-flex justify-content-center">
-                            <img class="img-fluid" src="{{ asset('web/images/clients/search-asia.png') }}" title=""
-                                 alt="">
-                        </div>
-                    </div>
-                    <div class="col-6 col-sm-4 col-lg-2 mb-4">
-                        <div class="item h-100 align-items-center d-flex justify-content-center">
-                            <img class="img-fluid" src="{{ asset('web/images/clients/sklas.png') }}" title="" alt="">
-                        </div>
-                    </div>
-                    <div class="col-6 col-sm-4 col-lg-2 mb-4">
-                        <div class="item h-100 align-items-center d-flex justify-content-center">
-                            <img class="img-fluid" src="{{ asset('web/images/clients/emum.png') }}" title="" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    <div class="item col-sm-12 col-md-6 col-lg-4">
+                        <div class="item-container">
+                            <div class="description">
+                                There is more material than I was expecting in the course. The videos are extremely helpful and the mix of presenters and ideas is outstanding.
 
-    </div>
-
-    <div class="testimonial home-section bg-light">
-        <div class="container py-5">
-            <div class="row">
-                <div class="col-md-4 mb-3">
-                    <div class="heading">
-                        Real People, <span class="d-md-block">Real Result</span>
-                    </div>
-                </div>
-                <div class="col-md-8">
-                    <div class="testimonial-swiper">
-                        <div class="swiper-container">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">Slide 1</div>
-                                <div class="swiper-slide">Slide 2</div>
-                                <div class="swiper-slide">Slide 3</div>
-                                <div class="swiper-slide">Slide 4</div>
-                                <div class="swiper-slide">Slide 5</div>
-                                <div class="swiper-slide">Slide 6</div>
-                                <div class="swiper-slide">Slide 7</div>
-                                <div class="swiper-slide">Slide 8</div>
-                                <div class="swiper-slide">Slide 9</div>
-                                <div class="swiper-slide">Slide 10</div>
+                                <div class="author">- Zbig Skiba, Selangor</div>
                             </div>
-                            <!-- Add Arrows -->
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
+                        </div>
+                    </div>
+
+                    <div class="item col-sm-12 col-md-6 col-lg-4">
+                        <div class="item-container">
+                            <div class="description">
+                                There is more material than I was expecting in the course. The videos are extremely helpful and the mix of presenters and ideas is outstanding.
+
+                                <div class="author">- Zbig Skiba, Selangor</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item col-sm-12 col-md-6 col-lg-4">
+                        <div class="item-container">
+                            <div class="description">
+                                There is more material than I was expecting in the course. The videos are extremely helpful and the mix of presenters and ideas is outstanding.
+
+                                <div class="author">- Zbig Skiba, Selangor</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item col-sm-12 col-md-6 col-lg-4">
+                        <div class="item-container">
+                            <div class="description">
+                                There is more material than I was expecting in the course. The videos are extremely helpful and the mix of presenters and ideas is outstanding.
+
+                                <div class="author">- Zbig Skiba, Selangor</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item col-sm-12 col-md-6 col-lg-4">
+                        <div class="item-container">
+                            <div class="description">
+                                There is more material than I was expecting in the course. The videos are extremely helpful and the mix of presenters and ideas is outstanding.
+
+                                <div class="author">- Zbig Skiba, Selangor</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item col-sm-12 col-md-6 col-lg-4">
+                        <div class="item-container">
+                            <div class="description">
+                                There is more material than I was expecting in the course. The videos are extremely helpful and the mix of presenters and ideas is outstanding.
+
+                                <div class="author">- Zbig Skiba, Selangor</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="request-consultation bg-theme">
-        <div class="container py-5">
-            <h3 class="text-center mb-4">We provide you the best solution for your online and retail business.</h3>
-            <div class="text-center">
-                <a href="" class="btn btn-red">Request A Free Consultation</a>
-            </div>
-        </div>
-    </div>
-@endsection
-
-@section('scripts')
-    <script src="{{ asset('web/js/swiper.min.js') }}"></script>
-    <script>
-
-        if ($('#banner').length) {
-            new Swiper('#banner .swiper-container', {
-                navigation: {
-                    nextEl: '#banner .swiper-button-next',
-                    prevEl: '#banner .swiper-button-prev'
-                }
-            });
-        }
-
-        new Swiper('.testimonial-swiper .swiper-container', {
-            navigation: {
-                nextEl: '.testimonial-swiper .swiper-button-next',
-                prevEl: '.testimonial-swiper .swiper-button-prev'
-            }
-        });
-    </script>
 @endsection

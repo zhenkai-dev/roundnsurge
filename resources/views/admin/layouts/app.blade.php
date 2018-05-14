@@ -88,6 +88,14 @@
                         @slot('text') {{ __('common.dashboard') }} @endslot
                     @endcomponent
 
+                    @if (can_access_module(\App\Package::class))
+                        @component('admin.shared.sidebar.item-component')
+                            @slot('url') {{ route('admin.package.index') }} @endslot
+                            @slot('iconClass') icon-badge @endslot
+                            @slot('text') {{ trans_choice('entity.package', 2) }} @endslot
+                        @endcomponent
+                    @endif
+
                     @if (can_access_module(\App\Page::class))
                         @component('admin.shared.sidebar.item-component')
                             @slot('url') {{ route('admin.page.index') }} @endslot

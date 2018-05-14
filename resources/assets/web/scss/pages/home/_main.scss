@@ -20,7 +20,7 @@
 
     .swiper-slide {
       background-size: cover;
-      background: url("../../../images/banner.jpg") no-repeat center center;
+      background: no-repeat center center;
       position: relative;
       color: #FFF;
       display: flex;
@@ -47,7 +47,7 @@
     flex-direction: column;
 
     p {
-      font-family: 'Georgia', serif;
+      font-family: 'Poppins', serif;
       font-style: italic;
     }
   }
@@ -56,9 +56,133 @@
 .home {
   .home-section {
     .heading {
-      font-size: 2.5rem;
-      border-bottom: 1px solid $theme-color;
+      font-size: 2rem;
+      color: $theme-color;
+      font-weight: 500;
       display: inline-block;
+      text-transform: uppercase;
+    }
+
+    p {
+      font-size: 1.5rem;
+      font-weight: 500;
+    }
+  }
+
+  .package-section {
+    background-color: $theme-color-2;
+
+    .heading {
+      color: $theme-color;
+      margin-bottom: 3rem;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+
+    .packages {
+      .item {
+        @include media-breakpoint-down(sm) {
+          margin-bottom: 2rem;
+        }
+
+        .item-container {
+          background-color: #c8c8c8;
+          padding: 2rem 0;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          position: relative;
+
+          .price {
+            font-weight: bold;
+            font-size: 2.5rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            margin-bottom: 2rem;
+          }
+
+          .description {
+            height: 100%;
+            margin-bottom: 1.5rem;
+          }
+        }
+
+        &.highlight {
+
+          @include media-breakpoint-down(sm) {
+            margin-top: 2rem;
+          }
+
+          .item-container {
+            background-color: #FFF;
+
+            &:before {
+              content: 'BEST DEAL';
+              background-color: $theme-color;
+              color: #FFF;
+              padding: .25rem .5rem;
+              display: inline-block;
+              font-weight: bold;
+              position: absolute;
+              top: -4%;
+              font-size: .8rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .testimonial-section {
+    background-color: #ebebeb;
+
+    .heading {
+      color: $theme-color;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .sub-heading {
+      font-weight: 500;
+      margin: 0 auto;
+
+      @include media-breakpoint-up(xl) {
+        width: 62%;
+      }
+    }
+
+    .testimonials {
+      .item {
+        margin-bottom: 4rem;
+
+        .item-container {
+          position: relative;
+          padding-left: 60px;
+
+          &:before {
+            content: ' ';
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 40px 40px 0;
+            border-color: transparent #ff0000 transparent transparent;
+            position: absolute;
+            left: 0;
+            top: 5px;
+          }
+
+          .description {
+            font-weight: 500;
+
+            .author {
+              margin-top: 1.5rem;
+              color: $theme-color;
+            }
+          }
+        }
+      }
     }
   }
 
@@ -71,25 +195,5 @@
         font-size: 1.5rem;
       }
     }
-  }
-
-  .happy-client {
-    .logos {
-      .item {
-        border: 1px solid $theme-color;
-        text-align: center;
-        padding: 1rem;
-      }
-    }
-  }
-
-  .testimonial {
-    .testimonial-swiper {
-      height: 300px;
-    }
-  }
-
-  .request-consultation {
-
   }
 }

@@ -244,7 +244,8 @@ return [
         'news' => true,
         'member' => true,
         'user' => true,
-        'setting' => true
+        'setting' => true,
+        'package' => true,
     ],
 
     'setting_id' => 1,

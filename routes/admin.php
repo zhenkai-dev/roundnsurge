@@ -68,5 +68,6 @@ Route::group(['as' => 'admin.', 'namespace' => 'Admin'], function () {
         Route::resource('user', 'UserController');
         Route::patch('member/{member}/address', 'MemberAddressController@update')->name('member.address.update');
         Route::resource('member', 'MemberController');
+        Route::resource('package', 'PackageController');
     });
 });

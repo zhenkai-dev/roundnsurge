@@ -59,7 +59,7 @@
                     @component('web.shared.menu.login')
                     @endcomponent
                     <div class="my-2 my-lg-0">
-                        <button class="btn btn-red btn-consultation text-uppercase px-3 d-sm-block" type="button" data-toggle="modal" data-target="#modalContact">Request Consultation</button>
+                        <button class="btn btn-theme px-3 d-sm-block" type="button" target="_blank">Sign Up</button>
                     </div>
                 </div>
             </nav>
@@ -70,138 +70,44 @@
         </main>
 
         <footer>
-            <div class="wrapper">
+            <div class="wrapper py-5">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-7 py-5">
+                        <div class="col-md-8 col-lg-9 footer-left">
                             <div class="row">
-                                <div class="col-md-4">
-                                    <ul class="list-unstyled">
-                                        <li><a href="">Team</a></li>
-                                        <li><a href="">Our Clients</a></li>
-                                        <li><a href="">Services</a></li>
-                                    </ul>
+                                <div class="col-sm-6 col-md-5 col-lg-3">
+                                    <div class="social">
+                                        <div class="social-heading">Stay Connected</div>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item"><a href=""><i class="fa fa-facebook"></i></a></li>
+                                            <li class="list-inline-item"><a href=""><i class="fa fa-instagram"></i></a></li>
+                                            <li class="list-inline-item"><a href=""><i class="fa fa-youtube"></i></a></li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="col-md-8 pr-5">
-                                    <h4>About OWL</h4>
-                                    <p>OWL is a digital consulting firm that offers a full range of
-                                        consulting services from web system development,
-                                        eCommerce, branding and creative development,
-                                        marketing services and omni-channel integration that
-                                        move from retail to online business.
-                                    </p>
+                                <div class="col-sm-6 col-md-7 col-lg-9">
+                                    <ul class="footer-link">
+                                        <li><a href="">Training</a></li>
+                                        <li><a href="">Blog</a></li>
+                                        <li><a href="">About</a></li>
+                                        <li><a href="">Resources</a></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-5">
-                            <div class="box-right py-5 pl-5">
-                                <h4>Our Office</h4>
-                                <address class="mb-3">
-                                    LEVEL 6.06 KPMG TOWER,<br />
-                                    8, FIRST AVENUE, BANDAR UTAMA,<br />
-                                    47800 PJ, SELANGOR, MALAYSIA
-                                </address>
-
-                                <div><a href="mailto:hoot@owl.my">hoot@owl.my</a></div>
-                                <div>Hotline :  +6017 888 1055</div>
-                            </div>
+                        <div class="col-md-4 col-lg-3 footer-right">
+                            <h5 class="text-theme">Contact Us</h5>
+                            <div class="phone mb-3">+6019 556 7829</div>
+                            <div class="mb-3"><a href="mailto:roundnsurge@gmail.com">roundnsurge@gmail.com</a></div>
+                            <address>
+                                19-2A, Jalan PJU 1/3C.<br />
+                                Petaling Jaya, Malaysia 47801
+                            </address>
                         </div>
                     </div>
                 </div>
             </div>
         </footer>
-    </div>
-
-    <div id="modalContact" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-                <form id="formContact" class="form" action="{{ route('web.enquiry.submit') }}" method="post">
-                    <div class="modal-body">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-
-                        <h3 class="text-center text-theme my-4">Ready to take your business to the next level ?</h3>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Your name</label>
-                                    @component('shared.input.text-component')
-                                        @slot('type') text @endslot
-                                        @slot('name') name @endslot
-                                        @slot('required') required @endslot
-                                    @endcomponent
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Your email address</label>
-                                    @component('shared.input.text-component')
-                                        @slot('type') email @endslot
-                                        @slot('name') email @endslot
-                                        @slot('required') required @endslot
-                                    @endcomponent
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Your phone number</label>
-                                    @component('shared.input.text-component')
-                                        @slot('type') text @endslot
-                                        @slot('name') phone @endslot
-                                        @slot('required') required @endslot
-                                    @endcomponent
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Your company name (optional)</label>
-                                    @component('shared.input.text-component')
-                                        @slot('type') text @endslot
-                                        @slot('name') company @endslot
-                                    @endcomponent
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>What do you want us to help?</label>
-                            @component('shared.input.select-component')
-                                @slot('name') subject @endslot
-                                @slot('required') required @endslot
-                                @slot('option')
-                                    <option value="Build a website">Build a website</option>
-                                @endslot
-                            @endcomponent
-                        </div>
-                        <div class="form-group">
-                            <label>How much is your budget?</label>
-                            @component('shared.input.select-component')
-                                @slot('name') budget @endslot
-                                @slot('required') required @endslot
-                                @slot('option')
-                                    <option value="RM 3,000 - RM 5,000">RM 3,000 - RM 5,000</option>
-                                @endslot
-                            @endcomponent
-                        </div>
-                        <div class="form-group">
-                            <label>Please provide a short description of your project</label>
-                            @component('shared.input.textarea-component')
-                                @slot('name') description @endslot
-                                @slot('required') required @endslot
-                                @slot('class') autosize @endslot
-                            @endcomponent
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-success"><i class="fa fa-envelope"></i> Submit</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </form>
-            </div>
-        </div>
     </div>
 
     @yield('modals')

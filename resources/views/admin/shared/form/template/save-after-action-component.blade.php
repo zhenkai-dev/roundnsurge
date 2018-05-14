@@ -17,14 +17,18 @@
                 <option value="{{ \App\Enumeration\SaveAfterActionEnum::CONTINUE_EDIT }}"
                         {{ (\App\Service\Admin\Util\SaveAfterActionUtil::getSaveAfterAction() === \App\Enumeration\SaveAfterActionEnum::CONTINUE_EDIT ? 'selected' : '') }}
                 >{{ __('common.continue_edit') }}</option>
+
                 @if (!empty(URL::previous()))
                     <option value="{{ \App\Enumeration\SaveAfterActionEnum::BACK_TO_PREVIOUS }}"
                             {{ (\App\Service\Admin\Util\SaveAfterActionUtil::getSaveAfterAction() === \App\Enumeration\SaveAfterActionEnum::BACK_TO_PREVIOUS ? 'selected' : '') }}
                     >{{ __('common.back_to_previous') }}</option>
                 @endif
-                <option value="{{ \App\Enumeration\SaveAfterActionEnum::INSERT_NEW_RECORD }}"
-                        {{ (\App\Service\Admin\Util\SaveAfterActionUtil::getSaveAfterAction() === \App\Enumeration\SaveAfterActionEnum::INSERT_NEW_RECORD ? 'selected' : '') }}
-                >{{ __('common.insert_new_record') }}</option>
+
+                @if (empty($noCreate))
+                    <option value="{{ \App\Enumeration\SaveAfterActionEnum::INSERT_NEW_RECORD }}"
+                            {{ (\App\Service\Admin\Util\SaveAfterActionUtil::getSaveAfterAction() === \App\Enumeration\SaveAfterActionEnum::INSERT_NEW_RECORD ? 'selected' : '') }}
+                    >{{ __('common.insert_new_record') }}</option>
+                @endif
             @else
                 <option value="{{ \App\Enumeration\SaveAfterActionEnum::INSERT_NEW_RECORD }}"
                         {{ (\App\Service\Admin\Util\SaveAfterActionUtil::getSaveAfterAction() === \App\Enumeration\SaveAfterActionEnum::INSERT_NEW_RECORD ? 'selected' : '') }}
@@ -34,9 +38,12 @@
                             {{ (\App\Service\Admin\Util\SaveAfterActionUtil::getSaveAfterAction() === \App\Enumeration\SaveAfterActionEnum::BACK_TO_PREVIOUS ? 'selected' : '') }}
                     >{{ __('common.back_to_previous') }}</option>
                 @endif
-                <option value="{{ \App\Enumeration\SaveAfterActionEnum::CONTINUE_EDIT }}"
-                        {{ (\App\Service\Admin\Util\SaveAfterActionUtil::getSaveAfterAction() === \App\Enumeration\SaveAfterActionEnum::CONTINUE_EDIT ? 'selected' : '') }}
-                >{{ __('common.continue_edit') }}</option>
+
+                @if (empty($noCreate))
+                    <option value="{{ \App\Enumeration\SaveAfterActionEnum::CONTINUE_EDIT }}"
+                            {{ (\App\Service\Admin\Util\SaveAfterActionUtil::getSaveAfterAction() === \App\Enumeration\SaveAfterActionEnum::CONTINUE_EDIT ? 'selected' : '') }}
+                    >{{ __('common.continue_edit') }}</option>
+                @endif
             @endif
         @endslot
     @endcomponent

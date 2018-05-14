@@ -14,6 +14,7 @@ return [
     'member' => 'Member|Members',
     'menu' => 'Menu|Menus',
     'news' => 'News|News',
+    'package' => 'Package|Packages',
     'page' => 'Page|Pages',
     'setting' => 'Setting|Settings',
     'user' => 'User|Users',

@@ -19,6 +19,7 @@ header {
     .navbar-nav {
       > li > a {
         color: $header-color;
+        font-weight: 500;
       }
 
       .nav-link.dropdown-toggle {

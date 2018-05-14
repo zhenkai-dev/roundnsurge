@@ -2,10 +2,14 @@
 @import '~font-awesome/scss/font-awesome';
 @import "~bootstrap-daterangepicker/daterangepicker";
 
-$header-bg-color: #3F3F3F !default;
-$header-color: #fff !default;
-$body-color: #3F3F3F !default;
-$theme-color: #48cccd !default;
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
+
+$header-bg-color: #FFFFFF !default;
+$header-color: #1e2832 !default;
+$body-color: #1e2832 !default;
+$body-bg-color: #f8f8f8 !default;
+$theme-color: #ff0000 !default;
+$theme-color-2: #1e2832 !default;
 
 @font-face {
   font-family: 'bentonsansregular';
@@ -15,12 +19,17 @@ $theme-color: #48cccd !default;
   font-style: normal;
 }
 
+.btn {
+  border-radius: 0 !important;
+}
+
 .btn-red {
   @include button-variant(#F64145, #F64145);
 }
 
 .btn-theme {
   @include button-variant($theme-color, $theme-color);
+  font-weight: 500;
 }
 
 .btn-theme {
@@ -41,9 +50,10 @@ html {
 }
 
 body {
-  font-family: 'bentonsansregular', serif;
+  font-family: 'Poppins', serif;
   color: $body-color;
   height: 100%;
+  background-color: $body-bg-color;
 
   > .wrapper {
     display: flex;
@@ -103,6 +113,20 @@ body {
 .list-group-item.active {
   background-color: $theme-color;
   border-color: $theme-color;
+}
+
+.social {
+  .social-heading {
+
+  }
+
+  ul {
+    list-style: none;
+
+    li {
+
+    }
+  }
 }
 
 @import "core/header";

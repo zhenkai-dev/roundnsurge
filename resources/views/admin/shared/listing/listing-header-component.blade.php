@@ -12,7 +12,7 @@
         {{ __('common.total_records', ['total' => $total]) }}
     </div>
     <div class="col text-right">
-        @can(\App\Enumeration\PolicyActionEnum::CREATE, $module)
+        @can(!empty($addNewUrl) && \App\Enumeration\PolicyActionEnum::CREATE, $module)
             {!! add_new_button($addNewUrl) !!}
         @endcan
     </div>
