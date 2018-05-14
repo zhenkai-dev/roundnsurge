@@ -37,6 +37,12 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
  */
 class Package extends Model
 {
+    const BASIC = 'basic';
+
+    const MEMBER = 'member';
+
+    const PRO = 'pro';
+
     protected $casts = [
         'is_active' => 'boolean',
     ];

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Page;
 use App\Service\Web\BannerService;
+use App\Service\Web\PackageService;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,8 @@ class HomeController extends Controller
         /* @var \App\Page $page */
         $pageTranslation = $page->pageTranslation(app('Language')->getId())->first();
 
-        return view('web.pages.home.main', compact('banners', 'page', 'pageTranslation'));
+        $packages = PackageService::getAll();
+
+        return view('web.pages.home.main', compact('banners', 'page', 'pageTranslation', 'packages'));
     }
 }

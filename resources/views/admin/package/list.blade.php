@@ -36,7 +36,8 @@
                 <thead>
                     <tr>
                         <th>{!! sortable('name', __('package.name')) !!}</th>
-                        <th width="10%" class="text-center">{{ __('common.status') }}</th>
+                        <th>{{ __('package.package_type') }}</th>
+                        <th>{{ __('package.price') }}</th>
                         <th width="10%"></th>
                     </tr>
                 </thead>
@@ -48,8 +49,8 @@
                                 <a href="{{ route('admin.package.edit', $package->getId()) }}">{{ $package->packageTranslation->getName() }}</a>
                                 <small class="font-italic d-block">{{ str_limit(strip_tags($package->packageTranslation->getDescription())) }}</small>
                             </td>
-                            </td>
-                            <td class="text-center">{!! status_icon($package->isActive()) !!}</td>
+                            <td>{{ $package->getPackageType() }}</td>
+                            <td>{{ currency($package->getPrice()) }}</td>
                             <td class="text-center">
                                 @if (!Auth::user()->can(\App\Enumeration\PolicyActionEnum::UPDATE, $package))
                                     {!! edit_icon_muted() !!}

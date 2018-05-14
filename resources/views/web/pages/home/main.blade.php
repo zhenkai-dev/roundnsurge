@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-    @if (count($banners) == 1)
+    @if (!empty($banners) && count($banners) == 1)
         <div id="banner">
             <div class="banner-swiper">
                 <div class="swiper-container">
@@ -88,62 +88,31 @@
         </div>
     </div>
 
-    <div class="package-section">
-        <div class="container py-5">
-            <h3 class="heading text-center">Training</h3>
+    @if(!empty($packages) && count($packages))
+        <div class="package-section">
+            <div class="container py-5">
+                <h3 class="heading text-center">Training</h3>
 
-            <div class="packages">
-                <div class="row">
-                    <div class="col-md-4 item">
-                        <div class="item-container text-center px-lg-5 px-3">
-                            <div>Basic use</div>
-                            <div class="price">FREE</div>
-                            <p class="description">
-                                Lorem Ipsum
-                                Vivamus elementum semper .
-                                hasellus viverra nulla
-                            </p>
-                            <a class="text-uppercase btn btn-theme" href="">Sign Up</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4 item highlight">
-                        <div class="item-container text-center px-lg-5 px-3">
-                            <div>Member</div>
-                            <div class="price">RM 3,888</div>
-                            <p class="description">
-                                Take control of your trading!
-                                The Day Trading
-                                Indicators Silver Package
-                                provides traders
-                                with the trading indicators
-                                and training needed
-                                to be successful in
-                                today’s markets.
-                            </p>
-                            <a class="text-uppercase btn btn-theme" href="">Sign Up</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4 item">
-                        <div class="item-container text-center px-lg-5 px-3">
-                            <div>Pro</div>
-                            <div class="price">RM 6,888</div>
-                            <p class="description">
-                                Take control of your trading!
-                                The Day Trading
-                                Indicators Silver Package
-                                provides traders
-                                with the trading indicators
-                                and training needed
-                                to be successful in
-                                today’s markets.
-                            </p>
-                            <a class="text-uppercase btn btn-theme" href="">Sign Up</a>
-                        </div>
+                <div class="packages">
+                    <div class="row">
+                        @foreach ($packages as $package)
+                            @php /* @var \App\Package $package with [package_name, package_description] */ @endphp
+                            <div class="col-md-4 item {{ ($package->getPackageType() == \App\Package::MEMBER) ? 'highlight' : '' }}">
+                                <div class="item-container text-center px-lg-5 px-3">
+                                    <div>{{ $package['package_name'] }}</div>
+                                    <div class="price">{{ ($package->getPrice() == 0 ? 'FREE' : currency($package->getPrice())) }}</div>
+                                    <p class="description">
+                                        {{ nl2br($package['package_description']) }}
+                                    </p>
+                                    <a class="text-uppercase btn btn-theme" href="{{ route('web.register', ['package' => $package->getId()]) }}">Sign Up</a>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
 
     <div class="testimonial-section">
         <div class="container py-5">

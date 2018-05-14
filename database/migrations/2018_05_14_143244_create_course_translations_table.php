@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePackageTranslationsTable extends Migration
+class CreateCourseTranslationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,17 @@ class CreatePackageTranslationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('package_translations', function (Blueprint $table) {
+        Schema::create('course_translations', function (Blueprint $table) {
             $table->bigIncrements('translation_id')->unsigned();
-            $table->bigInteger('package_id')->unsigned();
+            $table->bigInteger('course_id')->unsigned();
             $table->bigInteger('language_id')->unsigned();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->timestamps();
         });
 
-        Schema::table('package_translations', function (Blueprint $table) {
-            $table->foreign('package_id')->references('id')->on('packages');
+        Schema::table('course_translations', function (Blueprint $table) {
+            $table->foreign('course_id')->references('id')->on('packages');
             $table->foreign('language_id')->references('id')->on('languages');
         });
     }
@@ -34,6 +35,6 @@ class CreatePackageTranslationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('package_translations');
+        Schema::dropIfExists('course_translations');
     }
 }

@@ -46,19 +46,9 @@
             @slot('input')
                 @component('admin.shared.input.textarea-component')
                     @slot('id') description @endslot
+                    @slot('class') autosize @endslot
                     @slot('name') description @endslot
                     @slot('value') {{ old('description', (is_edit() ? $packageTranslation->getDescription() : '')) }} @endslot
-                @endcomponent
-            @endslot
-        @endcomponent
-
-        @component('admin.shared.form.form-group')
-            @slot('label') {{ __('common.status') }} @endslot
-            @slot('input')
-                @component('admin.shared.input.template.status-component', [
-                    'value' => old('is_active', (is_edit() ? $package->isActive() : ''))
-                ])
-                    @slot('name') is_active @endslot
                 @endcomponent
             @endslot
         @endcomponent
@@ -75,11 +65,4 @@
 
         @include('admin.shared.form.form-submit-button')
     </form>
-@endsection
-
-@section('scripts')
-    <script src="{{ asset('admin/js/ckeditor/ckeditor.js') }}"></script>
-    <script>
-        CKEDITOR.replace( 'description' );
-    </script>
 @endsection

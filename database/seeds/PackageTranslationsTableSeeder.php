@@ -16,7 +16,7 @@ class PackageTranslationsTableSeeder extends Seeder
             'package_id' => 1,
             'language_id' => 1,
             'name' => 'Basic use',
-            'description' => '<p>Lorem ipsum</p>',
+            'description' => 'Lorem ipsum',
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
@@ -25,7 +25,7 @@ class PackageTranslationsTableSeeder extends Seeder
             'package_id' => 2,
             'language_id' => 1,
             'name' => 'Member',
-            'description' => '<p>Lorem ipsum</p>',
+            'description' => 'Lorem ipsum',
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
@@ -34,7 +34,7 @@ class PackageTranslationsTableSeeder extends Seeder
             'package_id' => 3,
             'language_id' => 1,
             'name' => 'Pro',
-            'description' => '<p>Lorem ipsum</p>',
+            'description' => 'Lorem ipsum',
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);

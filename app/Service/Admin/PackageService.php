@@ -72,7 +72,6 @@ class PackageService
         }
 
         $package->setPrice($request->input('price'));
-        $package->setIsActive($request->input('is_active'));
 
         // save
         $package->save();
