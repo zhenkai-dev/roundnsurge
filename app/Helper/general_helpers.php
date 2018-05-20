@@ -146,6 +146,46 @@ if (!function_exists('edit_icon_muted')) {
     }
 }
 
+if (!function_exists('view_icon')) {
+    /**
+     * Get view icon by boolean
+     *
+     * @param string $title
+     * @return \Illuminate\View\View
+     */
+    function view_icon(string $title = ''): \Illuminate\View\View
+    {
+        return \App\Service\Util\ViewUtil::viewIcon($title);
+    }
+}
+
+if (!function_exists('view_icon_link')) {
+    /**
+     * Get view icon by boolean
+     *
+     * @param string $url
+     * @param string $title
+     * @return \Illuminate\View\View
+     */
+    function view_icon_link(string $url, string $title = ''): \Illuminate\View\View
+    {
+        return \App\Service\Util\ViewUtil::viewIconLink($url, $title);
+    }
+}
+
+if (!function_exists('view_icon_muted')) {
+    /**
+     * Get view icon by boolean
+     *
+     * @param string $title
+     * @return \Illuminate\View\View
+     */
+    function view_icon_muted(string $title = ''): \Illuminate\View\View
+    {
+        return \App\Service\Util\ViewUtil::viewIconMuted($title);
+    }
+}
+
 if (!function_exists('status_icon')) {
     /**
      * Get status icon by boolean

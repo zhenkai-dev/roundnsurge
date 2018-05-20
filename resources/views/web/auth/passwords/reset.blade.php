@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-body">
                     @php /* @var Illuminate\Support\ViewErrorBag $errors */ @endphp
-                    <h1 class="card-heading">Reset Password</h1>
+                    <h1 class="card-heading text-uppercase">Reset Password</h1>
 
                     @if (session('status'))
                         <div class="alert alert-success">
@@ -56,7 +56,7 @@
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-block btn-success">
+                            <button type="submit" class="btn btn-block btn-theme">
                                 Reset Password
                             </button>
                         </div>

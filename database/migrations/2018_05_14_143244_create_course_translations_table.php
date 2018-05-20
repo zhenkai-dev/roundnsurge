@@ -23,7 +23,7 @@ class CreateCourseTranslationsTable extends Migration
         });
 
         Schema::table('course_translations', function (Blueprint $table) {
-            $table->foreign('course_id')->references('id')->on('packages');
+            $table->foreign('course_id')->references('id')->on('courses');
             $table->foreign('language_id')->references('id')->on('languages');
         });
     }

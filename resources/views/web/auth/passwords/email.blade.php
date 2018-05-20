@@ -7,12 +7,14 @@
             <div class="card">
                 <div class="card-body">
                     @php /* @var Illuminate\Support\ViewErrorBag $errors */ @endphp
-                    <h1 class="card-title">Reset Password</h1>
+                    <h1 class="card-title text-uppercase">Reset Password</h1>
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
                         </div>
                     @endif
+
+                    <p>We will send you an email to reset your password.</p>
 
                     <form class="form-horizontal" method="POST" action="{{ route('web.password.email') }}">
                         {{ csrf_field() }}
@@ -30,7 +32,7 @@
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-block btn-success">
+                            <button type="submit" class="btn btn-block btn-theme">
                                 Send Password Reset Link
                             </button>
                         </div>

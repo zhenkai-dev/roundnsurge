@@ -11,6 +11,7 @@ return [
     'address' => 'Address|Addresses',
     'banner' => 'Banner|Banners',
     'country' => 'Country|Countries',
+    'course' => 'Course|Courses',
     'member' => 'Member|Members',
     'menu' => 'Menu|Menus',
     'news' => 'News|News',

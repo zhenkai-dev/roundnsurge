@@ -4,31 +4,32 @@ namespace App;
 
 use App\Notifications\Auth\ResetPassword;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 
-
 /**
  * App\Member
  *
- * @property int $id
- * @property string $name
- * @property \Carbon\Carbon|null $dob
- * @property string|null $mobile
- * @property string $email
- * @property string $password
- * @property int|null $added_by
- * @property string|null $last_login_ip
- * @property \Carbon\Carbon|null $last_login_at
- * @property string|null $remember_token
- * @property bool $is_active
- * @property string|null $deleted_at
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
- * @property-read \App\User|null $addedBy
+ * @property int                                                                                                            $id
+ * @property string                                                                                                         $name
+ * @property \Carbon\Carbon|null                                                                                            $dob
+ * @property string|null                                                                                                    $mobile
+ * @property string                                                                                                         $email
+ * @property string                                                                                                         $password
+ * @property int|null                                                                                                       $added_by
+ * @property string|null                                                                                                    $last_login_ip
+ * @property \Carbon\Carbon|null                                                                                            $last_login_at
+ * @property string|null                                                                                                    $remember_token
+ * @property bool                                                                                                           $is_active
+ * @property string|null                                                                                                    $deleted_at
+ * @property \Carbon\Carbon|null                                                                                            $created_at
+ * @property \Carbon\Carbon|null                                                                                            $updated_at
+ * @property-read \App\User|null                                                                                            $addedBy
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @method static bool|null forceDelete()
  * @method static \Illuminate\Database\Query\Builder|\App\Member onlyTrashed()
@@ -302,7 +303,7 @@ class Member extends Authenticatable
     /**
      * Send the password reset notification.
      *
-     * @param  string  $token
+     * @param  string $token
      * @return void
      */
     public function sendPasswordResetNotification($token)
@@ -318,5 +319,33 @@ class Member extends Authenticatable
     public function address(): MorphMany
     {
         return $this->morphMany('App\Address', 'name', 'module', 'fkid');
+    }
+
+    /**
+     * Current membership of this member
+     * @return Membership|HasOne
+     */
+    public function membership(): HasOne
+    {
+        return $this->hasOne('App\Membership', 'member_id', 'id')
+            ->where('is_active', '=', true)
+            ->orderBy('expiry_date', 'desc');
+    }
+
+    /**
+     * All previous memberships record
+     * @return HasMany
+     */
+    public function memberships(): HasMany
+    {
+        return $this->hasMany('App\Membership', 'member_id', 'id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function memberLogs(): HasMany
+    {
+        return $this->hasMany('App\MemberLog');
     }
 }

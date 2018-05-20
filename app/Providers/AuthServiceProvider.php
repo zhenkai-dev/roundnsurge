@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Banner;
+use App\Course;
 use App\Member;
 use App\Menu;
 use App\News;
@@ -29,6 +30,7 @@ class AuthServiceProvider extends ServiceProvider
         Setting::class => 'App\Policies\Admin\SettingPolicy',
         User::class => 'App\Policies\Admin\UserPolicy',
 
+        Course::class => 'App\Policies\Admin\CoursePolicy',
         Package::class => 'App\Policies\Admin\PackagePolicy',
     ];
 
@@ -39,6 +41,23 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if (request()->segment(1) === config('app.member_prefix')) {
+            $this->policies = [
+                Course::class => 'App\Policies\Member\CoursePolicy',
+
+                /*Banner::class => 'App\Policies\Member\BannerPolicy',
+                Member::class => 'App\Policies\Member\MemberPolicy',
+                Menu::class => 'App\Policies\Member\MenuPolicy',
+                News::class => 'App\Policies\Member\NewsPolicy',
+                Page::class => 'App\Policies\Member\PagePolicy',
+                Setting::class => 'App\Policies\Member\SettingPolicy',
+                User::class => 'App\Policies\Member\UserPolicy',
+
+                Course::class => 'App\Policies\Member\CoursePolicy',
+                Package::class => 'App\Policies\Member\PackagePolicy',*/
+            ];
+        }
+
         $this->registerPolicies();
 
         Passport::routes();

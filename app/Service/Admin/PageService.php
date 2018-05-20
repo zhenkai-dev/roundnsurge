@@ -46,7 +46,7 @@ class PageService
         } else {
             return Validator::make($request->all(), [
                 'name' => 'required|string|max:255',
-                'url_name' => (!$page->isModule() ? 'required|' : '') . 'string|max:255',
+                'url_name' => (!$page->isModule() && $page->getId() > 1 ? 'required|' : '') . 'string|max:255',
                 'photo' => 'nullable|image|max:' . config('filesystems.max_uploaded_size'),
                 'is_active' => 'required|boolean'
             ]);
@@ -108,7 +108,7 @@ class PageService
 
         $pageTranslation->save();
 
-        if (!$page->isModule()) {
+        if (!$page->isModule() && $page->getId() > 1) {
             if ($isEdit) {
                 $this->friendlyUrlService->insertOrUpdateNameByModule(
                     get_class($page),

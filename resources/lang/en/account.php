@@ -8,6 +8,7 @@
 
 return [
     'profile' => 'Profile',
+    'membership' => 'Membership',
     'change_password' => 'Change password',
     'logout' => 'Logout'
 ];

@@ -10,7 +10,10 @@
 @endsection
 
 @section('content')
-    @if (!empty($banners) && count($banners) == 1)
+
+    @php /* @var \App\Page[] $pages */ @endphp
+
+    @if (!empty($banners) && count($banners) > 1)
         <div id="banner">
             <div class="banner-swiper">
                 <div class="swiper-container">
@@ -48,37 +51,8 @@
 
     <div class="chart home-section">
         <div class="container py-5">
-            <div class="row">
-                <div class="col-lg-4 mb-3">
-                    <div class="heading">
-                        R&S PORTFOLIO
-                    </div>
-                    <p>Lorem ipsum dolor sit
-                        amet, consectetur
-                        adipiscing elit. Non autem
-                        hoc: igitur ne illud quidem.</p>
-                </div>
-                <div class="col-lg-8">
-                    [EMBED CHART API]
-
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-4 mb-3">
-                    <div class="heading">
-                        R&S PORTFOLIO
-                    </div>
-                    <p>Lorem ipsum dolor sit
-                        amet, consectetur
-                        adipiscing elit. Non autem
-                        hoc: igitur ne illud quidem.</p>
-                </div>
-                <div class="col-lg-8">
-                    [EMBED CHART API]
-
-                </div>
-            </div>
+            @php /* @var \App\PageTranslation $pageTranslation */ @endphp
+            {!! editor_content($pageTranslation->getDescription()) !!}
         </div>
     </div>
 
@@ -118,75 +92,33 @@
         <div class="container py-5">
             <div class="mb-5">
                 <h3 class="heading text-center">TESTIMONIAL</h3>
-                <h4 class="sub-heading text-center">
-                    Over 3,000 people have already taken the course and
-                    are getting results. Here's what a few of them had to say...
-                </h4>
+                @if (!empty($pages[6]))
+                    <h4 class="sub-heading text-center">
+                        {!! editor_content($pages[6]->pageTranslation->getDescription()) !!}
+                    </h4>
+                @endif
             </div>
 
-            <div class="testimonials">
-                <div class="row">
-                    <div class="item col-sm-12 col-md-6 col-lg-4">
-                        <div class="item-container">
-                            <div class="description">
-                                There is more material than I was expecting in the course. The videos are extremely helpful and the mix of presenters and ideas is outstanding.
-
-                                <div class="author">- Zbig Skiba, Selangor</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item col-sm-12 col-md-6 col-lg-4">
-                        <div class="item-container">
-                            <div class="description">
-                                There is more material than I was expecting in the course. The videos are extremely helpful and the mix of presenters and ideas is outstanding.
-
-                                <div class="author">- Zbig Skiba, Selangor</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item col-sm-12 col-md-6 col-lg-4">
-                        <div class="item-container">
-                            <div class="description">
-                                There is more material than I was expecting in the course. The videos are extremely helpful and the mix of presenters and ideas is outstanding.
-
-                                <div class="author">- Zbig Skiba, Selangor</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item col-sm-12 col-md-6 col-lg-4">
-                        <div class="item-container">
-                            <div class="description">
-                                There is more material than I was expecting in the course. The videos are extremely helpful and the mix of presenters and ideas is outstanding.
-
-                                <div class="author">- Zbig Skiba, Selangor</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item col-sm-12 col-md-6 col-lg-4">
-                        <div class="item-container">
-                            <div class="description">
-                                There is more material than I was expecting in the course. The videos are extremely helpful and the mix of presenters and ideas is outstanding.
-
-                                <div class="author">- Zbig Skiba, Selangor</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item col-sm-12 col-md-6 col-lg-4">
-                        <div class="item-container">
-                            <div class="description">
-                                There is more material than I was expecting in the course. The videos are extremely helpful and the mix of presenters and ideas is outstanding.
-
-                                <div class="author">- Zbig Skiba, Selangor</div>
-                            </div>
-                        </div>
-                    </div>
+            @if (!empty($pages[7]))
+                <div class="testimonials">
+                    {!! editor_content($pages[7]->pageTranslation->getDescription()) !!}
                 </div>
-            </div>
+            @endif
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('web/js/swiper.min.js') }}"></script>
+    <script>
+
+        if ($('#banner').length) {
+            new Swiper('#banner .swiper-container', {
+                navigation: {
+                    nextEl: '#banner .swiper-button-next',
+                    prevEl: '#banner .swiper-button-prev'
+                }
+            });
+        }
+    </script>
 @endsection

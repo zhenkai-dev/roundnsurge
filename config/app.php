@@ -237,6 +237,8 @@ return [
 
     'admin_prefix' => 'my-admin',
 
+    'member_prefix' => 'rs-member',
+
     'modules' => [
         'page' => true,
         'menu' => true,
@@ -246,8 +248,10 @@ return [
         'user' => true,
         'setting' => true,
         'package' => true,
+        'course' => true,
     ],
 
     'setting_id' => 1,
-    'default_ordering_value' => 999999999
+    'default_ordering_value' => 999999999,
+    'package_expiry_duration' => '12m'
 ];

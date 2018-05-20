@@ -43,5 +43,7 @@ return [
     'total_records' => 'Total :total record(s)',
     'updated_at' => 'Updated at',
     'url' => 'URL',
-    'view_front' => 'View front site'
+    'view' => 'View',
+    'view_front' => 'View front site',
+    'view_official' => 'Back to official site'
 ];

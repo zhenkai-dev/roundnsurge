@@ -24,7 +24,7 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('admin/js/jquery.nestable.js') }}"></script>
+    <script src="{{ asset('member/js/jquery.nestable.js') }}"></script>
     <script>
         $(document).ready(function() {
             var updateOutput = function (e) {

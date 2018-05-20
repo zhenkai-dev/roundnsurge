@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -239,5 +240,12 @@ class Package extends Model
     public function friendlyUrl(): MorphMany
     {
         return $this->morphMany('App\FriendlyUrl', 'name', 'module', 'fkid');
+    }
+
+    /**
+     * @return Collection|Package[]
+     */
+    public static function getMultipleChoice(): Collection {
+        return self::where('is_active', '=', true)->get();
     }
 }

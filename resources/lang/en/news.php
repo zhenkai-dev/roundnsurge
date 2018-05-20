@@ -11,6 +11,7 @@ return [
     'name' => 'Name',
     'post_date' => 'Post date',
     'photo' => 'Banner',
+    'short_intro' => 'Short introduction',
     'description' => 'Content',
 
 ];

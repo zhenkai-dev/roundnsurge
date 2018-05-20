@@ -22,9 +22,16 @@
 @section('content')
     <div class="container">
         <div class="py-5">
-            <h1>{{ $newsTranslation->getName() }}</h1>
+            <div class="row">
+                <div class="col-sm-8">
+                    <h1>{{ $newsTranslation->getName() }}</h1>
 
-            {!! editor_content($newsTranslation->getDescription()) !!}
+                    {!! editor_content($newsTranslation->getDescription()) !!}
+                </div>
+                <div class="col-sm-4">
+                    @include('web.shared.page-sidebar-component')
+                </div>
+            </div>
         </div>
     </div>
 @endsection

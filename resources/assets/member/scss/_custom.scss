@@ -1,0 +1,55 @@
+// Here you can add other styles
+@import '~font-awesome/scss/font-awesome';
+@import '~simple-line-icons/scss/simple-line-icons';
+@import "nestable";
+@import "~bootstrap-daterangepicker/daterangepicker";
+
+.app-header.navbar .navbar-brand {
+  background-image: url("../../../../storage/app/public/setting/logo.png");
+  image-rendering: -webkit-optimize-contrast;
+  background-size: 110px auto;
+  border-bottom: 0;
+}
+
+.form-filter {
+  .pagination {
+    margin-bottom: 0;
+  }
+}
+
+.btn-clear, .btn-filter {
+  width: 50%;
+  display: block;
+  float: left;
+}
+
+.home-quicklinks {
+  .card {
+    a {
+      display: block;
+      color: $body-color;
+
+      &:hover {
+        text-decoration: none;
+        background-color: $sidebar-nav-link-active-icon-color;
+        color: #FFF;
+      }
+    }
+
+    .icon {
+      text-align: center;
+
+      i {
+        font-size: 5rem;
+      }
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  .btn-clear, .btn-filter {
+    width: auto;
+    display: inline-block;
+    float: none;
+  }
+}

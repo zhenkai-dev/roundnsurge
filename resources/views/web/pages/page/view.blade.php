@@ -31,11 +31,18 @@
 
     <div class="container">
         <div class="py-5">
-            @if (!$page->getPhoto())
-                <h1>{{ $pageTranslation->getName() }}</h1>
-            @endif
+            <div class="row">
+                <div class="col-sm-8">
+                    @if (!$page->getPhoto())
+                        <h1 class="text-theme">{{ $pageTranslation->getName() }}</h1>
+                    @endif
 
-            {!! editor_content($pageTranslation->getDescription()) !!}
+                    {!! editor_content($pageTranslation->getDescription()) !!}
+                </div>
+                <div class="col-sm-4">
+                    @include('web.shared.page-sidebar-component')
+                </div>
+            </div>
         </div>
     </div>
 @endsection

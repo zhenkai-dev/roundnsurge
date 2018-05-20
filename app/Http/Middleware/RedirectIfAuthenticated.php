@@ -24,7 +24,7 @@ class RedirectIfAuthenticated
     {
         if ($guard == config('auth.guards.web.name')) {
             if (Auth::guard($guard)->check()) {
-                return redirect('/');
+                return redirect(route('member.home'));
             }
         } elseif ($guard == config('auth.guards.admin.name')) {
             if (Auth::guard($guard)->check()) {

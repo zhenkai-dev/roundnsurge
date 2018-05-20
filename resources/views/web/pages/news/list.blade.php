@@ -19,40 +19,29 @@
 @section('content')
     <div class="container">
         <div class="py-5">
-            <h1>News</h1>
-
-            @if (count($newsList))
-                <div class="news">
-                    <div class="row">
-                        @foreach ($newsList as $news)
-                            <div class="col-sm-12 col-md-6 col-lg-4 item">
-                                <div class="item-container">
-                                    @if ($news->getPhoto())
-                                        <a href="{{ route('web.news.show', ['slug' => $news->friendly_url_name]) }}" class="img-top" style="background-image: url('{{ $news->getPhotoFullUrl() }}')"></a>
-                                    @else
-                                        <a href="{{ route('web.news.show', ['slug' => $news->friendly_url_name]) }}" class="no-image">
-                                            <span>News</span>
-                                        </a>
-                                    @endif
-                                    <div class="item-body">
-                                        <h5 class="heading">
-                                           {{ $news->news_name }}
-                                        </h5>
-
-                                        <div class="text-muted post-date">{{ $news->getPostDate()->toFormattedDateString() }}</div>
-
-                                        <a href="{{ route('web.news.show', ['slug' => $news->friendly_url_name]) }}" class="btn btn-theme">Read more</a>
-                                    </div>
+            <div class="row">
+                <div class="col-sm-8">
+                    @if (count($newsList))
+                        <div class="news">
+                            @foreach ($newsList as $news)
+                                <div class="mb-5">
+                                    <h2><a class="text-theme text-uppercase" href="{{ route('web.news.show', ['slug' => $news->friendly_url_name]) }}">{{ $news->news_name }}</a></h2>
+                                    <div class="text-muted post-date">Added on {{ $news->getPostDate()->toFormattedDateString() }}</div>
+                                    <p>{{ $news->news_short_intro }}</p>
+                                    <a class="font-weight-bold text-theme" href="{{ route('web.news.show', ['slug' => $news->friendly_url_name]) }}">Read More <i class="fa fa-chevron-right"></i></a>
                                 </div>
-                            </div>
-                        @endforeach
-                    </div>
+                            @endforeach
 
-                    {{ $newsList->links() }}
+                            {{ $newsList->links() }}
+                        </div>
+                    @else
+                        <div>Now news updated yet.</div>
+                    @endif
                 </div>
-            @else
-                <div>Now news updated yet.</div>
-            @endif
+                <div class="col-sm-4">
+                    @include('web.shared.page-sidebar-component')
+                </div>
+            </div>
         </div>
     </div>
 @endsection

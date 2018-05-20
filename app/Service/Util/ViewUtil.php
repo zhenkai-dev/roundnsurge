@@ -101,4 +101,38 @@ class ViewUtil
     {
         return view('admin.shared.icon.delete-icon-link-component', ['url' => $url, 'title' => $title]);
     }
+
+    /**
+     * Get view icon
+     *
+     * @param string $title
+     * @return View
+     */
+    public static function viewIcon(string $title = ''): View
+    {
+        return view('admin.shared.icon.view-icon-component', ['title' => $title]);
+    }
+
+    /**
+     * Get view icon with redirect link
+     *
+     * @param string $url
+     * @param string $title
+     * @return View
+     */
+    public static function viewIconLink(string $url, string $title = ''): View
+    {
+        return view('admin.shared.icon.view-icon-link-component', ['url' => $url, 'title' => $title]);
+    }
+
+    /**
+     * Get muted view icon
+     *
+     * @param string $title
+     * @return View
+     */
+    public static function viewIconMuted(string $title = ''): View
+    {
+        return view('admin.shared.icon.view-icon-muted-component', ['title' => $title]);
+    }
 }

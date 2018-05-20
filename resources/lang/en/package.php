@@ -11,6 +11,6 @@ return [
     'name' => 'Name',
     'price' => 'Price',
     'package_type' => 'Type',
-    'description' => 'Content',
+    'description' => 'Description',
 
 ];

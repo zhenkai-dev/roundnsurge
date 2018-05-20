@@ -28,6 +28,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\NewsTranslation whereTranslationId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\NewsTranslation whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $short_intro
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\NewsTranslation whereShortIntro($value)
  */
 class NewsTranslation extends Model
 {
@@ -107,6 +109,22 @@ class NewsTranslation extends Model
     public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getShortIntro(): ?string
+    {
+        return $this->short_intro;
+    }
+
+    /**
+     * @param null|string $short_intro
+     */
+    public function setShortIntro(?string $short_intro): void
+    {
+        $this->short_intro = $short_intro;
     }
 
     /**

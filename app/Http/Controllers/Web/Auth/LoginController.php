@@ -38,6 +38,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        $this->redirectTo = url(config('app.member_prefix'));
         $this->middleware('guest')->except('logout');
     }
 

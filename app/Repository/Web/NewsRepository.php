@@ -42,10 +42,11 @@ class NewsRepository
             ->select([
                 News::getTableName() . '.*',
                 DB::raw(NewsTranslation::getTableName() . '.name as news_name'),
+                DB::raw(NewsTranslation::getTableName() . '.short_intro as news_short_intro'),
                 DB::raw(NewsTranslation::getTableName() . '.description as news_description'),
                 DB::raw(FriendlyUrl::getTableName() . '.name as friendly_url_name')
             ]);
 
-        return $query->paginate(18);
+        return $query->paginate(10);
     }
 }

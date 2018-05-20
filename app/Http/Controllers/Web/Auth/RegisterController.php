@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Web\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Member;
+use App\Membership;
+use App\Package;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class RegisterController extends Controller
 {
@@ -37,6 +41,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
+        $this->redirectTo = route('member.home');
         $this->middleware('guest');
     }
 
@@ -51,9 +56,17 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:' . Member::getTableName(),
-            'dob' => 'required|date|date_format:"m/d/Y"',
-            'mobile' => 'required|string|max:255',
+//            'dob' => 'required|date|date_format:"m/d/Y"',
+//            'mobile' => 'required|string|max:255',
             'password' => 'required|string|min:8|confirmed',
+            //'package' => 'nullable|integer|exists:' . Package::getTableName() . ',id'
+            'package' => array(
+                'nullable',
+                'integer',
+                Rule::exists(Package::getTableName(), 'id')->where(function (Builder $query) {
+                    $query->where('is_active', '=', true);
+                })
+            )
         ]);
     }
 
@@ -65,14 +78,38 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return Member::create([
+        $member = Member::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'dob' => $data['dob'],
-            'mobile' => $data['mobile'],
+//            'dob' => $data['dob'],
+//            'mobile' => $data['mobile'],
             'is_active' => true,
             'password' => bcrypt($data['password']),
         ]);
+
+        // FREE Account
+        $package = Package::where('package_type', '=', Package::BASIC)->first();
+
+        if (!empty($data['package'])) {
+            $packageCheck = Package::where('id', '=', $data['package'])
+                ->where('is_active', true)
+                ->first();
+
+            switch ($packageCheck->getPackageType()) {
+                case Package::MEMBER:
+                case Package::PRO:
+                    $this->redirectTo = route('member.membershipFee');
+                    break;
+            }
+        }
+
+        $membership = new Membership();
+        $membership->setMemberId($member->getId());
+        $membership->setPackageId($package->getId());
+        $membership->setIsActive(true);
+        $membership->save();
+
+        return $member;
     }
 
     protected function guard()

@@ -24,8 +24,18 @@ class HomeController extends Controller
         /* @var \App\Page $page */
         $pageTranslation = $page->pageTranslation(app('Language')->getId())->first();
 
+        $pagesAll = Page::whereIn('id', [6, 7])
+            ->where('is_active', true)
+            ->get();
+        $pages = [];
+        if (count($pagesAll)) {
+            foreach ($pagesAll as $page) {
+                $pages[$page->getId()] = $page;
+            }
+        }
+
         $packages = PackageService::getAll();
 
-        return view('web.pages.home.main', compact('banners', 'page', 'pageTranslation', 'packages'));
+        return view('web.pages.home.main', compact('banners', 'page', 'pageTranslation', 'packages', 'pages'));
     }
 }

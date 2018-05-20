@@ -60,7 +60,7 @@
             @endslot
         @endcomponent
 
-        @component('admin.shared.form.form-group')
+        {{--@component('admin.shared.form.form-group')
             @slot('label') {{ __('news.photo') }} @endslot
             @slot('input')
                 @component('admin.shared.input.file-component')
@@ -82,6 +82,17 @@
                         </div>
                     </div>
                 @endif
+            @endslot
+        @endcomponent --}}
+
+        @component('admin.shared.form.form-group')
+            @slot('label') {{ __('news.short_intro') }} @endslot
+            @slot('input')
+                @component('admin.shared.input.textarea-component')
+                    @slot('name') short_intro @endslot
+                    @slot('class') autosize @endslot
+                    @slot('value') {{ old('short_intro', (is_edit() ? $newsTranslation->getShortIntro() : '')) }} @endslot
+                @endcomponent
             @endslot
         @endcomponent
 
@@ -164,7 +175,7 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('admin/js/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('member/js/ckeditor/ckeditor.js') }}"></script>
     <script>
         CKEDITOR.replace( 'description' );
     </script>

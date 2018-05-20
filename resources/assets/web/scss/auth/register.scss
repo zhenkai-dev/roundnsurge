@@ -1,0 +1,22 @@
+.auth-register {
+  .left-content {
+    padding-right: 0;
+
+    .content {
+      background-color: $theme-color;
+      padding: 2rem;
+      color: #FFF;
+      height: 100%;
+    }
+  }
+
+  .right-content {
+    padding-left: 0;
+
+    .content {
+      background-color: #FFF;
+      height: 100%;
+      padding: 2rem;
+    }
+  }
+}

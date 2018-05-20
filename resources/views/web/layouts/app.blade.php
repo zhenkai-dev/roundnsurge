@@ -59,7 +59,7 @@
                     @component('web.shared.menu.login')
                     @endcomponent
                     <div class="my-2 my-lg-0">
-                        <button class="btn btn-theme px-3 d-sm-block" type="button" target="_blank">Sign Up</button>
+                        <a href="{{ route('web.register') }}" class="btn btn-theme px-3 d-sm-block" type="button">Sign Up</a>
                     </div>
                 </div>
             </nav>
@@ -86,23 +86,16 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-7 col-lg-9">
-                                    <ul class="footer-link">
-                                        <li><a href="">Training</a></li>
-                                        <li><a href="">Blog</a></li>
-                                        <li><a href="">About</a></li>
-                                        <li><a href="">Resources</a></li>
-                                    </ul>
+                                    @if (!empty($footerPages[8]))
+                                        {!! editor_content($footerPages[8]->pageTranslation->getDescription()) !!}
+                                    @endif
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4 col-lg-3 footer-right">
-                            <h5 class="text-theme">Contact Us</h5>
-                            <div class="phone mb-3">+6019 556 7829</div>
-                            <div class="mb-3"><a href="mailto:roundnsurge@gmail.com">roundnsurge@gmail.com</a></div>
-                            <address>
-                                19-2A, Jalan PJU 1/3C.<br />
-                                Petaling Jaya, Malaysia 47801
-                            </address>
+                            @if (!empty($footerPages[9]))
+                                {!! editor_content($footerPages[9]->pageTranslation->getDescription()) !!}
+                            @endif
                         </div>
                     </div>
                 </div>

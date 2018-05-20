@@ -14,7 +14,7 @@ mix.webpackConfig({
     devtool: "inline-source-map"
 });
 
-mix.babel([
+const dashboardScipts = [
     'node_modules/jquery/dist/jquery.min.js',
     'node_modules/popper.js/dist/umd/popper.js',
     'node_modules/bootstrap/dist/js/bootstrap.min.js',
@@ -28,13 +28,23 @@ mix.babel([
     'resources/assets/global/js/helpers.js',
     'resources/assets/admin/js/helpers.js',
     'resources/assets/admin/js/app.js'
-    ], 'public/admin/js/script.js')
+];
+
+mix.babel(dashboardScipts, 'public/admin/js/script.js')
+    .sourceMaps();
+
+mix.babel(dashboardScipts, 'public/member/js/script.js')
     .sourceMaps();
 
 mix.babel([
     'node_modules/chart.js/dist/Chart.min.js',
     'node_modules/chart.js/samples/utils.js'
     ], 'public/admin/js/chart.min.js');
+
+mix.babel([
+    'node_modules/chart.js/dist/Chart.min.js',
+    'node_modules/chart.js/samples/utils.js'
+], 'public/member/js/chart.min.js');
 
 mix.sass('node_modules/font-awesome/scss/font-awesome.scss', 'public/admin/css')
     .sass('resources/assets/admin/scss/style.scss', 'public/admin/css')
@@ -44,6 +54,8 @@ mix.sass('node_modules/font-awesome/scss/font-awesome.scss', 'public/admin/css')
     .copy('node_modules/nestable/jquery.nestable.js', 'public/admin/js/jquery.nestable.js')
     .copy('node_modules/bootstrap/dist/css/bootstrap.min.css', 'public/admin/css')
     .sourceMaps();
+
+mix.copy('public/admin', 'public/member').sourceMaps();
 
 mix.babel([
     'node_modules/jquery/dist/jquery.min.js',

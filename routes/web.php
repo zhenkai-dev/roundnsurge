@@ -41,6 +41,7 @@ Route::group(['as' => 'web.', 'namespace' => 'Web', 'middleware' => ['web.viewCo
 
     Route::get('/', 'HomeController@index')->name('home');
 
+    Route::get('news', 'NewsController@index')->name('news.index');
     Route::get('news/{slug}', 'NewsController@show')->name('news.show');
     Route::get('pages/{slug}', 'PageController@show')->name('pages.show');
 

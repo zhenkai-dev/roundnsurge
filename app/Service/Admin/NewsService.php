@@ -95,6 +95,7 @@ class NewsService
         $news->save();
 
         $newsTranslation->setName($request->input('name'));
+        $newsTranslation->setShortIntro($request->input('short_intro'));
         $newsTranslation->setDescription($request->input('description'));
         $newsTranslation->setMetaTitle($request->input('meta_title'));
         $newsTranslation->setMetaKeywords($request->input('meta_keywords'));

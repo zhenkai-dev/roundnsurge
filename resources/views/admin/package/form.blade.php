@@ -5,7 +5,7 @@
 @endsection
 
 @section('form')
-    @php /* @var \App\FriendlyUrl $friendlyUrl */ @endphp
+
     @php /* @var \App\Package $package */ @endphp
     @php /* @var \App\PackageTranslation $packageTranslation */ @endphp
     <form class="form-horizontal form-validation" action="{{ is_create() ? route('admin.package.store') : route('admin.package.update', $package->id) }}" method="post" enctype="multipart/form-data">

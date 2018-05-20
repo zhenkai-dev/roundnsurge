@@ -16,7 +16,7 @@
     @yield('styles')
 
     <!-- Main styles for this application -->
-    <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('member/css/style.css') }}" rel="stylesheet">
 </head>
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
@@ -87,6 +87,14 @@
                         @slot('iconClass') icon-speedometer @endslot
                         @slot('text') {{ __('common.dashboard') }} @endslot
                     @endcomponent
+
+                    @if (can_access_module(\App\Course::class))
+                        @component('admin.shared.sidebar.item-component')
+                            @slot('url') {{ route('admin.course.index') }} @endslot
+                            @slot('iconClass') icon-book-open @endslot
+                            @slot('text') {{ trans_choice('entity.course', 2) }} @endslot
+                        @endcomponent
+                    @endif
 
                     @if (can_access_module(\App\Package::class))
                         @component('admin.shared.sidebar.item-component')
@@ -172,7 +180,7 @@
     </div>
 
     <footer class="app-footer">
-        <a href="http://owl.my">Owl.My</a> © 2017 creativeLabs.
+        <a href="http://owl.my">Owl.My</a> © 2017.
         <span class="float-right">Powered by <a href="http://owl.my">Owl.My</a>
             </span>
     </footer>
@@ -182,7 +190,7 @@
     @yield('popup-dialog')
 
     <!-- Scripts -->
-    <script src="{{ asset('admin/js/script.js') }}"></script>
+    <script src="{{ asset('member/js/script.js') }}"></script>
 
     <!-- Custom scripts required by this view -->
     <script>

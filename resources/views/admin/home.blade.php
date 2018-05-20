@@ -99,5 +99,5 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('admin/js/chart.min.js') }}"></script>
+    <script src="{{ asset('member/js/chart.min.js') }}"></script>
 @endsection

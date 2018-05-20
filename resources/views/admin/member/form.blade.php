@@ -61,7 +61,7 @@
                         @component('admin.shared.input.text-component')
                             @slot('type') text @endslot
                             @slot('name') dob @endslot
-                            @slot('value') {{ old('name', (is_edit() ? carbon_to_calendar($member->getDob()) : '')) }} @endslot
+                            @slot('value') {{ old('name', (is_edit() && $member->getDob() ? carbon_to_calendar($member->getDob()) : '')) }} @endslot
                             @slot('attributes')
                                 data-name = "datepicker"
                             @endslot

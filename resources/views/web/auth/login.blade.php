@@ -6,7 +6,10 @@
         <div class="col-md-6 col-lg-4">
             <div class="card">
                 <div class="card-body">
-                    <h1 class="card-title">Login</h1>
+                    <h1 class="card-title text-uppercase">LOG IN</h1>
+
+                    <p>Need an account? <a href="{{ route('web.register') }}">Sign up</a></p>
+
                     <form class="form-horizontal" method="POST" action="{{ route('web.login') }}">
                         {{ csrf_field() }}
 
@@ -34,7 +37,7 @@
                             @endif
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group d-none">
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
@@ -43,13 +46,15 @@
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-success">
-                                <i class="fa fa-login"></i> Login
-                            </button>
-
-                            <a class="btn btn-link" href="{{ route('web.password.request') }}">
+                            <a class="" href="{{ route('web.password.request') }}">
                                 Forgot Your Password?
                             </a>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-theme btn-block">
+                                <i class="fa fa-login"></i> Login
+                            </button>
                         </div>
                     </form>
                 </div>

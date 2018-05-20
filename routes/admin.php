@@ -59,6 +59,7 @@ Route::group(['as' => 'admin.', 'namespace' => 'Admin'], function () {
         )->name('setting.updateClientTimezone');
         Route::get('setting/edit', 'SettingController@edit')->name('setting.edit');
         Route::patch('setting', 'SettingController@update')->name('setting.update');
+
         Route::put('banner/sortable', 'BannerController@sortable')->name('banner.sortable');
         Route::resource('banner', 'BannerController');
         Route::resource('page', 'PageController');
@@ -69,5 +70,6 @@ Route::group(['as' => 'admin.', 'namespace' => 'Admin'], function () {
         Route::patch('member/{member}/address', 'MemberAddressController@update')->name('member.address.update');
         Route::resource('member', 'MemberController');
         Route::resource('package', 'PackageController');
+        Route::resource('course', 'CourseController');
     });
 });

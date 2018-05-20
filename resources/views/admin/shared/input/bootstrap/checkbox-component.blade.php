@@ -1,7 +1,7 @@
-<div class="form-check">
+<div class="form-check {{ !empty($inline) ? 'form-check-inline' : '' }}">
     <label class="form-check-label" {{ (!empty($id) ? 'for="' . $id . '"' : '') }}>
         @component('admin.shared.input.checkbox-component', [
-            'checked' => $checked
+            'checked' => (!empty($checked) ? $checked: false)
         ])
             @slot('name') {{ $name }} @endslot
             @slot('class') form-check-input {{ $class or '' }} @endslot

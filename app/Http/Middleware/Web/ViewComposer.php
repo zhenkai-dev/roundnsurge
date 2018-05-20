@@ -8,9 +8,10 @@
 
 namespace App\Http\Middleware\Web;
 
+use App\FriendlyUrl;
+use App\Page;
 use App\Service\Web\MenuService;
 use Closure;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 
 class ViewComposer
@@ -25,8 +26,7 @@ class ViewComposer
     public function handle($request, Closure $next)
     {
         //load header
-        View::composer('web.layouts.app', function ($view) {
-            /* @var \Illuminate\View\View $view */
+        View::composer('web.layouts.app', function (\Illuminate\View\View $view) {
             $menuGrouped = [];
             $menuAll = MenuService::getAll();
             if (count($menuAll)) {
@@ -36,7 +36,33 @@ class ViewComposer
                 }
             }
 
-            $view->with(compact('menuGrouped'));
+            $footerPagesAll = Page::whereIn('id', [8, 9])
+                ->where('is_active', true)
+                ->get();
+            $footerPages = [];
+            if (count($footerPagesAll)) {
+                foreach ($footerPagesAll as $footerPage) {
+                    $footerPages[$footerPage->getId()] = $footerPage;
+                }
+            } 
+
+            $view->with(compact('menuGrouped', 'footerPages'));
+        });
+
+        View::composer('web.shared.page-sidebar-component', function (\Illuminate\View\View $view) {
+            $sidePanel = Page::where('id', '=', 3)->first();
+
+            $view->with(compact('sidePanel'));
+        });
+
+        View::composer('web.auth.register', function (\Illuminate\View\View $view) {
+            $registerPage = Page::where('id', '=', 4)->first();
+
+            $termsUrl = FriendlyUrl::where('module', '=', Page::class)
+                ->where('fkid', '=', 5)
+                ->first();
+
+            $view->with(compact('registerPage', 'termsUrl'));
         });
 
         return $next($request);

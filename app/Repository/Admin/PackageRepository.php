@@ -67,28 +67,6 @@ class PackageRepository extends Repository
             return $query;
         };
 
-        $this->filterableList[] = function (string $key = 'packagename') use ($query, $request): Builder {
-            if ($request->filled($key)) {
-                return $query->where(
-                    Package::getTableName() . '.packagename',
-                    'like',
-                    '%' . $request->input($key) . '%'
-                );
-            }
-            return $query;
-        };
-
-        $this->filterableList[] = function (string $key = 'email') use ($query, $request): Builder {
-            if ($request->filled($key)) {
-                return $query->where(
-                    Package::getTableName() . '.email',
-                    'like',
-                    '%' . $request->input($key) . '%'
-                );
-            }
-            return $query;
-        };
-
         $this->buildCondition();
 
         return $query;

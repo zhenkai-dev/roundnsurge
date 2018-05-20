@@ -154,7 +154,7 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('admin/js/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('member/js/ckeditor/ckeditor.js') }}"></script>
     <script>
         CKEDITOR.replace( 'description' );
     </script>
