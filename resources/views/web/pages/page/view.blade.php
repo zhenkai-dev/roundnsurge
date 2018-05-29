@@ -24,7 +24,7 @@
     @if ($page->getPhoto())
         <div class="banner" style="background-image: url('{{ $page->getPhotoFullUrl() }}')">
             <div class="container">
-                <h1>{{ $pageTranslation->getName() }}</h1>
+                <h1 class="text-uppercase">{{ $pageTranslation->getName() }}</h1>
             </div>
         </div>
     @endif
@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col-sm-8">
                     @if (!$page->getPhoto())
-                        <h1 class="text-theme">{{ $pageTranslation->getName() }}</h1>
+                        <h1 class="text-theme text-uppercase">{{ $pageTranslation->getName() }}</h1>
                     @endif
 
                     {!! editor_content($pageTranslation->getDescription()) !!}

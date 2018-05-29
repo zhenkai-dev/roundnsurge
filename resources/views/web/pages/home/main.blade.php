@@ -73,12 +73,12 @@
                             @php /* @var \App\Package $package with [package_name, package_description] */ @endphp
                             <div class="col-md-4 item {{ ($package->getPackageType() == \App\Package::MEMBER) ? 'highlight' : '' }}">
                                 <div class="item-container text-center px-lg-5 px-3">
-                                    <div>{{ $package['package_name'] }}</div>
+                                    <div class="name">{{ $package['package_name'] }}</div>
                                     <div class="price">{{ ($package->getPrice() == 0 ? 'FREE' : currency($package->getPrice())) }}</div>
                                     <p class="description">
                                         {{ nl2br($package['package_description']) }}
                                     </p>
-                                    <a class="text-uppercase btn btn-theme" href="{{ route('web.register', ['package' => $package->getId()]) }}">Sign Up</a>
+                                    <a class="text-uppercase btn btn-theme btn-lg btn-action" href="{{ route('web.register', ['package' => $package->getId()]) }}">Sign Up</a>
                                 </div>
                             </div>
                         @endforeach

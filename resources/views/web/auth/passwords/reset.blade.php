@@ -1,4 +1,6 @@
-@extends('web.layouts.app')
+@extends('web.layouts.app', [
+        'bodyClass' => 'auth auth-password-reset'
+        ])
 
 @section('content')
 <div class="container">
@@ -55,7 +57,7 @@
                             @endif
                         </div>
 
-                        <div class="form-group">
+                        <div>
                             <button type="submit" class="btn btn-block btn-theme">
                                 Reset Password
                             </button>

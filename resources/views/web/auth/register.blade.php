@@ -1,5 +1,5 @@
 @extends('web.layouts.app', [
-    'bodyClass' => 'auth-register'
+    'bodyClass' => 'auth auth-register'
 ])
 
 @php
@@ -111,7 +111,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div>
                             <input type="hidden" name="package" value="{{ request('package') }}">
 
                             <button type="submit" class="btn btn-block btn-theme">

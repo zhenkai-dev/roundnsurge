@@ -94,17 +94,27 @@
           align-items: center;
           position: relative;
 
+          .name {
+            font-weight: 500;
+          }
+
           .price {
             font-weight: bold;
-            font-size: 2.5rem;
+            font-size: 1.5rem;
             padding-left: 1rem;
             padding-right: 1rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
           }
 
           .description {
             height: 100%;
             margin-bottom: 1.5rem;
+            line-height: 2;
+          }
+
+          .btn-action {
+            padding-left: 2.5rem;
+            padding-right: 2.5rem;
           }
         }
 

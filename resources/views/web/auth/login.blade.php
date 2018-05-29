@@ -1,4 +1,6 @@
-@extends('web.layouts.app')
+@extends('web.layouts.app', [
+        'bodyClass' => 'auth auth-login'
+        ])
 
 @section('content')
 <div class="container">
@@ -51,7 +53,7 @@
                             </a>
                         </div>
 
-                        <div class="form-group">
+                        <div>
                             <button type="submit" class="btn btn-theme btn-block">
                                 <i class="fa fa-login"></i> Login
                             </button>

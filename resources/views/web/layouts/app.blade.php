@@ -41,25 +41,27 @@
     <div class="wrapper">
         <header>
             <nav class="navbar navbar-expand-md">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <img class="img-fluid" title="{{ setting()->getSiteName() }}" alt="{{ setting()->getSiteName() }}" src="{{ get_logo() }}">
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMainMenu" aria-controls="navbarMainMenu" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <div class="container">
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        <img class="img-fluid" title="{{ setting()->getSiteName() }}" alt="{{ setting()->getSiteName() }}" src="{{ get_logo() }}">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMainMenu" aria-controls="navbarMainMenu" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-                <div class="collapse navbar-collapse" id="navbarMainMenu">
-                    <div class="mr-auto"></div>
-                    @if (count($menuGrouped))
-                        <ul id="menu" class="navbar-nav">
-                            @component ('web.shared.menu.menu-item-component', ['menus' => $menuGrouped[0], 'menuGrouped' => $menuGrouped])
-                            @endcomponent
-                        </ul>
-                    @endif
-                    @component('web.shared.menu.login')
-                    @endcomponent
-                    <div class="my-2 my-lg-0">
-                        <a href="{{ route('web.register') }}" class="btn btn-theme px-3 d-sm-block" type="button">Sign Up</a>
+                    <div class="collapse navbar-collapse" id="navbarMainMenu">
+                        <div class="mr-auto"></div>
+                        @if (count($menuGrouped))
+                            <ul id="menu" class="navbar-nav">
+                                @component ('web.shared.menu.menu-item-component', ['menus' => $menuGrouped[0], 'menuGrouped' => $menuGrouped])
+                                @endcomponent
+                            </ul>
+                        @endif
+                        @component('web.shared.menu.login')
+                        @endcomponent
+                        <div class="my-2 my-lg-0">
+                            <a href="{{ route('web.register') }}" class="btn btn-theme px-3 d-sm-block" type="button">Sign Up</a>
+                        </div>
                     </div>
                 </div>
             </nav>

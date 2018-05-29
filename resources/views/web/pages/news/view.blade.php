@@ -24,7 +24,7 @@
         <div class="py-5">
             <div class="row">
                 <div class="col-sm-8">
-                    <h1>{{ $newsTranslation->getName() }}</h1>
+                    <h1 class="text-theme text-uppercase">{{ $newsTranslation->getName() }}</h1>
 
                     {!! editor_content($newsTranslation->getDescription()) !!}
                 </div>
