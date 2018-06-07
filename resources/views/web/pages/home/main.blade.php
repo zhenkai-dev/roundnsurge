@@ -13,7 +13,7 @@
 
     @php /* @var \App\Page[] $pages */ @endphp
 
-    @if (!empty($banners) && count($banners) > 1)
+    @if (!empty($banners) && count($banners) > 0)
         <div id="banner">
             <div class="banner-swiper">
                 <div class="swiper-container">
