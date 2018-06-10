@@ -2,6 +2,10 @@
   .left-content {
     padding-right: 0;
 
+    @include media-breakpoint-down(sm) {
+      padding-right: 15px;
+    }
+
     .content {
       background-color: $theme-color;
       padding: 2rem;
@@ -13,10 +17,19 @@
   .right-content {
     padding-left: 0;
 
+    @include media-breakpoint-down(sm) {
+      padding-left: 15px;
+    }
+
     .content {
       background-color: #FFF;
       height: 100%;
       padding: 2rem;
+
+      .control-label {
+        color: $theme-color;
+        font-weight: bold;
+      }
     }
   }
 }

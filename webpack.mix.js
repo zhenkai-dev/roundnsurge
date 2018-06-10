@@ -67,6 +67,7 @@ mix.babel([
     'node_modules/moment/moment.js',
     'node_modules/moment-timezone/builds/moment-timezone-with-data.min.js',
     'node_modules/bootstrap-daterangepicker/daterangepicker.js',
+    'node_modules/jquery-match-height/dist/jquery.matchHeight-min.js',
     'resources/assets/global/js/helpers.js',
     'resources/assets/web/js/helpers.js'
 ], 'public/web/js/script.js')

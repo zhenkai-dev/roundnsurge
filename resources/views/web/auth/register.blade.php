@@ -140,5 +140,7 @@
 
             inputAddRules($form);
         });
+
+        $('#main-container > .container > .row > div').matchHeight();
     </script>
 @endsection
