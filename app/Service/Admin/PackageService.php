@@ -41,15 +41,13 @@ class PackageService
             return Validator::make($request->all(), [
                 'name' => 'required|string|max:255',
                 'price' => 'required|numeric',
-                'description' => 'nullable|string',
-                'is_active' => 'required|boolean'
+                'description' => 'nullable|string'
             ]);
         } else {
             return Validator::make($request->all(), [
                 'name' => 'required|string|max:255',
                 'price' => 'required|numeric',
-                'description' => 'nullable|string',
-                'is_active' => 'required|boolean'
+                'description' => 'nullable|string'
             ]);
         }
     }
