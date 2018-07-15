@@ -9,7 +9,7 @@
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center my-5">
+        <div class="row justify-content-center my-5 py-5">
             <div class="col-md-7 left-content">
                 <div class="content">
                     {!! editor_content($registerPage->pageTranslation->getDescription()) !!}
@@ -36,7 +36,7 @@
                         @endcomponent
                     @endif
 
-                    <p>Already have an account? <a href="{{ route('web.login') }}">Log in</a></p>
+                    <p class="description">Already have an account? <a href="{{ route('web.login') }}">Log in</a></p>
 
                     <form class="form-horizontal form-register" method="POST" action="{{ route('web.register') }}">
                         {{ csrf_field() }}
@@ -114,8 +114,8 @@
                         <div>
                             <input type="hidden" name="package" value="{{ request('package') }}">
 
-                            <button type="submit" class="btn btn-block btn-theme">
-                                Register
+                            <button type="submit" class="btn btn-block btn-theme py-2">
+                                SIGN UP
                             </button>
                         </div>
                     </form>

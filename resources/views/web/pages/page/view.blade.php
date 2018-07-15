@@ -37,7 +37,9 @@
                         <h1 class="text-theme text-uppercase">{{ $pageTranslation->getName() }}</h1>
                     @endif
 
-                    {!! editor_content($pageTranslation->getDescription()) !!}
+                    <div class="page-content">
+                        {!! editor_content($pageTranslation->getDescription()) !!}
+                    </div>
                 </div>
                 <div class="col-sm-4">
                     @include('web.shared.page-sidebar-component')

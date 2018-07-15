@@ -4,8 +4,8 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center my-5">
-        <div class="col-md-6 col-lg-4">
+    <div class="row justify-content-center my-5 py-5">
+        <div class="col-md-6 col-lg-4 mb-5 py-3">
             <div class="card">
                 <div class="card-body">
                     @php /* @var Illuminate\Support\ViewErrorBag $errors */ @endphp
@@ -58,7 +58,7 @@
                         </div>
 
                         <div>
-                            <button type="submit" class="btn btn-block btn-theme">
+                            <button type="submit" class="btn btn-block btn-theme text-uppercase">
                                 Reset Password
                             </button>
                         </div>

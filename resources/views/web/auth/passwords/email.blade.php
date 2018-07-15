@@ -4,8 +4,8 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center my-5">
-        <div class="col-md-6 col-lg-4">
+    <div class="row justify-content-center my-5 py-5">
+        <div class="col-md-6 col-lg-4 mb-5 py-3">
             <div class="card">
                 <div class="card-body">
                     @php /* @var Illuminate\Support\ViewErrorBag $errors */ @endphp
@@ -16,13 +16,13 @@
                         </div>
                     @endif
 
-                    <p>We will send you an email to reset your password.</p>
+                    <p class="description">We will send you an email to reset your password.</p>
 
                     <form class="form-horizontal" method="POST" action="{{ route('web.password.email') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="control-label">E-Mail Address</label>
+                            <label for="email" class="control-label">Email</label>
 
                             <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
 
@@ -34,8 +34,8 @@
                         </div>
 
                         <div>
-                            <button type="submit" class="btn btn-block btn-theme">
-                                Send Password Reset Link
+                            <button type="submit" class="btn btn-block btn-theme text-uppercase">
+                                Submit
                             </button>
                         </div>
                     </form>

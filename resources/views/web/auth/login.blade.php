@@ -4,13 +4,13 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center my-5">
-        <div class="col-md-6 col-lg-4">
+    <div class="row justify-content-center my-5 py-5">
+        <div class="col-md-6 col-lg-4 mb-5 py-3">
             <div class="card">
                 <div class="card-body">
                     <h1 class="card-title text-uppercase">LOG IN</h1>
 
-                    <p>Need an account? <a href="{{ route('web.register') }}">Sign up</a></p>
+                    <p class="description">Need an account? <a href="{{ route('web.register') }}">Sign up</a></p>
 
                     <form class="form-horizontal" method="POST" action="{{ route('web.login') }}">
                         {{ csrf_field() }}
@@ -55,7 +55,7 @@
 
                         <div>
                             <button type="submit" class="btn btn-theme btn-block">
-                                <i class="fa fa-login"></i> Login
+                                <i class="fa fa-login"></i> LOG IN
                             </button>
                         </div>
                     </form>

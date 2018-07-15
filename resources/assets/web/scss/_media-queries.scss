@@ -2,7 +2,13 @@
   header {
     .navbar {
       #menu {
-        margin-right: 30px;
+        padding-right: 1rem;
+        margin-right: 1.5rem;
+        border-right: 1px solid $theme-color-2;
+
+        .nav-link {
+          padding: 0 1rem !important;
+        }
 
         .nav-link.dropdown-toggle {
           padding-right: .5rem;

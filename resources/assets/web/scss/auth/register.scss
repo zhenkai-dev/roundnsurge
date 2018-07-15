@@ -26,9 +26,22 @@
       height: 100%;
       padding: 2rem;
 
+      a {
+        color: $body-color;
+        text-decoration: underline;
+      }
+
+      .description {
+        color: #969696;
+
+        a {
+          color: #969696;
+        }
+      }
+
       .control-label {
         color: $theme-color;
-        font-weight: bold;
+        font-weight: 500;
       }
     }
   }

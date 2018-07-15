@@ -26,7 +26,9 @@
                 <div class="col-sm-8">
                     <h1 class="text-theme text-uppercase">{{ $newsTranslation->getName() }}</h1>
 
-                    {!! editor_content($newsTranslation->getDescription()) !!}
+                    <div class="page-content">
+                        {!! editor_content($newsTranslation->getDescription()) !!}
+                    </div>
                 </div>
                 <div class="col-sm-4">
                     @include('web.shared.page-sidebar-component')

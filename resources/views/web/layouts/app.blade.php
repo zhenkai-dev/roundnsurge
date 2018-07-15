@@ -40,7 +40,7 @@
 <body class="{{ $bodyClass or '' }}">
     <div class="wrapper">
         <header>
-            <nav class="navbar navbar-expand-md">
+            <nav class="navbar navbar-expand-md fixed-top">
                 <div class="container">
                     <a class="navbar-brand" href="{{ url('/') }}">
                         <img class="img-fluid" title="{{ setting()->getSiteName() }}" alt="{{ setting()->getSiteName() }}" src="{{ get_logo() }}">
@@ -60,7 +60,7 @@
                         @component('web.shared.menu.login')
                         @endcomponent
                         <div class="my-2 my-lg-0">
-                            <a href="{{ route('web.register') }}" class="btn btn-theme px-3 d-sm-block" type="button">Sign Up</a>
+                            <a href="{{ route('web.register') }}" class="btn btn-theme px-3 d-sm-block">Sign Up</a>
                         </div>
                     </div>
                 </div>

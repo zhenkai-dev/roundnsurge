@@ -54,6 +54,7 @@ body {
   color: $body-color;
   height: 100%;
   background-color: $body-bg-color;
+  padding-top: 78px;
 
   &.auth {
     background-color: #e1e1e1;
@@ -64,14 +65,31 @@ body {
 
     .card-body {
       padding: 2rem;
+      font-weight: 500;
+
+      .description {
+        color: #969696;
+        font-weight: 500;
+
+        a {
+          color: #969696;
+        }
+      }
 
       a {
         color: $body-color;
+        text-decoration: underline;
+      }
+
+      .control-label {
+        color: $theme-color;
+        font-weight: 500;
       }
 
       .form-control {
         background-color: #e9e9e9;
         border-color: #e9e9e9;
+        border-radius: 0;
       }
     }
   }
@@ -155,5 +173,6 @@ body {
 @import "pages/home/main";
 @import "pages/page/view";
 @import "pages/news/list";
+@import "pages/news/view";
 @import "core/footer";
 @import "media-queries";
