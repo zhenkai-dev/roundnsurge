@@ -43,7 +43,7 @@
             <nav class="navbar navbar-expand-md fixed-top">
                 <div class="container">
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        <img class="img-fluid" title="{{ setting()->getSiteName() }}" alt="{{ setting()->getSiteName() }}" src="{{ get_logo() }}">
+                        <img class="img-fluid" width="125" title="{{ setting()->getSiteName() }}" alt="{{ setting()->getSiteName() }}" src="{{ get_logo() }}">
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMainMenu" aria-controls="navbarMainMenu" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>

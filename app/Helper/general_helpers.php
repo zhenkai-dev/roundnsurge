@@ -270,7 +270,7 @@ if (!function_exists('carbon_to_calendar')) {
 if (!function_exists('get_logo')) {
     function get_logo(): string
     {
-        return \Illuminate\Support\Facades\Storage::url(config('storage.directory.setting') . '/logo.png');
+        return \Illuminate\Support\Facades\Storage::url(config('storage.directory.setting') . '/logo.svg');
     }
 }
 
