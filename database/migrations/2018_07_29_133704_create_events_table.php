@@ -15,8 +15,8 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamp('event_start_at');
-            $table->timestamp('event_end_at');
+            $table->timestamp('event_start_at')->useCurrent();
+            $table->timestamp('event_end_at')->useCurrent();
             $table->string('rsvp_link');
             $table->boolean('is_active')->default(false);
             $table->softDeletes();
