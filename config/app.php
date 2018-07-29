@@ -243,6 +243,8 @@ return [
         'page' => true,
         'menu' => true,
         'banner' => true,
+        'event' => true,
+        'invoice' => true,
         'news' => true,
         'member' => true,
         'user' => true,

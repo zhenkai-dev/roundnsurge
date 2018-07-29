@@ -1,15 +1,5 @@
 {
     "/admin/css/font-awesome.css": "/admin/css/font-awesome.css",
     "/admin/css/style.css": "/admin/css/style.css",
-    "/web/css/style.css": "/web/css/style.css",
-    "/admin/js/script.js": "/admin/js/script.js",
-    "/member/js/script.js": "/member/js/script.js",
-    "/admin/js/chart.min.js": "/admin/js/chart.min.js",
-    "/member/js/chart.min.js": "/member/js/chart.min.js",
-    "/admin/css/ckeditor.css": "/admin/css/ckeditor.css",
-    "/admin/js/jquery.nestable.js": "/admin/js/jquery.nestable.js",
-    "/admin/css/bootstrap.min.css": "/admin/css/bootstrap.min.css",
-    "/web/js/script.js": "/web/js/script.js",
-    "/web/css/swiper.min.css": "/web/css/swiper.min.css",
-    "/web/js/swiper.min.js": "/web/js/swiper.min.js"
+    "/web/css/style.css": "/web/css/style.css"
 }

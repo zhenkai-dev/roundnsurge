@@ -1,0 +1,22 @@
+.upcoming-event {
+  .item {
+    & + .item {
+      margin-top: 1rem;
+    }
+
+    .name {
+      font-weight: 500;
+    }
+
+    .date {
+      color: #969696;
+      font-size: .75rem;
+    }
+  }
+
+  .learn-more {
+    margin-top: 1rem;
+    color: #000;
+    display: inline-block;
+  }
+}

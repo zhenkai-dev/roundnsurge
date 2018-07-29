@@ -2,25 +2,26 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Course;
-use App\CourseTranslation;
 use App\Enumeration\PolicyActionEnum;
+use App\Event;
+use App\EventTranslation;
+use App\FriendlyUrl;
 use App\Http\Controllers\Controller;
-use App\Service\Admin\CourseService;
+use App\Service\Admin\EventService;
 use Illuminate\Http\Request;
 
-class CourseController extends Controller
+class EventController extends Controller
 {
-    private $courseService;
+    private $eventService;
 
     /**
      * Create a new controller instance.
      *
-     * @param CourseService $courseService
+     * @param EventService $eventService
      */
-    public function __construct(CourseService $courseService)
+    public function __construct(EventService $eventService)
     {
-        $this->courseService = $courseService;
+        $this->eventService = $eventService;
     }
 
     /**
@@ -32,12 +33,12 @@ class CourseController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize(PolicyActionEnum::INDEX, Course::class);
+        $this->authorize(PolicyActionEnum::INDEX, Event::class);
 
-        $title = trans_choice('entity.course', 2);
-        $courses = $this->courseService->getListing($request);
+        $title = trans_choice('entity.event', 2);
+        $events = $this->eventService->getListing($request);
 
-        return view('admin.course.list', compact('title', 'courses'));
+        return view('admin.event.list', compact('title', 'events'));
     }
 
     /**
@@ -58,11 +59,11 @@ class CourseController extends Controller
      */
     public function create()
     {
-        $this->authorize(PolicyActionEnum::CREATE, Course::class);
+        $this->authorize(PolicyActionEnum::CREATE, Event::class);
 
-        $course = new Course();
+        $event = new Event();
         $title = __('form.add_new_record');
-        return view('admin.course.form', compact('title', 'course'));
+        return view('admin.event.form', compact('title', 'event'));
     }
 
     /**
@@ -74,79 +75,82 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize(PolicyActionEnum::CREATE, Course::class);
+        $this->authorize(PolicyActionEnum::CREATE, Event::class);
 
-        $course = new Course();
+        $event = new Event();
 
         // validation
-        $validator = $this->courseService->validate($course, $request);
+        $validator = $this->eventService->validate($event, $request);
 
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
 
-        $course = $this->courseService->save($course, $request);
+        $event = $this->eventService->save($event, $request);
 
-        return $this->courseService->saveAfterAction($request, $course)
+        return $this->eventService->saveAfterAction($request, $event)
             ->with('status', __('message.record_created'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Course $course
+     * @param Event $event
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function edit(Course $course)
+    public function edit(Event $event)
     {
-        $this->authorize(PolicyActionEnum::UPDATE, $course);
+        $this->authorize(PolicyActionEnum::UPDATE, $event);
 
-        /* @var CourseTranslation $courseTranslation */
-        $courseTranslation = $course->courseTranslation(app('Language')->getId())->first();
+        /* @var EventTranslation $eventTranslation */
+        $eventTranslation = $event->eventTranslation(app('Language')->getId())->first();
 
-        $title = 'Edit ' . $courseTranslation->getName();
-        return view('admin.course.form', compact('title', 'course', 'courseTranslation'));
+        /* @var FriendlyUrl $friendlyUrl */
+        // $friendlyUrl = $event->friendlyUrl()->first();
+
+        $title = 'Edit ' . $eventTranslation->getName();
+        return view('admin.event.form', compact('title', 'event', 'eventTranslation'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param Course  $course
+     * @param Event   $event
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function update(Course $course, Request $request)
+    public function update(Event $event, Request $request)
     {
-        $this->authorize(PolicyActionEnum::UPDATE, $course);
+        $this->authorize(PolicyActionEnum::UPDATE, $event);
 
         // validation
-        $validator = $this->courseService->validate($course, $request);
+        $validator = $this->eventService->validate($event, $request);
 
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
 
-        $course = $this->courseService->save($course, $request);
+        $event = $this->eventService->save($event, $request);
 
-        return $this->courseService->saveAfterAction($request, $course)
+        return $this->eventService->saveAfterAction($request, $event)
             ->with('status', __('message.record_updated'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param Course  $course
+     * @param Event   $event
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
-    public function destroy(Course $course, Request $request)
+    public function destroy(Event $event, Request $request)
     {
-        $this->authorize(PolicyActionEnum::DELETE, $course);
+        $this->authorize(PolicyActionEnum::DELETE, $event);
 
-        $this->courseService->delete($course, $request);
+        $this->eventService->delete($event, $request);
 
         return back()->with('status', __('message.record_deleted'));
     }

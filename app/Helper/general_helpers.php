@@ -267,6 +267,13 @@ if (!function_exists('carbon_to_calendar')) {
     }
 }
 
+if (!function_exists('carbon_to_calendar_with_time')) {
+    function carbon_to_calendar_with_time(\Carbon\Carbon $date): string
+    {
+        return $date->format('m/d/Y h:i A');
+    }
+}
+
 if (!function_exists('get_logo')) {
     function get_logo(): string
     {

@@ -136,11 +136,27 @@
                         @endcomponent
                     @endif
 
+                    @if (can_access_module(\App\Event::class))
+                        @component('admin.shared.sidebar.item-component')
+                            @slot('url') {{ route('admin.event.index') }} @endslot
+                            @slot('iconClass') icon-envelope-open @endslot
+                            @slot('text') {{ trans_choice('entity.event', 2) }} @endslot
+                        @endcomponent
+                    @endif
+
                     @if (can_access_module(\App\Member::class))
                         @component('admin.shared.sidebar.item-component')
                             @slot('url') {{ route('admin.member.index') }} @endslot
                             @slot('iconClass') icon-people @endslot
                             @slot('text') {{ trans_choice('entity.member', 2) }} @endslot
+                        @endcomponent
+                    @endif
+
+                    @if (can_access_module(\App\Invoice::class))
+                        @component('admin.shared.sidebar.item-component')
+                            @slot('url') {{ route('admin.invoice.index') }} @endslot
+                            @slot('iconClass') icon-docs @endslot
+                            @slot('text') {{ trans_choice('entity.invoice', 2) }} @endslot
                         @endcomponent
                     @endif
 
@@ -278,7 +294,23 @@
                 });
             };
 
+            $.fn.singleDatetimePicker = function() {
+                $(this).on("apply.daterangepicker", function(e, picker) {
+                    picker.element.val(picker.startDate.format(picker.locale.format));
+                });
+                return $(this).daterangepicker({
+                    singleDatePicker: true,
+                    timePicker: true,
+                    autoUpdateInput: false,
+                    showDropdowns: true,
+                    locale: {
+                        format: 'MM/DD/YYYY hh:mm A'
+                    }
+                });
+            };
+
             $('input[data-name="datepicker"]').singleDatePicker();
+            $('input[data-name="datetimepicker"]').singleDatetimePicker();
 
             autosize(document.querySelectorAll('textarea.autosize'));
         });

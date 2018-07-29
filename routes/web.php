@@ -43,6 +43,7 @@ Route::group(['as' => 'web.', 'namespace' => 'Web', 'middleware' => ['web.viewCo
 
     Route::get('news', 'NewsController@index')->name('news.index');
     Route::get('news/{slug}', 'NewsController@show')->name('news.show');
+    Route::get('events', 'EventController@index')->name('events.index');
     Route::get('pages/{slug}', 'PageController@show')->name('pages.show');
 
     Route::post('contact/submit', 'EnquiryController@submit')->name('enquiry.submit');

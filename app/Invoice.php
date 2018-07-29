@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 
@@ -537,5 +538,13 @@ class Invoice extends Model
                 break;
         }
         return $this->invoice_status;
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function member(): BelongsTo
+    {
+        return $this->belongsTo('App\Member');
     }
 }

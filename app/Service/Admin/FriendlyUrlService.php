@@ -74,6 +74,7 @@ class FriendlyUrlService
     {
         $pages = FriendlyUrlRepository::getPages()->get()->toArray();
         $news = FriendlyUrlRepository::getNews()->get()->toArray();
-        return ['page' => $pages, 'news' => $news];
+        $events = FriendlyUrlRepository::getEvents()->get()->toArray();
+        return ['page' => $pages, 'news' => $news, 'event' => $events];
     }
 }

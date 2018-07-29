@@ -7,7 +7,7 @@
  */
 ?>
 
-@extends('member.layouts.app-show')
+@extends('admin.layouts.app-show')
 
 @section('heading')
     {!! $title !!}

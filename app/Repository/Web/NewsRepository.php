@@ -38,7 +38,7 @@ class NewsRepository
                 ->where(FriendlyUrl::getTableName() . '.module', '=', News::class);
         })->where(NewsTranslation::getTableName() . '.language_id', '=', app('Language')->getId())
             ->where(News::getTableName() . '.is_active', '=', true)
-            ->orderBy(News::getTableName() . '.post_date', 'asc')
+            ->orderBy(News::getTableName() . '.post_date', 'desc')
             ->select([
                 News::getTableName() . '.*',
                 DB::raw(NewsTranslation::getTableName() . '.name as news_name'),

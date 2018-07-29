@@ -54,7 +54,7 @@ class InvoicePolicy
      */
     public function view(Member $user, Invoice $model): bool
     {
-        return true;
+        return $model->getMemberId() === $user->getId();
     }
 
     /**

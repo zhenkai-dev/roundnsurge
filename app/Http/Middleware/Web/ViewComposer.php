@@ -8,8 +8,10 @@
 
 namespace App\Http\Middleware\Web;
 
+use App\Event;
 use App\FriendlyUrl;
 use App\Page;
+use App\Repository\Web\EventRepository;
 use App\Service\Web\MenuService;
 use Closure;
 use Illuminate\Support\Facades\View;
@@ -52,7 +54,9 @@ class ViewComposer
         View::composer('web.shared.page-sidebar-component', function (\Illuminate\View\View $view) {
             $sidePanel = Page::where('id', '=', 3)->first();
 
-            $view->with(compact('sidePanel'));
+            $upcomingEvents = EventRepository::getUpcomingEvents(4)->get();
+
+            $view->with(compact('sidePanel', 'upcomingEvents'));
         });
 
         View::composer('web.auth.register', function (\Illuminate\View\View $view) {

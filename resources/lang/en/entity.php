@@ -12,6 +12,7 @@ return [
     'banner' => 'Banner|Banners',
     'country' => 'Country|Countries',
     'course' => 'Course|Courses',
+    'event' => 'Event|Events',
     'invoice' => 'Invoice|Invoices',
     'invoice_item' => 'Invoice item|Invoice items',
     'member' => 'Member|Members',

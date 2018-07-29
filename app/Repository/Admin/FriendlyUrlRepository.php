@@ -8,6 +8,8 @@
 
 namespace App\Repository\Admin;
 
+use App\Event;
+use App\EventTranslation;
 use App\FriendlyUrl;
 use App\News;
 use App\NewsTranslation;
@@ -58,6 +60,27 @@ class FriendlyUrlRepository extends Repository
                 FriendlyUrl::getTableName() . '.id',
                 FriendlyUrl::getTableName() . '.module',
                 NewsTranslation::getTableName() . '.name'
+            ]);
+    }
+
+    /**
+     * @return Builder
+     */
+    public static function getEvents(): Builder
+    {
+        return FriendlyUrl::query()->join(Event::getTableName(), function (JoinClause $join) {
+            $join->on(FriendlyUrl::getTableName() . '.fkid', '=', Event::getTableName() . '.id')
+                ->where(FriendlyUrl::getTableName() . '.module', '=', 'App\Event');
+        })->join(
+            EventTranslation::getTableName(),
+            EventTranslation::getTableName() . '.event_id',
+            Event::getTableName() . '.id'
+        )
+            ->orderBy(EventTranslation::getTableName() . '.name', 'asc')
+            ->select([
+                FriendlyUrl::getTableName() . '.id',
+                FriendlyUrl::getTableName() . '.module',
+                EventTranslation::getTableName() . '.name'
             ]);
     }
 }

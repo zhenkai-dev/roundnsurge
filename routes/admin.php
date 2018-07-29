@@ -62,6 +62,8 @@ Route::group(['as' => 'admin.', 'namespace' => 'Admin'], function () {
 
         Route::put('banner/sortable', 'BannerController@sortable')->name('banner.sortable');
         Route::resource('banner', 'BannerController');
+        Route::resource('event', 'EventController');
+        Route::resource('invoice', 'InvoiceController');
         Route::resource('page', 'PageController');
         Route::put('menu/sortable', 'MenuController@sortable')->name('menu.sortable');
         Route::resource('menu', 'MenuController');

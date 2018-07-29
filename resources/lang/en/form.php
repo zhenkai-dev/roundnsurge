@@ -8,5 +8,6 @@
 
 return [
     'add_new_record' => 'Add new record',
-    'edit_record' => 'Edit :name'
+    'edit_record' => 'Edit :name',
+    'show_record' => 'Show :name'
 ];

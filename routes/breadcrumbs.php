@@ -4,6 +4,8 @@ use App\Banner;
 use App\BannerTranslation;
 use App\Course;
 use App\CourseTranslation;
+use App\Event;
+use App\EventTranslation;
 use App\Invoice;
 use App\Member;
 use App\Menu;
@@ -48,6 +50,37 @@ try {
         $bannerTranslation = $banner->bannerTranslation(app('Language')->getId())->first();
         $breadcrumbs->push(
             __('form.edit_record', ['name' => $bannerTranslation->getName()]), route('admin.banner.edit', $banner->getId())
+        );
+    });
+
+    Breadcrumbs::register('admin.event.index', function (BreadcrumbsGenerator $breadcrumbs) {
+        $breadcrumbs->parent('admin.home');
+        $breadcrumbs->push(trans_choice('entity.event', 2), route('admin.event.index'));
+    });
+
+    Breadcrumbs::register('admin.event.create', function (BreadcrumbsGenerator $breadcrumbs) {
+        $breadcrumbs->parent('admin.event.index');
+        $breadcrumbs->push(__('form.add_new_record'), route('admin.event.create'));
+    });
+
+    Breadcrumbs::register('admin.event.edit', function (BreadcrumbsGenerator $breadcrumbs, Event $event) {
+        $breadcrumbs->parent('admin.event.index');
+        /* @var EventTranslation $eventTranslation */
+        $eventTranslation = $event->eventTranslation(app('Language')->getId())->first();
+        $breadcrumbs->push(
+            __('form.edit_record', ['name' => $eventTranslation->getName()]), route('admin.event.edit', $event->getId())
+        );
+    });
+
+    Breadcrumbs::register('admin.invoice.index', function (BreadcrumbsGenerator $breadcrumbs) {
+        $breadcrumbs->parent('admin.home');
+        $breadcrumbs->push(trans_choice('entity.invoice', 2), route('admin.invoice.index'));
+    });
+
+    Breadcrumbs::register('admin.invoice.show', function (BreadcrumbsGenerator $breadcrumbs, Invoice $invoice) {
+        $breadcrumbs->parent('admin.invoice.index');
+        $breadcrumbs->push(
+            __('form.show_record', ['name' => $invoice->formatInvoiceNo()]), route('admin.invoice.edit', $invoice->getId())
         );
     });
 
@@ -221,7 +254,7 @@ try {
         /* @var CourseTranslation $courseTranslation */
         $courseTranslation = $course->courseTranslation(app('Language')->getId())->first();
         $breadcrumbs->push(
-            __('form.edit_record', ['name' => $courseTranslation->getName()]), route('member.course.show', $course->getId())
+            __('form.show_record', ['name' => $courseTranslation->getName()]), route('member.course.show', $course->getId())
         );
     });
 
@@ -233,7 +266,7 @@ try {
     Breadcrumbs::register('member.invoice.show', function (BreadcrumbsGenerator $breadcrumbs, Invoice $invoice) {
         $breadcrumbs->parent('member.invoice.index');
         $breadcrumbs->push(
-            __('form.edit_record', ['name' => $invoice->formatInvoiceNo()]), route('member.invoice.show', $invoice->getId())
+            __('form.show_record', ['name' => $invoice->formatInvoiceNo()]), route('member.invoice.show', $invoice->getId())
         );
     });
 } catch (\DaveJamesMiller\Breadcrumbs\Facades\DuplicateBreadcrumbException $e) {

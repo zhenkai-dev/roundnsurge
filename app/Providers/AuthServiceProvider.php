@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Banner;
 use App\Course;
+use App\Event;
 use App\Invoice;
 use App\Member;
 use App\Menu;
@@ -32,6 +33,8 @@ class AuthServiceProvider extends ServiceProvider
         User::class => 'App\Policies\Admin\UserPolicy',
 
         Course::class => 'App\Policies\Admin\CoursePolicy',
+        Event::class => 'App\Policies\Admin\EventPolicy',
+        Invoice::class => 'App\Policies\Admin\InvoicePolicy',
         Package::class => 'App\Policies\Admin\PackagePolicy',
     ];
 
