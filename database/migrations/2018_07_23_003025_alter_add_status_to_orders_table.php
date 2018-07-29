@@ -14,7 +14,7 @@ class AlterAddStatusToOrdersTable extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->boolean('paid')->default(false)->after('order_details_json');
+            $table->boolean('paid')->default(false)->after('order_details');
         });
     }
 
