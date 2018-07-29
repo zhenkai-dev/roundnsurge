@@ -2,19 +2,16 @@
 
 namespace App\Repository\Member;
 
-use App\Course;
-use App\CourseTranslation;
+use App\Invoice;
 use App\Member;
-use App\Package;
 use App\Service\Query\FilterTrait;
 use App\Service\Query\PaginateTrait;
 use App\Service\Query\SortTrait;
-use Auth;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class CourseRepository extends Repository
+class InvoiceRepository extends Repository
 {
     use SortTrait;
     use FilterTrait;
@@ -25,7 +22,7 @@ class CourseRepository extends Repository
      */
     public function model()
     {
-        return 'App\Course';
+        return 'App\Invoice';
     }
 
     /**
@@ -36,19 +33,9 @@ class CourseRepository extends Repository
      */
     public function findListing(Request $request): LengthAwarePaginator
     {
-        $member = Member::find(Auth::id());
-        /* @var Member $member */
-        $package = $member->allowPackageToViewCourse();
-
-        $query = Course::query()->join(
-            CourseTranslation::getTableName(),
-            Course::getTableName() . '.id',
-            '=',
-            CourseTranslation::getTableName() . '.course_id'
-        )->join('course_packages', 'course_packages.course_id', '=', Course::getTableName() . '.id')
-        ->where(Course::getTableName() . '.is_active', true)
-        ->where(CourseTranslation::getTableName() . '.language_id', '=', app('Language')->getId())
-        ->where('course_packages.package_id', '=', $package->getId());
+        $member = \Auth::user();
+        /* @var Member $member ; */
+        $query = Invoice::whereMemberId($member->getId());
 
         $query = $this->filterListing($query, $request);
         $query = $this->sortListing($query);
@@ -66,10 +53,10 @@ class CourseRepository extends Repository
      */
     private function filterListing(Builder $query, Request $request): Builder
     {
-        $this->filterableList[] = function (string $key = 'name') use ($query, $request): Builder {
+        $this->filterableList[] = function (string $key = 'invoice_no') use ($query, $request): Builder {
             if ($request->filled($key)) {
                 $query->where(
-                    CourseTranslation::getTableName() . '.name',
+                    Invoice::getTableName() . '.invoice_no',
                     'like',
                     '%' . $request->input($key) . '%'
                 );
@@ -91,8 +78,8 @@ class CourseRepository extends Repository
     private function sortListing(Builder $query): Builder
     {
         $this->sortableList = [
-            'id' => Course::getTableName() . '.id',
-            'name' => CourseTranslation::getTableName() . '.name'
+            'id' => Invoice::getTableName() . '.id',
+            'invoice_no' => Invoice::getTableName() . '.invoice_no'
         ];
 
         return $this->buildSorting($query, $this->sortableList);
@@ -107,7 +94,7 @@ class CourseRepository extends Repository
     private function selectColumnFromListing(Builder $query): Builder
     {
         return $query->select([
-            Course::getTableName() . '.*'
+            Invoice::getTableName() . '.*'
         ]);
     }
 

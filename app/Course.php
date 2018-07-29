@@ -26,6 +26,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Course whereTotalView($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Course whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \App\CourseTranslation $courseTranslation
+ * @method static bool|null forceDelete()
+ * @method static \Illuminate\Database\Query\Builder|\App\Course onlyTrashed()
+ * @method static bool|null restore()
+ * @method static \Illuminate\Database\Query\Builder|\App\Course withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|\App\Course withoutTrashed()
  */
 class Course extends Model
 {

@@ -3,7 +3,6 @@
 namespace App\Service\Member;
 
 use App\Member;
-use App\Repository\Member\UserRepository;
 use App\Service\Member\Util\LogUtil;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -11,11 +10,10 @@ use Illuminate\Support\Facades\Validator;
 
 class AccountService
 {
-    private $userRepository;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct()
     {
-        $this->userRepository = $userRepository;
+
     }
 
     /**

@@ -10,8 +10,8 @@ namespace App\Http\Controllers\Member;
 
 use App\Enumeration\PolicyActionEnum;
 use App\Http\Controllers\Controller;
-use App\Service\Member\SettingService;
-use App\Service\Member\Util\PageSizeUtil;
+use App\Service\Admin\SettingService;
+use App\Service\Admin\Util\PageSizeUtil;
 use App\Setting;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -28,47 +28,6 @@ class SettingController extends Controller
     public function __construct(SettingService $settingService)
     {
         $this->settingService = $settingService;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
-     */
-    public function edit()
-    {
-        $setting = Setting::find(config('app.setting_id'));
-
-        $this->authorize(PolicyActionEnum::UPDATE, $setting);
-
-        $title = 'Edit ' . trans_choice('entity.setting', 1);
-        return view('member.setting.form', compact('title', 'setting'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
-     */
-    public function update(Request $request)
-    {
-        $setting = Setting::find(config('app.setting_id'));
-
-        $this->authorize(PolicyActionEnum::UPDATE, $setting);
-
-        // validation
-        $validator = $this->settingService->validate($setting, $request);
-
-        if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
-        }
-
-        $setting = $this->settingService->save($setting, $request);
-
-        return back()->with('status', __('message.record_updated'));
     }
 
     /**

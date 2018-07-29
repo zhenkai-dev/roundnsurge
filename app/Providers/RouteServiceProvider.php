@@ -43,7 +43,9 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapMemberRoutes();
 
-        $this->mapLabRoutes();
+        $this->mapPaymentRoutes();
+
+        //$this->mapLabRoutes();
         //
     }
 
@@ -77,7 +79,7 @@ class RouteServiceProvider extends ServiceProvider
     }
 
     /**
-     * Define the "admin" routes for the application.
+     * Define the "member" routes for the application.
      *
      * These routes are typically stateless.
      *
@@ -107,7 +109,7 @@ class RouteServiceProvider extends ServiceProvider
     }
 
     /**
-     * Define the "api" routes for the application.
+     * Define the "lab" routes for the application.
      *
      * These routes are typically stateless.
      *
@@ -119,5 +121,20 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/lab.php'));
+    }
+
+    /**
+     * Define the "payment" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapPaymentRoutes()
+    {
+        Route::prefix('payment')
+            ->middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/payment.php'));
     }
 }

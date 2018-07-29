@@ -37,6 +37,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Address whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Address whereUseDefault($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $addressOwned
  */
 class Address extends Model
 {

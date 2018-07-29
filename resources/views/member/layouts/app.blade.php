@@ -89,77 +89,17 @@
                         @slot('text') {{ __('common.dashboard') }} @endslot
                     @endcomponent
 
-                    @if (can_access_module(\App\Course::class))
-                        @component('member.shared.sidebar.item-component')
-                            @slot('url') {{ route('member.course.index') }} @endslot
-                            @slot('iconClass') icon-book-open @endslot
-                            @slot('text') {{ trans_choice('entity.course', 2) }} @endslot
-                        @endcomponent
-                    @endif
+                    @component('member.shared.sidebar.item-component')
+                        @slot('url') {{ route('member.course.index') }} @endslot
+                        @slot('iconClass') icon-book-open @endslot
+                        @slot('text') {{ trans_choice('entity.course', 2) }} @endslot
+                    @endcomponent
 
-                    @if (can_access_module(\App\Package::class))
-                        @component('member.shared.sidebar.item-component')
-                            @slot('url') {{ route('member.package.index') }} @endslot
-                            @slot('iconClass') icon-badge @endslot
-                            @slot('text') {{ trans_choice('entity.package', 2) }} @endslot
-                        @endcomponent
-                    @endif
-
-                    @if (can_access_module(\App\Page::class))
-                        @component('member.shared.sidebar.item-component')
-                            @slot('url') {{ route('member.page.index') }} @endslot
-                            @slot('iconClass') icon-screen-desktop @endslot
-                            @slot('text') {{ trans_choice('entity.page', 2) }} @endslot
-                        @endcomponent
-                    @endif
-
-                    @if (can_access_module(\App\Menu::class))
-                        @component('member.shared.sidebar.item-component')
-                            @slot('url') {{ route('member.menu.index') }} @endslot
-                            @slot('iconClass') icon-list @endslot
-                            @slot('text') {{ trans_choice('entity.menu', 2) }} @endslot
-                        @endcomponent
-                    @endif
-
-                    @if (can_access_module(\App\Banner::class))
-                        @component('member.shared.sidebar.item-component')
-                            @slot('url') {{ route('member.banner.index') }} @endslot
-                            @slot('iconClass') icon-picture @endslot
-                            @slot('text') {{ trans_choice('entity.banner', 2) }} @endslot
-                        @endcomponent
-                    @endif
-
-                    @if (can_access_module(\App\News::class))
-                        @component('member.shared.sidebar.item-component')
-                            @slot('url') {{ route('member.news.index') }} @endslot
-                            @slot('iconClass') icon-book-open @endslot
-                            @slot('text') {{ trans_choice('entity.news', 2) }} @endslot
-                        @endcomponent
-                    @endif
-
-                    @if (can_access_module(\App\Member::class))
-                        @component('member.shared.sidebar.item-component')
-                            @slot('url') {{ route('member.member.index') }} @endslot
-                            @slot('iconClass') icon-people @endslot
-                            @slot('text') {{ trans_choice('entity.member', 2) }} @endslot
-                        @endcomponent
-                    @endif
-
-                    @if (can_access_module(\App\User::class))
-                        @component('member.shared.sidebar.item-component')
-                            @slot('url') {{ route('member.user.index') }} @endslot
-                            @slot('iconClass') icon-user @endslot
-                            @slot('text') {{ trans_choice('entity.user', 2) }} @endslot
-                        @endcomponent
-                    @endif
-
-                    @if (can_access_module(\App\Setting::class))
-                        @component('member.shared.sidebar.item-component')
-                            @slot('url') {{ route('member.setting.edit') }} @endslot
-                            @slot('iconClass') icon-settings @endslot
-                            @slot('text') {{ trans_choice('entity.setting', 1) }} @endslot
-                        @endcomponent
-                    @endif
+                    @component('member.shared.sidebar.item-component')
+                        @slot('url') {{ route('member.invoice.index') }} @endslot
+                        @slot('iconClass') icon-docs @endslot
+                        @slot('text') {{ trans_choice('entity.invoice', 2) }} @endslot
+                    @endcomponent
                 </ul>
             </nav>
         </div>

@@ -16,3 +16,6 @@ use Illuminate\Http\Request;
 /*Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });*/
+
+Route::get('paypal/ipn', 'Payment\PaypalController@ipn')->name('paypal.ipnGet');
+Route::post('paypal/ipn', 'Payment\PaypalController@ipn')->name('paypal.ipnPost');

@@ -51,6 +51,10 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Query\Builder|\App\Member withTrashed()
  * @method static \Illuminate\Database\Query\Builder|\App\Member withoutTrashed()
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Address[]                                                   $address
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\MemberLog[]                                                 $memberLogs
+ * @property-read \App\Membership                                                                                           $membership
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Membership[]                                                $memberships
  */
 class Member extends Authenticatable
 {
@@ -62,7 +66,7 @@ class Member extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'is_active'
     ];
 
     /**
@@ -323,17 +327,19 @@ class Member extends Authenticatable
 
     /**
      * Current membership of this member
+     *
      * @return Membership|HasOne
      */
     public function membership(): HasOne
     {
         return $this->hasOne('App\Membership', 'member_id', 'id')
             ->where('is_active', '=', true)
-            ->orderBy('expiry_date', 'desc');
+            ->orderBy('id', 'desc');
     }
 
     /**
      * All previous memberships record
+     *
      * @return HasMany
      */
     public function memberships(): HasMany
@@ -342,10 +348,31 @@ class Member extends Authenticatable
     }
 
     /**
+     * @return Package
+     */
+    public function allowPackageToViewCourse(): Package
+    {
+        $membership = $this->membership()->first();
+        $package = Package::wherePackageType(Package::BASIC)->first();
+        if (!$membership->isExpired()) {
+            $package = $membership->package()->first();
+        }
+        return $package;
+    }
+
+    /**
      * @return HasMany
      */
     public function memberLogs(): HasMany
     {
         return $this->hasMany('App\MemberLog');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function invoices(): HasMany
+    {
+        return $this->hasMany('App\Invoice');
     }
 }

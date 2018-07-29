@@ -62,21 +62,12 @@ Route::group(['as' => 'member.', 'namespace' => 'Member'], function () {
             'setting/client-timezone',
             'SettingController@setClientTimezone'
         )->name('setting.updateClientTimezone');
-        Route::get('setting/edit', 'SettingController@edit')->name('setting.edit');
-        Route::patch('setting', 'SettingController@update')->name('setting.update');
 
-        Route::put('banner/sortable', 'BannerController@sortable')->name('banner.sortable');
-        Route::resource('banner', 'BannerController');
-        Route::resource('page', 'PageController');
-        Route::put('menu/sortable', 'MenuController@sortable')->name('menu.sortable');
-        Route::resource('menu', 'MenuController');
-        Route::resource('news', 'NewsController');
-        Route::resource('user', 'UserController');
-        Route::patch('member/{member}/address', 'MemberAddressController@update')->name('member.address.update');
-        Route::resource('member', 'MemberController');
-        Route::resource('package', 'PackageController');
         Route::resource('course', 'CourseController');
+        Route::resource('invoice', 'InvoiceController');
     });
+
+    Route::post('account/upgrade-membership', 'AccountController@upgradeMembership')->name('account.upgradeMembership');
 
     Route::get('membership-fee', function() {
         echo 'Redirect to payment page.';

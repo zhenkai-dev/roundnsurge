@@ -9,7 +9,6 @@
 
     @component('member.shared.listing.listing-header-component', ['module' => \App\Course::class])
         @slot('total') {{ $courses->total() }} @endslot
-        @slot('addNewUrl') {{ route('member.course.create') }}  @endslot
     @endcomponent
 
     @component('member.shared.listing.filter-form')

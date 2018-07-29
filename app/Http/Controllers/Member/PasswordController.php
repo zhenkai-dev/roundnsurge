@@ -12,20 +12,17 @@ use Illuminate\Support\Facades\Auth;
 class PasswordController extends Controller
 {
     private $passwordService;
-    private $userRepository;
 
     /**
      * Create a new controller instance.
      * PasswordController constructor.
      *
      * @param PasswordService $passwordService
-     * @param UserRepository  $userRepository
      */
-    public function __construct(PasswordService $passwordService, UserRepository $userRepository)
+    public function __construct(PasswordService $passwordService)
     {
         $this->middleware('auth');
         $this->passwordService = $passwordService;
-        $this->userRepository = $userRepository;
     }
 
     public function index()

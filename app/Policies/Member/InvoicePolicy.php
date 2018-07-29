@@ -1,18 +1,23 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Kit Loong
+ * Date: 28/7/2018
+ * Time: 1:55 PM
+ */
 
 namespace App\Policies\Member;
 
-use App\Enumeration\RolePermissionEnum;
-use App\Course;
+
+use App\Invoice;
 use App\Member;
-use App\Package;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class CoursePolicy
+class InvoicePolicy
 {
     use HandlesAuthorization;
 
-    public $module = 'course';
+    public $module = 'invoice';
 
     /**
      * Determine whether is admin
@@ -44,19 +49,12 @@ class CoursePolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Member $user
-     * @param  \App\Member $model
+     * @param Invoice      $model
      * @return bool
      */
-    public function view(Member $user, Course $model): bool
+    public function view(Member $user, Invoice $model): bool
     {
-        $package = $user->allowPackageToViewCourse();
-
-        $check = $model->packages()
-            ->where(Package::getTableName() . '.id', '=', $package->getId())
-            ->get();
-        return count($check) > 0 && $model->isActive();
-
-        // return $user->isUserPermitted($this->module, RolePermissionEnum::CAN_VIEW);
+        return true;
     }
 
     /**
@@ -74,10 +72,10 @@ class CoursePolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Member $user
-     * @param  \App\Member $model
+     * @param Invoice      $model
      * @return bool
      */
-    public function update(Member $user, Course $model): bool
+    public function update(Member $user, Invoice $model): bool
     {
         return false;
     }
@@ -86,10 +84,10 @@ class CoursePolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Member $user
-     * @param  \App\Member $model
+     * @param Invoice      $model
      * @return bool
      */
-    public function delete(Member $user, Course $model): bool
+    public function delete(Member $user, Invoice $model): bool
     {
         return false;
     }

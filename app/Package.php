@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -10,18 +11,18 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 /**
  * App\Package
  *
- * @property int $id
- * @property int $currency_id
- * @property string $currency_code
- * @property string $currency_symbol
- * @property string $currency_format
- * @property string $currency_exchange_rate
- * @property string $package_type
- * @property float $price
- * @property bool $is_active
- * @property string|null $deleted_at
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
+ * @property int                                                              $id
+ * @property int                                                              $currency_id
+ * @property string                                                           $currency_code
+ * @property string                                                           $currency_symbol
+ * @property string                                                           $currency_format
+ * @property string                                                           $currency_exchange_rate
+ * @property string                                                           $package_type
+ * @property float                                                            $price
+ * @property bool                                                             $is_active
+ * @property string|null                                                      $deleted_at
+ * @property \Carbon\Carbon|null                                              $created_at
+ * @property \Carbon\Carbon|null                                              $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Package whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Package whereCurrencyCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Package whereCurrencyExchangeRate($value)
@@ -35,6 +36,8 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Package wherePrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Package whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\FriendlyUrl[] $friendlyUrl
+ * @property-read \App\PackageTranslation                                     $packageTranslation
  */
 class Package extends Model
 {
@@ -245,7 +248,19 @@ class Package extends Model
     /**
      * @return Collection|Package[]
      */
-    public static function getMultipleChoice(): Collection {
+    public static function getMultipleChoice(): Collection
+    {
         return self::where('is_active', '=', true)->get();
+    }
+
+    public static function dropdown(): Builder
+    {
+        return self::whereIsActive(true);
+    }
+
+    public static function dropdownPaidPackage(): Builder
+    {
+        return self::where('package_type', '!=', self::BASIC)
+            ->whereIsActive(true);
     }
 }

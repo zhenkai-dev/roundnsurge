@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Banner;
 use App\Course;
+use App\Invoice;
 use App\Member;
 use App\Menu;
 use App\News;
@@ -44,6 +45,7 @@ class AuthServiceProvider extends ServiceProvider
         if (request()->segment(1) === config('app.member_prefix')) {
             $this->policies = [
                 Course::class => 'App\Policies\Member\CoursePolicy',
+                Invoice::class => 'App\Policies\Member\InvoicePolicy',
 
                 /*Banner::class => 'App\Policies\Member\BannerPolicy',
                 Member::class => 'App\Policies\Member\MemberPolicy',

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int                 $id
  * @property int                 $member_id
  * @property int                 $package_id
- * @property string|null         $expiry_date
+ * @property \Carbon\Carbon|null         $expiry_date
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Membership whereCreatedAt($value)
@@ -23,6 +24,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @mixin \Eloquent
  * @property bool                $is_active
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Membership whereIsActive($value)
+ * @property-read \App\Member $member
+ * @property-read \App\Package $package
  */
 class Membership extends Model
 {
@@ -31,7 +34,7 @@ class Membership extends Model
     ];
 
     protected $dates = [
-        'post_date'
+        'expiry_date'
     ];
 
     /**
@@ -95,7 +98,7 @@ class Membership extends Model
     /**
      * @return null|string
      */
-    public function getExpiryDate(): ?string
+    public function getExpiryDate(): ?\Carbon\Carbon
     {
         return $this->expiry_date;
     }
@@ -103,7 +106,7 @@ class Membership extends Model
     /**
      * @param null|string $expiry_date
      */
-    public function setExpiryDate(?string $expiry_date): void
+    public function setExpiryDate(?\Carbon\Carbon $expiry_date): void
     {
         $this->expiry_date = $expiry_date;
     }
@@ -154,5 +157,14 @@ class Membership extends Model
     public function package(): BelongsTo
     {
         return $this->belongsTo('App\Package', 'package_id');
+    }
+
+    public function isExpired(): bool
+    {
+        if ($this->getExpiryDate() === null) {
+            return false;
+        }
+
+        return $this->getExpiryDate() < Carbon::today();
     }
 }

@@ -12,6 +12,8 @@ return [
     'banner' => 'Banner|Banners',
     'country' => 'Country|Countries',
     'course' => 'Course|Courses',
+    'invoice' => 'Invoice|Invoices',
+    'invoice_item' => 'Invoice item|Invoice items',
     'member' => 'Member|Members',
     'menu' => 'Menu|Menus',
     'news' => 'News|News',

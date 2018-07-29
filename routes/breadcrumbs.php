@@ -4,6 +4,7 @@ use App\Banner;
 use App\BannerTranslation;
 use App\Course;
 use App\CourseTranslation;
+use App\Invoice;
 use App\Member;
 use App\Menu;
 use App\MenuTranslation;
@@ -210,161 +211,9 @@ try {
         $breadcrumbs->push(__('passwords.change'), route('member.password.index'));
     });
 
-    Breadcrumbs::register('member.banner.index', function (BreadcrumbsGenerator $breadcrumbs) {
-        $breadcrumbs->parent('member.home');
-        $breadcrumbs->push(trans_choice('entity.banner', 2), route('member.banner.index'));
-    });
-
-    Breadcrumbs::register('member.banner.create', function (BreadcrumbsGenerator $breadcrumbs) {
-        $breadcrumbs->parent('member.banner.index');
-        $breadcrumbs->push(__('form.add_new_record'), route('member.banner.create'));
-    });
-
-    Breadcrumbs::register('member.banner.edit', function (BreadcrumbsGenerator $breadcrumbs, Banner $banner) {
-        $breadcrumbs->parent('member.banner.index');
-        /* @var BannerTranslation $bannerTranslation */
-        $bannerTranslation = $banner->bannerTranslation(app('Language')->getId())->first();
-        $breadcrumbs->push(
-            __('form.edit_record', ['name' => $bannerTranslation->getName()]), route('member.banner.edit', $banner->getId())
-        );
-    });
-
-    Breadcrumbs::register('member.page.index', function (BreadcrumbsGenerator $breadcrumbs) {
-        $breadcrumbs->parent('member.home');
-        $breadcrumbs->push(trans_choice('entity.page', 2), route('member.page.index'));
-    });
-
-    Breadcrumbs::register('member.page.create', function (BreadcrumbsGenerator $breadcrumbs) {
-        $breadcrumbs->parent('member.page.index');
-        $breadcrumbs->push(__('form.add_new_record'), route('member.page.create'));
-    });
-
-    Breadcrumbs::register('member.page.edit', function (BreadcrumbsGenerator $breadcrumbs, Page $page) {
-        $breadcrumbs->parent('member.page.index');
-        /* @var PageTranslation $pageTranslation */
-        $pageTranslation = $page->pageTranslation(app('Language')->getId())->first();
-        $breadcrumbs->push(
-            __('form.edit_record', ['name' => $pageTranslation->getName()]), route('member.page.edit', $page->getId())
-        );
-    });
-
-    Breadcrumbs::register('member.news.index', function (BreadcrumbsGenerator $breadcrumbs) {
-        $breadcrumbs->parent('member.home');
-        $breadcrumbs->push(trans_choice('entity.news', 2), route('member.news.index'));
-    });
-
-    Breadcrumbs::register('member.news.create', function (BreadcrumbsGenerator $breadcrumbs) {
-        $breadcrumbs->parent('member.news.index');
-        $breadcrumbs->push(__('form.add_new_record'), route('member.news.create'));
-    });
-
-    Breadcrumbs::register('member.news.edit', function (BreadcrumbsGenerator $breadcrumbs, News $news) {
-        $breadcrumbs->parent('member.news.index');
-        /* @var NewsTranslation $newsTranslation */
-        $newsTranslation = $news->newsTranslation(app('Language')->getId())->first();
-        $breadcrumbs->push(
-            __('form.edit_record', ['name' => $newsTranslation->getName()]), route('member.news.edit', $news->getId())
-        );
-    });
-
-    Breadcrumbs::register('member.menu.index', function (BreadcrumbsGenerator $breadcrumbs) {
-        $breadcrumbs->parent('member.home');
-        $breadcrumbs->push(trans_choice('entity.menu', 2), route('member.menu.index'));
-    });
-
-    Breadcrumbs::register('member.menu.create', function (BreadcrumbsGenerator $breadcrumbs) {
-        $breadcrumbs->parent('member.menu.index');
-        $breadcrumbs->push(__('form.add_new_record'), route('member.menu.create'));
-    });
-
-    Breadcrumbs::register('member.menu.edit', function (BreadcrumbsGenerator $breadcrumbs, Menu $menu) {
-        $breadcrumbs->parent('member.menu.index');
-        /* @var MenuTranslation $menuTranslation */
-        $menuTranslation = $menu->menuTranslation(app('Language')->getId())->first();
-        $breadcrumbs->push(
-            __('form.edit_record', ['name' => $menuTranslation->getName()]), route('member.menu.edit', $menu->getId())
-        );
-    });
-
-    Breadcrumbs::register('member.user.index', function (BreadcrumbsGenerator $breadcrumbs) {
-        $breadcrumbs->parent('member.home');
-        $breadcrumbs->push(trans_choice('entity.user', 2), route('member.user.index'));
-    });
-
-    Breadcrumbs::register('member.user.create', function (BreadcrumbsGenerator $breadcrumbs) {
-        $breadcrumbs->parent('member.user.index');
-        $breadcrumbs->push(__('form.add_new_record'), route('member.user.create'));
-    });
-
-    Breadcrumbs::register('member.user.edit', function (BreadcrumbsGenerator $breadcrumbs, User $user) {
-        $breadcrumbs->parent('member.user.index');
-        $breadcrumbs->push(__('form.edit_record', ['name' => $user->getName()]), route('member.user.edit', $user->getId()));
-    });
-
-    Breadcrumbs::register('member.member.index', function (BreadcrumbsGenerator $breadcrumbs) {
-        $breadcrumbs->parent('member.home');
-        $breadcrumbs->push(trans_choice('entity.member', 2), route('member.member.index'));
-    });
-
-    Breadcrumbs::register('member.member.create', function (BreadcrumbsGenerator $breadcrumbs) {
-        $breadcrumbs->parent('member.member.index');
-        $breadcrumbs->push(__('form.add_new_record'), route('member.member.create'));
-    });
-
-    Breadcrumbs::register('member.member.edit', function (BreadcrumbsGenerator $breadcrumbs, Member $member) {
-        $breadcrumbs->parent('member.member.index');
-        $breadcrumbs->push(
-            __('form.edit_record',
-                ['name' => $member->getName()]),
-            route('member.member.edit', $member->getId())
-        );
-    });
-
-    Breadcrumbs::register('member.setting.edit', function (BreadcrumbsGenerator $breadcrumbs) {
-        $breadcrumbs->parent('member.home');
-        $breadcrumbs->push(__(
-            'form.edit_record',
-            ['name' => trans_choice('entity.setting', 1)]),
-            route('member.setting.edit')
-        );
-    });
-
-    Breadcrumbs::register('member.package.index', function (BreadcrumbsGenerator $breadcrumbs) {
-        $breadcrumbs->parent('member.home');
-        $breadcrumbs->push(trans_choice('entity.package', 2), route('member.package.index'));
-    });
-
-    Breadcrumbs::register('member.package.create', function (BreadcrumbsGenerator $breadcrumbs) {
-        $breadcrumbs->parent('member.package.index');
-        $breadcrumbs->push(__('form.add_new_record'), route('member.package.create'));
-    });
-
-    Breadcrumbs::register('member.package.edit', function (BreadcrumbsGenerator $breadcrumbs, Package $package) {
-        $breadcrumbs->parent('member.package.index');
-        /* @var PackageTranslation $packageTranslation */
-        $packageTranslation = $package->packageTranslation(app('Language')->getId())->first();
-        $breadcrumbs->push(
-            __('form.edit_record', ['name' => $packageTranslation->getName()]), route('member.package.edit', $package->getId())
-        );
-    });
-
     Breadcrumbs::register('member.course.index', function (BreadcrumbsGenerator $breadcrumbs) {
         $breadcrumbs->parent('member.home');
         $breadcrumbs->push(trans_choice('entity.course', 2), route('member.course.index'));
-    });
-
-    Breadcrumbs::register('member.course.create', function (BreadcrumbsGenerator $breadcrumbs) {
-        $breadcrumbs->parent('member.course.index');
-        $breadcrumbs->push(__('form.add_new_record'), route('member.course.create'));
-    });
-
-    Breadcrumbs::register('member.course.edit', function (BreadcrumbsGenerator $breadcrumbs, Course $course) {
-        $breadcrumbs->parent('member.course.index');
-        /* @var CourseTranslation $courseTranslation */
-        $courseTranslation = $course->courseTranslation(app('Language')->getId())->first();
-        $breadcrumbs->push(
-            __('form.edit_record', ['name' => $courseTranslation->getName()]), route('member.course.edit', $course->getId())
-        );
     });
 
     Breadcrumbs::register('member.course.show', function (BreadcrumbsGenerator $breadcrumbs, Course $course) {
@@ -373,6 +222,18 @@ try {
         $courseTranslation = $course->courseTranslation(app('Language')->getId())->first();
         $breadcrumbs->push(
             __('form.edit_record', ['name' => $courseTranslation->getName()]), route('member.course.show', $course->getId())
+        );
+    });
+
+    Breadcrumbs::register('member.invoice.index', function (BreadcrumbsGenerator $breadcrumbs) {
+        $breadcrumbs->parent('member.home');
+        $breadcrumbs->push(trans_choice('entity.invoice', 2), route('member.invoice.index'));
+    });
+
+    Breadcrumbs::register('member.invoice.show', function (BreadcrumbsGenerator $breadcrumbs, Invoice $invoice) {
+        $breadcrumbs->parent('member.invoice.index');
+        $breadcrumbs->push(
+            __('form.edit_record', ['name' => $invoice->formatInvoiceNo()]), route('member.invoice.show', $invoice->getId())
         );
     });
 } catch (\DaveJamesMiller\Breadcrumbs\Facades\DuplicateBreadcrumbException $e) {
