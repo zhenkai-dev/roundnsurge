@@ -58,6 +58,7 @@ class PaypalController extends Controller
      */
     public function ipn(Request $request)
     {
+
 // CONFIG: Enable debug mode. This means we'll log requests into 'ipn.log' in the same directory.
 // Especially useful if you encounter network errors or other intermittent problems with IPN (validation).
 // Set this to 0 once you go live or don't require logging.
@@ -253,7 +254,7 @@ class PaypalController extends Controller
 //                }
 //            }
 //        });
-
+// Store transaction
         $res = curl_exec($ch);
         if (curl_errno($ch) != 0) // cURL error
         {
@@ -276,7 +277,7 @@ class PaypalController extends Controller
         }
 
         // Store transaction
-        $order = Order::whereOrderNo($_POST['invoice']);
+        $order = Order::whereOrderNo($_POST['invoice'])->first();
         $transaction = new Transaction();
         $transaction->setOrderId($order->getId());
         $transaction->setPaymentMethod(Invoice::PAY_METHOD_PAYPAL);
