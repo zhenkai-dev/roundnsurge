@@ -394,7 +394,7 @@ class PaypalController extends Controller
                                             $membership->setPackageId($orderDetailDto->getItemId());
 
                                             if ($currentMembership->getExpiryDate() === null) {
-                                                $membership->setExpiryDate(Carbon::now());
+                                                $membership->setExpiryDate(Carbon::now()->addMonth(config('app.package_expiry_duration')));
                                             } else {
                                                 if ($currentMembership->isExpired()) {
                                                     $membership->setExpiryDate(Carbon::now()->addMonth(config('app.package_expiry_duration')));
