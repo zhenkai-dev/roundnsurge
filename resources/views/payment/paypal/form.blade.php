@@ -7,7 +7,7 @@
     <input type="text" name="currency_code" value="{{ $order->getCurrencyCode() }}">
     <input type="text" name="button_subtype" value="products">
     <input type="text" name="invoice" value="{{ $order->getOrderNo() }}">
-    <input type="text" name="return" value="{{ route('paypal.response') }}">
+    <input type="text" name="return" value="{{ route('paypal.response', ['orderNo' => $order->getOrderNo()]) }}">
     <input type="text" name="notify_url" value="{{ route('paypal.ipnPost') }}">
     <input type="text" name='rm' value='1'>
     <input type="text" name="cancel_return" value="{{ url('/') }}">

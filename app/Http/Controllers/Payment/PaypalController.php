@@ -46,9 +46,19 @@ class PaypalController extends Controller
         abort(404);
     }
 
-    public function response(Request $request)
+    public function response(string $orderNo, Request $request)
     {
+        $status = 'failed';
+        if (!empty($orderNo)) {
+            $order = Order::whereOrderNo($orderNo)->first();
+            if ($order) {
+                if ($order->isPaid()) {
+                    $status = 'success';
+                }
+            }
+        }
 
+        return view('payment.paypal.response', compact('status'));
     }
 
     /**
@@ -309,115 +319,117 @@ class PaypalController extends Controller
 
             $paidAmount = (float)$_POST['mc_gross'];
 
-            DB::transaction(function () use ($paidAmount) {
-                $order = Order::whereOrderNo($_POST['invoice'])->lockForUpdate()->first();
-                /* @var Order $order */
+            if ($_POST['payment_status'] === 'Completed') {
+                DB::transaction(function () use ($paidAmount) {
+                    $order = Order::whereOrderNo($_POST['invoice'])->lockForUpdate()->first();
+                    /* @var Order $order */
 
-                if ($_POST['mc_currency'] == $order->getCurrencyCode() && abs(($paidAmount - $order->getAmount()) / $order->getAmount()) < 0.00001) {
-                    if (!$order->isPaid()) {
-                        $member = Member::find($order->getMemberId());
+                    if ($_POST['mc_currency'] == $order->getCurrencyCode() && abs(($paidAmount - $order->getAmount()) / $order->getAmount()) < 0.00001) {
+                        if (!$order->isPaid()) {
+                            $member = Member::find($order->getMemberId());
 
-                        // Create invoice
-                        $invoice = new Invoice();
-                        $invoice->setPrefix(config('payment.invoice_prefix'));
-                        $invoice->setAuthKey(md5(str_random(16)));
-                        $invoice->setBillingName($order->getUsername());
-                        $invoice->setBillingEmail($order->getEmail());
+                            // Create invoice
+                            $invoice = new Invoice();
+                            $invoice->setPrefix(config('payment.invoice_prefix'));
+                            $invoice->setAuthKey(md5(str_random(16)));
+                            $invoice->setBillingName($order->getUsername());
+                            $invoice->setBillingEmail($order->getEmail());
 
-                        if ($member) {
-                            $invoice->setMemberId($order->getMemberId());
-                            $invoice->setBillingContact($member->getMobile());
-                            $address = $member->address()->first();
+                            if ($member) {
+                                $invoice->setMemberId($order->getMemberId());
+                                $invoice->setBillingContact($member->getMobile());
+                                $address = $member->address()->first();
 
-                            if ($address) {
-                                /* @var Address $address */
-                                $invoice->setBillingAddress1($address->getAddress1());
-                                $invoice->setBillingAddress2($address->getAddress2());
-                                $invoice->setBillingPostcode($address->getPostcode());
-                                $invoice->setBillingCity($address->getCity());
-                                $invoice->setBillingState($address->getState());
-                                $invoice->setBillingCountryId($address->getCountryId());
+                                if ($address) {
+                                    /* @var Address $address */
+                                    $invoice->setBillingAddress1($address->getAddress1());
+                                    $invoice->setBillingAddress2($address->getAddress2());
+                                    $invoice->setBillingPostcode($address->getPostcode());
+                                    $invoice->setBillingCity($address->getCity());
+                                    $invoice->setBillingState($address->getState());
+                                    $invoice->setBillingCountryId($address->getCountryId());
+                                }
                             }
-                        }
 
-                        $invoice->setCurrencyId($order->getCurrencyId());
-                        $invoice->setCurrencySymbol($order->getCurrencySymbol());
-                        $invoice->setCurrencyFormat($order->getCurrencyFormat());
-                        $invoice->setCurrencyExchangeRate($order->getCurrencyExchangeRate());
-                        $invoice->setCurrencyCode($order->getCurrencyCode());
+                            $invoice->setCurrencyId($order->getCurrencyId());
+                            $invoice->setCurrencySymbol($order->getCurrencySymbol());
+                            $invoice->setCurrencyFormat($order->getCurrencyFormat());
+                            $invoice->setCurrencyExchangeRate($order->getCurrencyExchangeRate());
+                            $invoice->setCurrencyCode($order->getCurrencyCode());
 
-                        $this->invoiceService->createInvoice($invoice);
+                            $this->invoiceService->createInvoice($invoice);
 
-                        $lastInvoice = Invoice::orderBy('id', 'desc')->lockForUpdate()->first();
-                        $invoiceNo = config('payment.invoice_initial_number');
-                        /* @var \App\Invoice $lastInvoice */
-                        if ($lastInvoice != null) {
-                            $invoiceNo = $lastInvoice->getInvoiceNo() + 1;
-                        }
-                        $invoice->setInvoiceNo($invoiceNo);
-                        $invoice->setAmount($order->getAmount());
-                        $invoice->setPaymentMethod(Invoice::PAY_METHOD_PAYPAL);
-                        $invoice->setPaid(true);
-                        $invoice->setPaidAmount($paidAmount);
-                        $invoice->setPaidDate(Carbon::now());
-                        $invoice->setInvoiceStatus(Invoice::STATUS_PAID);
+                            $lastInvoice = Invoice::orderBy('id', 'desc')->lockForUpdate()->first();
+                            $invoiceNo = config('payment.invoice_initial_number');
+                            /* @var \App\Invoice $lastInvoice */
+                            if ($lastInvoice != null) {
+                                $invoiceNo = $lastInvoice->getInvoiceNo() + 1;
+                            }
+                            $invoice->setInvoiceNo($invoiceNo);
+                            $invoice->setAmount($order->getAmount());
+                            $invoice->setPaymentMethod(Invoice::PAY_METHOD_PAYPAL);
+                            $invoice->setPaid(true);
+                            $invoice->setPaidAmount($paidAmount);
+                            $invoice->setPaidDate(Carbon::now());
+                            $invoice->setInvoiceStatus(Invoice::STATUS_PAID);
 
-                        $invoice->save();
+                            $invoice->save();
 
-                        // Create invoice item
-                        if ($order->getOrderDetails()) {
-                            $invoiceItem = new InvoiceItem();
-                            $orderDetails = unserialize($order->getOrderDetails());
-                            foreach ($orderDetails as $orderDetail) {
-                                $orderDetailDto = OrderDetailDto::arrayToObject($orderDetail);
-                                $invoiceItem->setItemName($orderDetailDto->getItemName());
-                                $invoiceItem->setFkid($orderDetailDto->getItemId());
-                                $invoiceItem->setModule($orderDetailDto->getItemModule());
-                                $invoiceItem->setAmount($orderDetailDto->getAmount());
-                                $invoiceItem->setQuantity($orderDetailDto->getQuantity());
+                            // Create invoice item
+                            if ($order->getOrderDetails()) {
+                                $invoiceItem = new InvoiceItem();
+                                $orderDetails = unserialize($order->getOrderDetails());
+                                foreach ($orderDetails as $orderDetail) {
+                                    $orderDetailDto = OrderDetailDto::arrayToObject($orderDetail);
+                                    $invoiceItem->setItemName($orderDetailDto->getItemName());
+                                    $invoiceItem->setFkid($orderDetailDto->getItemId());
+                                    $invoiceItem->setModule($orderDetailDto->getItemModule());
+                                    $invoiceItem->setAmount($orderDetailDto->getAmount());
+                                    $invoiceItem->setQuantity($orderDetailDto->getQuantity());
 
-                                if ($orderDetailDto->getItemModule() == Package::class) {
-                                    switch ($order->getOrderType()) {
-                                        case Order::REGISTER_MEMBERSHIP:
-                                            $membership = new Membership();
-                                            $membership->setMemberId($member->getId());
-                                            $membership->setPackageId($orderDetailDto->getItemId());
-                                            $membership->setExpiryDate(Carbon::now()->addMonth(config('app.package_expiry_duration')));
-                                            $membership->setIsActive(true);
-                                            $membership->save();
-                                            break;
-                                        case Order::UPGRADE_MEMBERSHIP:
-                                        case Order::RENEW_MEMBERSHIP:
-                                            $currentMembership = $member->membership()->first();
-                                            $membership = new Membership();
-                                            $membership->setMemberId($member->getId());
-                                            $membership->setPackageId($orderDetailDto->getItemId());
-
-                                            if ($currentMembership->getExpiryDate() === null) {
+                                    if ($orderDetailDto->getItemModule() == Package::class) {
+                                        switch ($order->getOrderType()) {
+                                            case Order::REGISTER_MEMBERSHIP:
+                                                $membership = new Membership();
+                                                $membership->setMemberId($member->getId());
+                                                $membership->setPackageId($orderDetailDto->getItemId());
                                                 $membership->setExpiryDate(Carbon::now()->addMonth(config('app.package_expiry_duration')));
-                                            } else {
-                                                if ($currentMembership->isExpired()) {
+                                                $membership->setIsActive(true);
+                                                $membership->save();
+                                                break;
+                                            case Order::UPGRADE_MEMBERSHIP:
+                                            case Order::RENEW_MEMBERSHIP:
+                                                $currentMembership = $member->membership()->first();
+                                                $membership = new Membership();
+                                                $membership->setMemberId($member->getId());
+                                                $membership->setPackageId($orderDetailDto->getItemId());
+
+                                                if ($currentMembership->getExpiryDate() === null) {
                                                     $membership->setExpiryDate(Carbon::now()->addMonth(config('app.package_expiry_duration')));
                                                 } else {
-                                                    $membership->setExpiryDate($currentMembership->getExpiryDate()->addMonth(config('app.package_expiry_duration')));
+                                                    if ($currentMembership->isExpired()) {
+                                                        $membership->setExpiryDate(Carbon::now()->addMonth(config('app.package_expiry_duration')));
+                                                    } else {
+                                                        $membership->setExpiryDate($currentMembership->getExpiryDate()->addMonth(config('app.package_expiry_duration')));
+                                                    }
                                                 }
-                                            }
 
-                                            $membership->setIsActive(true);
-                                            $membership->save();
-                                        default:
+                                                $membership->setIsActive(true);
+                                                $membership->save();
+                                            default:
+                                        }
                                     }
+
                                 }
-
+                                $invoice->invoiceItems()->save($invoiceItem);
                             }
-                            $invoice->invoiceItems()->save($invoiceItem);
-                        }
 
-                        $order->setPaid(true);
-                        $order->save();
+                            $order->setPaid(true);
+                            $order->save();
+                        }
                     }
-                }
-            });
+                });
+            }
 
         } else if (strcmp($res, "INVALID") == 0) {
             // log for manual investigation

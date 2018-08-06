@@ -7,5 +7,9 @@
  */
 
 Route::get('paypal/create-submit', 'Payment\PaypalController@createFormAndSubmit')->name('paypal.createSubmit');
-Route::get('paypal/response', 'Payment\PaypalController@response')->name('paypal.response');
+
 Route::get('paypal/ipn', 'Payment\PaypalController@ipn')->name('paypal.ipn');
+
+Route::group(['middleware' => ['web.viewComposer']], function () {
+    Route::get('paypal/response/{orderNo}', 'Payment\PaypalController@response')->name('paypal.response');
+});
