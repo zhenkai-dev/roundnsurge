@@ -55,7 +55,7 @@ mix.sass('node_modules/font-awesome/scss/font-awesome.scss', 'public/admin/css')
     .copy('node_modules/bootstrap/dist/css/bootstrap.min.css', 'public/admin/css')
     .sourceMaps(!mix.config.production);
 
-mix.copy('public/admin', 'public/member').sourceMaps();
+mix.copy('public/admin', 'public/member').sourceMaps(!mix.config.production);
 
 mix.babel([
     'node_modules/jquery/dist/jquery.min.js',

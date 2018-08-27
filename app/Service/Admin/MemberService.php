@@ -104,7 +104,6 @@ class MemberService
     public function delete(Member $member, Request $request): void
     {
         $member->email = $member->email . '.' . time();
-        $member->membername = $member->membername . '.' . time();
 
         $member->save();
 

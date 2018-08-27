@@ -25,7 +25,8 @@
                                     // $banner with [banner_name, banner_description, friendly_url_name, friendly_url_module]
                                 @endphp
 
-                                <div class="swiper-slide" style="background-image: url({{ $banner->getPhotoFullUrl() }})">
+                                <div class="swiper-slide"
+                                     style="background-image: url({{ $banner->getPhotoFullUrl() }})">
                                     <div class="">
                                         @if (!empty($banner['banner_name']))
                                             <h1>{{ $banner['banner_name'] }}</h1>
@@ -36,7 +37,8 @@
                                         @endif
 
                                         @if (!empty($banner->getUrl()) || !empty($banner->getUrlId()))
-                                            <a href="{{ get_site_url(new \App\Dto\UrlDto($banner['friendly_url_id'], $banner['friendly_url_name'], $banner['friendly_url_module'], $banner->getUrl())) }}" class="btn btn-theme">Read more</a>
+                                            <a href="{{ get_site_url(new \App\Dto\UrlDto($banner['friendly_url_id'], $banner['friendly_url_name'], $banner['friendly_url_module'], $banner->getUrl())) }}"
+                                               class="btn btn-theme">Read more</a>
                                         @endif
                                     </div>
                                 </div>
@@ -80,7 +82,8 @@
                                     <p class="description">
                                         {{ nl2br($package['package_description']) }}
                                     </p>
-                                    <a class="text-uppercase btn btn-theme btn-lg btn-action" href="{{ route('web.register', ['package' => $package->getId()]) }}">Sign Up</a>
+                                    <a class="text-uppercase btn btn-theme btn-lg btn-action"
+                                       href="{{ route('web.register', ['package' => $package->getId()]) }}">Sign Up</a>
                                 </div>
                             </div>
                         @endforeach
@@ -122,5 +125,120 @@
                 }
             });
         }
+
+        var stockLiveCount = $('#stock-table-live li').length;
+        if (stockLiveCount) {
+            $('#stock-table-live').after('<div id="table-stock-live" class="table-responsive"></div>');
+            $('#table-stock-live').html('' +
+                '<table class="table table-stock table-striped">' +
+                '<thead>' +
+                '<tr>' +
+                '<th>Company</th>' +
+                '<th>Date</th>' +
+                '<th>Buy</th>' +
+                '<th>Live Price</th>' +
+                '<th>Profit / Loss</th>' +
+                '</tr' +
+                '</thead>' +
+                '<tbody>' +
+                '</tbody>' +
+                '</table>');
+            
+            $('#stock-table-live li').each(function () {
+                var $this = $(this);
+                var stockData = $this.html();
+                var stockNameReg = /[^\[]+?(?=\])/;
+                var stockName = stockNameReg.exec(stockData);
+
+                var stockSymbolReg = new RegExp('(?<=\\[' + stockName + '\\]).*?(?=\\s)', 'g');
+                var stockSymbol = stockSymbolReg.exec(stockData);
+
+                var stockDateReg = /(?<=DATE\:).*?(?=\s)/;
+                var stockDate = stockDateReg.exec(stockData);
+
+                var stockBuyReg = /(?<=BUY\:).*?(?=\s)/;
+                var stockBuy = parseFloat(stockBuyReg.exec(stockData).toString());
+
+                var stockCloseReg = /(?<=CLOSE\:).*/;
+                var stockClose = parseFloat(stockCloseReg.exec(stockData).toString());
+
+                var isProfit = false;
+                var profit = (stockClose - stockBuy) / stockBuy * 100;
+                if (profit >= 0) {
+                    isProfit = true;
+                }
+
+                $('#table-stock-live tbody').append($('<tr>' +
+                    '<td class="name">' + stockName + '</td>' +
+                    '<td class="date">' + stockDate + '</td>' +
+                    '<td class="text-center ' + (isProfit ? 'text-success' : 'text-danger') + '">' + stockBuy + '</td>' +
+                    '<td class="text-center ' + (isProfit ? 'text-success' : 'text-danger') + '">' + stockClose + '</td>' +
+                    '<td class="text-center ' + (isProfit ? 'text-success' : 'text-danger') + '">' + (profit !== 'N/A' ? profit.toFixed(2) + '%' : profit) + '</td>' +
+                    '</tr>'));
+            });
+        }
+
+        var stockSellCount = $('#stock-table-sell li').length;
+        if (stockSellCount) {
+            $('#stock-table-sell').after('<div id="table-stock-sell" class="table-responsive"></div>');
+            $('#table-stock-sell').html('' +
+                '<table class="table table-stock table-striped">' +
+                '<thead>' +
+                '<tr>' +
+                '<th>Company</th>' +
+                '<th>Date</th>' +
+                '<th>Buy</th>' +
+                '<th>Sell</th>' +
+                '<th>Profit / Loss</th>' +
+                '</tr' +
+                '</thead>' +
+                '<tbody>' +
+                '</tbody>' +
+                '</table>');
+
+            $('#stock-table-sell li').each(function () {
+                var $this = $(this);
+                var stockData = $this.html();
+                var stockNameReg = /[^\[]+?(?=\])/;
+                var stockName = stockNameReg.exec(stockData);
+
+                var stockSymbolReg = new RegExp('(?<=\\[' + stockName + '\\]).*?(?=\\s)', 'g');
+                var stockSymbol = stockSymbolReg.exec(stockData);
+
+                var stockDateReg = /(?<=DATE\:).*?(?=\s)/;
+                var stockDate = stockDateReg.exec(stockData);
+
+                var stockBuyReg = /(?<=BUY\:).*?(?=\s)/;
+                var stockBuy = parseFloat(stockBuyReg.exec(stockData).toString());
+
+                var stockSellReg = /(?<=SELL\:).*/;
+                var stockSell = parseFloat(stockSellReg.exec(stockData).toString());
+
+                var isProfit = false;
+                var profit = (stockSell - stockBuy) / stockBuy * 100;
+                if (profit >= 0) {
+                    isProfit = true;
+                }
+
+                $('#table-stock-sell tbody').append($('<tr>' +
+                    '<td class="name">' + stockName + '</td>' +
+                    '<td class="date">' + stockDate + '</td>' +
+                    '<td class="text-center ' + (isProfit ? 'text-success' : 'text-danger') + '">' + stockBuy + '</td>' +
+                    '<td class="text-center ' + (isProfit ? 'text-success' : 'text-danger') + '">' + stockSell + '</td>' +
+                    '<td class="text-center ' + (isProfit ? 'text-success' : 'text-danger') + '">' + (profit !== 'N/A' ? profit.toFixed(2) + '%' : profit) + '</td>' +
+                    '</tr>'));
+            });
+        }
+
+        /*Stock name
+/[^\[]+?(?=\])/
+
+Date
+(?<=DATE\:).*?(?=\s)
+
+Buy
+(?<=BUY\:).*?(?=\s)
+
+Close*/
     </script>
 @endsection
