@@ -115,6 +115,7 @@
 
 @section('scripts')
     <script src="{{ asset('web/js/swiper.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js"></script>
     <script>
 
         if ($('#banner').length) {
@@ -143,7 +144,7 @@
                 '<tbody>' +
                 '</tbody>' +
                 '</table>');
-            
+
             $('#stock-table-live li').each(function () {
                 var $this = $(this);
                 var stockData = $this.html();
@@ -196,6 +197,7 @@
                 '</tbody>' +
                 '</table>');
 
+            var stockSellList = [];
             $('#stock-table-sell li').each(function () {
                 var $this = $(this);
                 var stockData = $this.html();
@@ -227,18 +229,64 @@
                     '<td class="text-center ' + (isProfit ? 'text-success' : 'text-danger') + '">' + stockSell + '</td>' +
                     '<td class="text-center ' + (isProfit ? 'text-success' : 'text-danger') + '">' + (profit !== 'N/A' ? profit.toFixed(2) + '%' : profit) + '</td>' +
                     '</tr>'));
+
+                stockSellList.push({
+                    name: stockName,
+                    symbol: stockSymbol,
+                    date: stockDate,
+                    buy: stockBuy,
+                    sell: stockSell,
+                    profit: profit
+                });
             });
+
+            var chartData = [];
+            stockSellList.forEach((stockSell) => {
+                chartData.push({
+                    x: new Date(stockSell.date),
+                    y: stockSell.profit,
+                    name: stockSell.name
+                })
+            });
+
+            var chart = new CanvasJS.Chart("stockSellChart", {
+                animationEnabled: true,
+                theme: "light2",
+                title: {
+                    text: "Stock"
+                },
+                axisX: {
+                    valueFormatString: "DD MMM",
+                    crosshair: {
+                        enabled: true,
+                        snapToDataPoint: true
+                    }
+                },
+                axisY: {
+                    title: "Profits",
+                    crosshair: {
+                        enabled: true
+                    }
+                },
+                toolTip: {
+                    content:"{x}<br />{name}: {y}%" ,
+                },
+                legend: {
+                    cursor: "pointer",
+                    verticalAlign: "bottom",
+                    horizontalAlign: "left",
+                    dockInsidePlotArea: true
+                },
+                data: [{
+                    type: "line",
+                    showInLegend: true,
+                    name: "Profit",
+                    markerType: "square",
+                    xValueFormatString: "DD MMM, YYYY",
+                    dataPoints: chartData
+                }]
+            });
+            chart.render();
         }
-
-        /*Stock name
-/[^\[]+?(?=\])/
-
-Date
-(?<=DATE\:).*?(?=\s)
-
-Buy
-(?<=BUY\:).*?(?=\s)
-
-Close*/
     </script>
 @endsection
