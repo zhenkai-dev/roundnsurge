@@ -139,6 +139,7 @@
                 '<th>Buy</th>' +
                 '<th>Live Price</th>' +
                 '<th>Profit / Loss</th>' +
+                '<th>Profit / Loss (%)</th>' +
                 '</tr' +
                 '</thead>' +
                 '<tbody>' +
@@ -164,7 +165,8 @@
                 var stockClose = parseFloat(stockCloseReg.exec(stockData).toString());
 
                 var isProfit = false;
-                var profit = (stockClose - stockBuy) / stockBuy * 100;
+                var profit = stockClose - stockBuy;
+                var profitPercentage = profit / stockBuy * 100;
                 if (profit >= 0) {
                     isProfit = true;
                 }
@@ -174,7 +176,8 @@
                     '<td class="date">' + stockDate + '</td>' +
                     '<td class="text-center ' + (isProfit ? 'text-success' : 'text-danger') + '">' + stockBuy + '</td>' +
                     '<td class="text-center ' + (isProfit ? 'text-success' : 'text-danger') + '">' + stockClose + '</td>' +
-                    '<td class="text-center ' + (isProfit ? 'text-success' : 'text-danger') + '">' + (profit !== 'N/A' ? profit.toFixed(2) + '%' : profit) + '</td>' +
+                    '<td class="text-center ' + (isProfit ? 'text-success' : 'text-danger') + '">' + profit + '</td>' +
+                    '<td class="text-center ' + (isProfit ? 'text-success' : 'text-danger') + '">' + (profitPercentage !== 'N/A' ? profitPercentage.toFixed(2) + '%' : profitPercentage) + '</td>' +
                     '</tr>'));
             });
         }
@@ -191,6 +194,7 @@
                 '<th>Buy</th>' +
                 '<th>Sell</th>' +
                 '<th>Profit / Loss</th>' +
+                '<th>Profit / Loss (%)</th>' +
                 '</tr' +
                 '</thead>' +
                 '<tbody>' +
@@ -217,8 +221,9 @@
                 var stockSell = parseFloat(stockSellReg.exec(stockData).toString());
 
                 var isProfit = false;
-                var profit = (stockSell - stockBuy) / stockBuy * 100;
-                if (profit >= 0) {
+                var profit = stockSell - stockBuy;
+                var profitPercentage = profit / stockBuy * 100;
+                if (profitPercentage >= 0) {
                     isProfit = true;
                 }
 
@@ -227,7 +232,8 @@
                     '<td class="date">' + stockDate + '</td>' +
                     '<td class="text-center ' + (isProfit ? 'text-success' : 'text-danger') + '">' + stockBuy + '</td>' +
                     '<td class="text-center ' + (isProfit ? 'text-success' : 'text-danger') + '">' + stockSell + '</td>' +
-                    '<td class="text-center ' + (isProfit ? 'text-success' : 'text-danger') + '">' + (profit !== 'N/A' ? profit.toFixed(2) + '%' : profit) + '</td>' +
+                    '<td class="text-center ' + (isProfit ? 'text-success' : 'text-danger') + '">' + profitPercentage + '</td>' +
+                    '<td class="text-center ' + (isProfit ? 'text-success' : 'text-danger') + '">' + (profitPercentage !== 'N/A' ? profitPercentage.toFixed(2) + '%' : profitPercentage) + '</td>' +
                     '</tr>'));
 
                 stockSellList.push({
@@ -236,7 +242,7 @@
                     date: stockDate,
                     buy: stockBuy,
                     sell: stockSell,
-                    profit: profit
+                    profit: profitPercentage
                 });
             });
 
