@@ -202,6 +202,7 @@
                 '</table>');
 
             var stockSellList = [];
+            var accumulatedProfit = 0;
             $('#stock-table-sell li').each(function () {
                 var $this = $(this);
                 var stockData = $this.html();
@@ -222,6 +223,7 @@
 
                 var isProfit = false;
                 var profit = stockSell - stockBuy;
+                accumulatedProfit += profit;
                 var profitPercentage = profit / stockBuy * 100;
                 if (profitPercentage >= 0) {
                     isProfit = true;
@@ -242,7 +244,7 @@
                     date: stockDate,
                     buy: stockBuy,
                     sell: stockSell,
-                    profit: profitPercentage
+                    profit: accumulatedProfit
                 });
             });
 
@@ -275,7 +277,7 @@
                     }
                 },
                 toolTip: {
-                    content:"{x}<br />{name}: {y}%" ,
+                    content:"{x}<br />{name}: RM{y}" ,
                 },
                 legend: {
                     cursor: "pointer",
