@@ -234,7 +234,7 @@
                     '<td class="date">' + stockDate + '</td>' +
                     '<td class="text-center ' + (isProfit ? 'text-success' : 'text-danger') + '">' + stockBuy + '</td>' +
                     '<td class="text-center ' + (isProfit ? 'text-success' : 'text-danger') + '">' + stockSell + '</td>' +
-                    '<td class="text-center ' + (isProfit ? 'text-success' : 'text-danger') + '">' + profitPercentage + '</td>' +
+                    '<td class="text-center ' + (isProfit ? 'text-success' : 'text-danger') + '">' + profit + '</td>' +
                     '<td class="text-center ' + (isProfit ? 'text-success' : 'text-danger') + '">' + (profitPercentage !== 'N/A' ? profitPercentage.toFixed(2) + '%' : profitPercentage) + '</td>' +
                     '</tr>'));
 
@@ -271,7 +271,7 @@
                     }
                 },
                 axisY: {
-                    title: "Profits",
+                    title: "Accumulated Profits",
                     crosshair: {
                         enabled: true
                     }
@@ -288,7 +288,7 @@
                 data: [{
                     type: "line",
                     showInLegend: true,
-                    name: "Profit",
+                    name: "Accumulated Profits",
                     markerType: "square",
                     xValueFormatString: "DD MMM, YYYY",
                     dataPoints: chartData
