@@ -12,6 +12,7 @@ return [
     'email' => 'Email',
     'mobile' => 'Mobile number',
     'name' => 'Name',
+    'membership' => 'Membership',
     'password' => 'Password',
     'password_confirm' => 'Confirm password',
     'status' => 'Status'

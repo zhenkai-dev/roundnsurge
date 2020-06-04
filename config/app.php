@@ -255,5 +255,5 @@ return [
 
     'setting_id' => 1,
     'default_ordering_value' => 999999999,
-    'package_expiry_duration' => '12m'
+    'package_expiry_duration' => '6m'
 ];

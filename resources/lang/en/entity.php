@@ -16,6 +16,7 @@ return [
     'invoice' => 'Invoice|Invoices',
     'invoice_item' => 'Invoice item|Invoice items',
     'member' => 'Member|Members',
+    'membership' => 'Membership|Memberships',
     'menu' => 'Menu|Menus',
     'news' => 'News|News',
     'package' => 'Package|Packages',

@@ -70,6 +70,7 @@ Route::group(['as' => 'admin.', 'namespace' => 'Admin'], function () {
         Route::resource('news', 'NewsController');
         Route::resource('user', 'UserController');
         Route::patch('member/{member}/address', 'MemberAddressController@update')->name('member.address.update');
+        Route::post('member/{member}/membership', 'MemberMembershipController@store')->name('member.membership.store');
         Route::resource('member', 'MemberController');
         Route::resource('package', 'PackageController');
         Route::resource('course', 'CourseController');

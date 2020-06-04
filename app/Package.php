@@ -174,6 +174,22 @@ class Package extends Model
     }
 
     /**
+     * @return string
+     */
+    public function getAllowedPackageId(): string
+    {
+        return $this->allowed_package_id;
+    }
+
+    /**
+     * @param string $allowed_package_id
+     */
+    public function setAllowedPackageId(string $allowed_package_id): void
+    {
+        $this->allowed_package_id = $allowed_package_id;
+    }
+
+    /**
      * @return float
      */
     public function getPrice(): float

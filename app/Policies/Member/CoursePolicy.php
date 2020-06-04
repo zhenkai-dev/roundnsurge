@@ -52,7 +52,7 @@ class CoursePolicy
         $package = $user->allowPackageToViewCourse();
 
         $check = $model->packages()
-            ->where(Package::getTableName() . '.id', '=', $package->getId())
+            ->whereIn(Package::getTableName() . '.id', explode(',', $package->allowed_package_id))
             ->get();
         return count($check) > 0 && $model->isActive();
 

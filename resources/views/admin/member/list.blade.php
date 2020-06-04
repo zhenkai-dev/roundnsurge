@@ -59,6 +59,7 @@
                 <thead>
                     <tr>
                         <th>{!! sortable('name', __('member.name')) !!}</th>
+                        <th>{{ __('member.membership') }}</th>
                         <th>{!! sortable('mobile', __('member.mobile')) !!}</th>
                         <th>{!! sortable('email', __('member.email')) !!}</th>
                         <th class="text-center">{{ __('common.status') }}</th>
@@ -70,6 +71,7 @@
                         @php /* @var App\Member $member */ @endphp
                         <tr>
                             <td><a href="{{ route('admin.member.edit', $member->getId()) }}">{{ $member->getName() }}</a></td>
+                            <td>{{ $member->membership ? $member->membership->package->packageTranslation->getName() : '-' }}</td>
                             <td>{{ $member->getMobile() }}</td>
                             <td>{{ $member->getEmail() }}</td>
                             <td class="text-center">{!! status_icon($member->isActive()) !!}</td>

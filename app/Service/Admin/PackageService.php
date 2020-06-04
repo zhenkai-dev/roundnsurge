@@ -70,6 +70,7 @@ class PackageService
         }
 
         $package->setPrice($request->input('price'));
+        $package->setAllowedPackageId($request->input('allowed_package_id'));
 
         // save
         $package->save();

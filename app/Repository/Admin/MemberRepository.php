@@ -32,7 +32,7 @@ class MemberRepository extends Repository
      */
     public function findListing(Request $request): LengthAwarePaginator
     {
-        $query = Member::query();
+        $query = Member::query()->with('membership.package.packageTranslation');
 
         $query = $this->filterListing($query, $request);
         $query = $this->sortListing($query);

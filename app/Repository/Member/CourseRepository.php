@@ -39,6 +39,7 @@ class CourseRepository extends Repository
         $member = Member::find(Auth::id());
         /* @var Member $member */
         $package = $member->allowPackageToViewCourse();
+        // dd(explode(',', $package->allowed_package_id));
 
         $query = Course::query()->join(
             CourseTranslation::getTableName(),
@@ -48,7 +49,9 @@ class CourseRepository extends Repository
         )->join('course_packages', 'course_packages.course_id', '=', Course::getTableName() . '.id')
         ->where(Course::getTableName() . '.is_active', true)
         ->where(CourseTranslation::getTableName() . '.language_id', '=', app('Language')->getId())
-        ->where('course_packages.package_id', '=', $package->getId());
+        ->whereIn('course_packages.package_id', explode(',', $package->allowed_package_id))
+        ->groupBy('course_packages.course_id');
+        // ->where('course_packages.package_id', '=', $package->getId());
 
         $query = $this->filterListing($query, $request);
         $query = $this->sortListing($query);

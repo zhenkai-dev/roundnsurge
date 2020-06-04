@@ -42,6 +42,18 @@
         @endcomponent
 
         @component('admin.shared.form.form-group')
+            @slot('label') Allowed Package ID @endslot
+            @slot('input')
+                @component('admin.shared.input.text-group-component')
+                    @slot('type') text @endslot
+                    @slot('name') allowed_package_id @endslot
+                    @slot('value') {{ $package->getAllowedPackageId() }} @endslot
+                    @slot('required') required @endslot
+                @endcomponent
+            @endslot
+        @endcomponent
+
+        @component('admin.shared.form.form-group')
             @slot('label') {{ __('package.description') }} @endslot
             @slot('input')
                 @component('admin.shared.input.textarea-component')

@@ -18,6 +18,9 @@
             <li class="nav-item">
                 <a class="nav-link" id="address-tab" data-toggle="tab" href="#address" role="tab" aria-controls="address" aria-selected="false">{{ trans_choice('entity.address', 1) }}</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" id="membership-tab" data-toggle="tab" href="#membership" role="tab" aria-controls="membership" aria-selected="false">{{ trans_choice('entity.membership', 1) }}</a>
+            </li>
         @endif
     </ul>
 
@@ -251,6 +254,126 @@
                 @include('admin.shared.form.form-submit-button')
             </form>
         </div>
+        <div class="tab-pane fade" id="membership" role="tabpanel" aria-labelledby="membership-tab">
+            <div class="float-right mb-3">
+                <a href="javascript:void(0);" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#form-membership"><i class="fa fa-plus"></i> Add new membership</a>
+            </div>
+            <div class="clearfix"></div>
+            <div id="form-membership" class="modal" tabindex="-1" role="dialog">
+                <form class="form-horizontal form-validation" action="{{ route('admin.member.membership.store', $member->getId()) }}" method="post" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Add new membership</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                @component('admin.shared.form.form-group')
+                                    @slot('label') Select package: @endslot
+                                    @slot('input')
+                                        @component('admin.shared.input.select-component')
+                                            @slot('name') package_id @endslot
+                                            @slot('value') {{ old('package_id') }} @endslot
+                                            @slot('option')
+                                                <option value="" selected>{{ __('common.select_with_hyphen') }}</option>
+                                                @foreach(\App\Package::dropdown()->get() as $packageOption)
+                                                    @php /* @var \App\Package $packageOption */ @endphp
+                                                    <option value="{{ $packageOption->getId() }}">{{ $packageOption->packageTranslation->getName() }}</option>
+                                                @endforeach
+                                            @endslot
+                                            @slot('required') required @endslot
+                                        @endcomponent
+                                    @endslot
+                                @endcomponent
+                                
+                                @component('admin.shared.form.form-group')
+                                    @slot('label') {{ __('membership.validity') }} @endslot
+                                    @slot('input')
+                                        @component('admin.shared.input.text-component')
+                                            @slot('type') text @endslot
+                                            @slot('name') expiry_date @endslot
+                                            @slot('value') {{ old('expiry_date') }} @endslot
+                                            @slot('attributes')
+                                                data-name="datepicker"
+                                            @endslot
+                                        @endcomponent
+                                    @endslot
+                                @endcomponent
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light border" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> {{ __('common.save') }}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            @if ($member->memberships)
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>{{ __('member.membership') }}</th>
+                                <th class="text-center">{{ __('membership.validity') }}</th>
+                                <th class="text-center">{{ __('common.status') }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php
+                            $memberships = $member->memberships->load('package.packageTranslation')->sortByDesc('id');
+                            @endphp
+                            @foreach ($memberships as $membership)
+                                <tr>
+                                    <td @if ($member->membership->id == $membership->id)class="font-weight-bold text-success"@endif>
+                                        @if ($member->membership->id == $membership->id)
+                                            <i class="fa fa-fw fa-star"></i>
+                                        @endif
+                                        {{ $membership->package->packageTranslation->getName() }}
+                                    </td>
+                                    <td class="text-center">
+                                         @if ($membership->getExpiryDate() === null)
+                                            {{ __('membership.lifetime') }}
+                                        @else
+                                            {{ $membership->getExpiryDate()->toDayDateTimeString() }}
+                                        @endif    
+                                    </td>
+                                    <td class="text-center">
+                                        @if ($membership->isExpired())
+                                            <span class="text-danger">{{ __('membership.expired') }}</span>
+                                        @else
+                                            <span class="text-success">{{ __('common.active') }}</span>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @else
+                <div class="alert alert-warning" role="alert">
+                    {{ __('message.no_record') }}
+                </div>
+            @endif
+        </div>
         @endif
     </div>
 @endsection
+
+{{-- @section('scripts')
+<script>
+var expiry_date = $('input[name="expiry_date"]'),
+    expiry_start_date = moment(expiry_date.data('start-date'), 'YYYY/MM/DD');
+expiry_date.daterangepicker({
+    startDate: expiry_start_date,
+    singleDatePicker: true,
+    autoUpdateInput: false,
+    showDropdowns: true
+}).on("apply.daterangepicker", function(e, picker) {
+    picker.element.val(picker.startDate.format(picker.locale.format));
+});
+</script>
+@endsection --}}
