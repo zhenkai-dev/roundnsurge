@@ -176,7 +176,7 @@ class Package extends Model
     /**
      * @return string
      */
-    public function getAllowedPackageId(): string
+    public function getAllowedPackageId(): ?string
     {
         return $this->allowed_package_id;
     }
