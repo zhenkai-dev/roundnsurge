@@ -61,11 +61,25 @@
         </div>
     </div>
 
-    <div class="middle-banner home-section">
-        <div class="container py-5">
-            <img class="img-fluid" src="{{ asset('web/images/banner.jpg') }}">
+    {{-- member only --}}
+    @auth
+        <div class="chart home-section">
+            <div class="container py-5">
+                @if (!empty($memberPages[13]))
+                    {!! editor_content($memberPages[13]->pageTranslation->getDescription()) !!}
+                @endif
+            </div>
         </div>
-    </div>
+    @endauth
+    
+    {{-- video --}}
+    @if (!empty($pages[12]))
+        <div class="video home-section">
+            <div class="container py-5">
+                {!! editor_content($pages[12]->pageTranslation->getDescription()) !!}
+            </div>
+        </div>
+    @endif
 
     @if(!empty($packages) && count($packages))
         <div class="package-section">
@@ -128,6 +142,7 @@
             });
         }
 
+        // v1
         var stockLiveCount = $('#stock-table-live li').length;
         if (stockLiveCount) {
             $('#stock-table-live').after('<div id="table-stock-live" class="table-responsive"></div>');
@@ -294,6 +309,83 @@
                     xValueFormatString: "DD MMM, YYYY",
                     dataPoints: chartData
                 }]
+            });
+            chart.render();
+        }
+
+        // v2
+        var annualReturnLength = $('#table-cumulative-annual-return tbody tr').length;
+        if (annualReturnLength) {
+            var annualReturnData = {};
+
+            var ths = $('#table-cumulative-annual-return thead tr th');
+            var th_length = ths.length - 1;
+            var trs = $('#table-cumulative-annual-return tbody tr');
+            var tr_length = trs.length;
+            ths.each(function (j) {
+                var key = '';
+                var data = [];
+                var tr = null;
+                if (j > 0) {
+                    key = $(this).text();
+
+                    var dataX = '';
+                    var dataY = '';
+                    var dataPoints = [];
+
+                    $.each(trs, function(i) {
+                        var tds = $('td', this);
+                        var dataX = $(tds[0]).text();
+                        var dataY = parseFloat($(tds[j]).text());
+                        dataPoints.push(
+                            { name: key, x: new Date(dataX, 11, 01), y: dataY }
+                        );
+                    });
+
+                    annualReturnData[key] = dataPoints;
+                }
+            });
+
+            var chartData = [];
+            $.each(annualReturnData, function(key, dataPoint) {
+                chartData.push({
+                    type: "line",
+                    axisYType: "secondary",
+                    name: key,
+                    showInLegend: true,
+                    markerType: "square",
+                    dataPoints: dataPoint
+                });
+            });
+
+            var chart = new CanvasJS.Chart("annualReturnChart", {
+                animationEnabled: true,
+                title: {
+                    text: "Cumulative Annual Return"
+                },
+                axisX: {
+                    valueFormatString: "YYYY",
+                    crosshair: {
+                        enabled: true,
+                        snapToDataPoint: true
+                    }
+                },
+                axisY2: {
+                    title: "Return per year",
+                    crosshair: {
+                        enabled: true,
+                    }
+                },
+                toolTip: {
+                    content:"{name}<br>{x}: {y}%" ,
+                },
+                legend: {
+                    cursor: "pointer",
+                    verticalAlign: "bottom",
+                    horizontalAlign: "left",
+                    dockInsidePlotArea: true,
+                },
+                data: chartData
             });
             chart.render();
         }

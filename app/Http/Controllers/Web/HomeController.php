@@ -24,7 +24,7 @@ class HomeController extends Controller
         /* @var \App\Page $page */
         $pageTranslation = $page->pageTranslation(app('Language')->getId())->first();
 
-        $pagesAll = Page::whereIn('id', [6, 7])
+        $pagesAll = Page::whereIn('id', [6, 7, 12])
             ->where('is_active', true)
             ->get();
         $pages = [];
@@ -34,8 +34,17 @@ class HomeController extends Controller
             }
         }
 
+        $memberPagesAll = Page::whereIn('id', [13])
+            ->get();
+        $memberPages = [];
+        if (count($memberPagesAll)) {
+            foreach ($memberPagesAll as $page) {
+                $memberPages[$page->getId()] = $page;
+            }
+        }
+
         $packages = PackageService::getAll();
 
-        return view('web.pages.home.main', compact('banners', 'page', 'pageTranslation', 'packages', 'pages'));
+        return view('web.pages.home.main', compact('banners', 'page', 'pageTranslation', 'packages', 'pages', 'memberPages'));
     }
 }
