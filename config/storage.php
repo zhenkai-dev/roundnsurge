@@ -17,8 +17,8 @@ return [
             'height' => 533,
             'mobile' => [
                 'postfix' => '-mb',
-                'width' => 768,
-                'height' => 1024,
+                'width' => 600,
+                'height' => 600,
             ],
             'thumbnail' => [
                 'postfix' => '-t',
