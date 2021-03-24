@@ -13,8 +13,13 @@ return [
 
     'size' => [
         'banner' => [
-            'width' => 1920,
-            'height' => 1080,
+            'width' => 1400,
+            'height' => 533,
+            'mobile' => [
+                'postfix' => '-mb',
+                'width' => 768,
+                'height' => 1024,
+            ],
             'thumbnail' => [
                 'postfix' => '-t',
                 'width' => 150,

@@ -41,6 +41,7 @@ class BannerService
             return Validator::make($request->all(), [
                 'name' => 'nullable|max:255',
                 'photo' => 'required|image|max:' . config('filesystems.max_uploaded_size'),
+                'photo_mobile' => 'required|image|max:' . config('filesystems.max_uploaded_size'),
                 'url_id' => 'nullable|exists:' . FriendlyUrl::getTableName() . ',id',
                 'url' => 'nullable|string',
                 'target' => 'required|string',
@@ -50,6 +51,7 @@ class BannerService
             return Validator::make($request->all(), [
                 'name' => 'nullable|max:255',
                 'photo' => 'nullable|image|max:' . config('filesystems.max_uploaded_size'),
+                'photo_mobile' => 'required|image|max:' . config('filesystems.max_uploaded_size'),
                 'url_id' => 'nullable|exists:' . FriendlyUrl::getTableName() . ',id',
                 'url' => 'nullable|string',
                 'target' => 'required|string',
@@ -84,6 +86,17 @@ class BannerService
             $filenameToStore = $this->uploadPhoto($photo);
 
             $banner->setPhoto($filenameToStore);
+        }
+
+        //upload file mobile
+        $photo_mobile = $request->file('photo_mobile');
+        if ($request->hasFile('photo_mobile') && $photo_mobile->isValid()) {
+            // Remove old files
+            $this->removePhotoMobile($banner);
+
+            $filenameToStore = $this->uploadPhotoMobile($photo_mobile);
+
+            $banner->setPhotoMobile($filenameToStore);
         }
 
         $banner->setUrlId($request->input('url_id'));
@@ -215,6 +228,54 @@ class BannerService
                 $path . '/' .
                 $pathParts['filename'] .
                 config('storage.size.banner.thumbnail.postfix') .
+                '.' . $pathParts['extension']
+            );
+
+            Storage::delete($remove);
+        }
+    }
+
+    /**
+     * Upload photo mobile
+     *
+     * @param UploadedFile $photo
+     * @return string Filename to store
+     */
+    private function uploadPhotoMobile(UploadedFile $photo): string
+    {
+        $path = config('storage.directory.banner');
+
+        list($filename, $extension) = FileUtil::generateFilename($photo, $path);
+
+        $filenameToStore = $filename . '.' . $extension;
+
+        ImageUtil::resize(
+            $photo,
+            $path . '/' . $filename . config('storage.size.banner.mobile.postfix') . '.' . $extension,
+            config('storage.size.banner.mobile.width'),
+            config('storage.size.banner.mobile.height')
+        );
+
+        return $filenameToStore;
+    }
+
+    /**
+     * Remove photo mobile
+     *
+     * @param Banner $banner
+     */
+    private function removePhotoMobile(Banner $banner): void
+    {
+        if ($banner->getPhoto()) {
+            $path = config('storage.root') . '/' . config('storage.directory.banner');
+
+            $pathParts = pathinfo(Storage::path($path . '/' . $banner->getPhoto()));
+
+            $remove = array(
+                $path . '/' . $banner->getPhotoMobile(),
+                $path . '/' .
+                $pathParts['filename'] .
+                config('storage.size.banner.mobile.postfix') .
                 '.' . $pathParts['extension']
             );
 

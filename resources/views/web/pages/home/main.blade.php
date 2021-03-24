@@ -25,9 +25,10 @@
                                     // $banner with [banner_name, banner_description, friendly_url_name, friendly_url_module]
                                 @endphp
 
-                                <div class="swiper-slide"
-                                     style="background-image: url({{ $banner->getPhotoFullUrl() }})">
-                                    <div class="">
+                                <div class="swiper-slide">
+                                    <img src="{{ $banner->getPhotoFullUrl() }}" alt="" class="show-desktop">
+                                    <img src="{{ $banner->getPhotoMobileUrl() }}" alt="" class="show-mobile">
+                                    <div class="container">
                                         @if (!empty($banner['banner_name']))
                                             <h1>{{ $banner['banner_name'] }}</h1>
                                         @endif
