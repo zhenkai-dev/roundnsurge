@@ -41,6 +41,7 @@
                         @slot('required') required @endslot
                     @endif
                 @endcomponent
+                <div><small>file size: {{ config('storage.size.banner.width') }}px x {{ config('storage.size.banner.height') }}px</small></div>
             @endslot
             @slot('more')
                 @if ($banner->getPhoto())
@@ -50,11 +51,40 @@
                         </div>
                     </div>
 
-                    <div class="mt-1">
+                    {{-- <div class="mt-1">
                         <div class="border d-inline-block p-1">
                             <img class="img-fluid" src="{{ $banner->getPhotoThumbnailFullUrl() }}">
                         </div>
+                    </div> --}}
+                @endif
+            @endslot
+        @endcomponent
+
+        @component('admin.shared.form.form-group')
+            @slot('label') Banner mobile @endslot
+            @slot('input')
+                @component('admin.shared.input.file-component')
+                    @slot('id') photo_mobile @endslot
+                    @slot('name') photo_mobile @endslot
+                    @if (!is_edit())
+                        @slot('required') required @endslot
+                    @endif
+                @endcomponent
+                <div><small>file size: {{ config('storage.size.banner.mobile.width') }}px x {{ config('storage.size.banner.mobile.height') }}px</small></div>
+            @endslot
+            @slot('more')
+                @if ($banner->getPhotoMobileUrl())
+                    <div class="mt-1">
+                        <div class="border d-inline-block p-1">
+                            <img class="img-fluid" src="{{ $banner->getPhotoMobileUrl() }}">
+                        </div>
                     </div>
+
+                    {{-- <div class="mt-1">
+                        <div class="border d-inline-block p-1">
+                            <img class="img-fluid" src="{{ $banner->getPhotoThumbnailFullUrl() }}">
+                        </div>
+                    </div> --}}
                 @endif
             @endslot
         @endcomponent

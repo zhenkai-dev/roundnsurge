@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
  *
  * @property int                 $id
  * @property string|null         $photo
+ * @property string|null         $photo_mobile
  * @property int|null            $url_id Link to friendly url table
  * @property string|null         $url External url
  * @property string|null         $target
@@ -86,6 +87,22 @@ class Banner extends Model
     public function setPhoto(?string $photo): void
     {
         $this->photo = $photo;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getPhotoMobile(): ?string
+    {
+        return $this->photo_mobile;
+    }
+
+    /**
+     * @param null|string $photo
+     */
+    public function setPhotoMobile(?string $photo_mobile): void
+    {
+        $this->photo_mobile = $photo_mobile;
     }
 
     /**
@@ -206,6 +223,18 @@ class Banner extends Model
     public function getPhotoFullUrl(): string
     {
         return url(Storage::url(config('storage.directory.banner') . '/' . $this->getPhoto()));
+    }
+
+    public function getPhotoMobileUrl(): string
+    {
+        return url(Storage::url(config('storage.directory.banner') . '/' . $this->getPhotoMobile()));
+        // $pathParts = pathinfo(Storage::path(
+        //     config('storage.root') . '/' . config('storage.directory.banner') . '/' . $this->getPhotoMobile()
+        // ));
+        // return url(Storage::url(
+        //     config('storage.directory.banner') . '/' . $pathParts['filename'] .
+        //     config('storage.size.banner.mobile.postfix') . '.' . $pathParts['extension']
+        // ));
     }
 
     public function getPhotoThumbnailFullUrl(): string

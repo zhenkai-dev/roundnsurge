@@ -3,8 +3,10 @@
 
   .container {
     position: relative;
-    min-height: 400px;
+    // min-height: 400px;
     display: flex;
+    padding: 0;
+    max-width: inherit;
   }
 
   /*&:before {
@@ -40,6 +42,9 @@
         content: ' ';
         display: block;
       }
+
+      > img { width: 100%; }
+      > div { position: absolute; top: 0; bottom: 0; left: 50%; z-index: 10; transform: translateX(-50%); flex-direction: column; align-items: center; justify-content: center; }
     }
   }
 
@@ -55,6 +60,13 @@
       font-style: italic;
     }
   }*/
+
+  @media (min-width: 768px) {
+    .show-mobile { display: none; }
+  }
+  @media (max-width: 767px) {
+    .show-desktop { display: none; }
+  }
 }
 
 .home {

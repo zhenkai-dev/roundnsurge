@@ -11,7 +11,7 @@ const mix = require('laravel-mix');
  |
  */
 mix.webpackConfig({
-    devtool: "inline-source-map"
+    // devtool: "inline-source-map"
 });
 
 const dashboardScipts = [
@@ -31,10 +31,12 @@ const dashboardScipts = [
 ];
 
 mix.babel(dashboardScipts, 'public/admin/js/script.js')
-    .sourceMaps(!mix.config.production);
+    // .sourceMaps(!mix.config.production)
+    ;
 
 mix.babel(dashboardScipts, 'public/member/js/script.js')
-    .sourceMaps(!mix.config.production);
+    // .sourceMaps(!mix.config.production)
+    ;
 
 mix.babel([
     'node_modules/chart.js/dist/Chart.min.js',
@@ -53,9 +55,12 @@ mix.sass('node_modules/font-awesome/scss/font-awesome.scss', 'public/admin/css')
     .copy('resources/assets/admin/js/ckeditor/', 'public/admin/js/ckeditor')
     .copy('node_modules/nestable/jquery.nestable.js', 'public/admin/js/jquery.nestable.js')
     .copy('node_modules/bootstrap/dist/css/bootstrap.min.css', 'public/admin/css')
-    .sourceMaps(!mix.config.production);
+    // .sourceMaps(!mix.config.production)
+    ;
 
-mix.copy('public/admin', 'public/member').sourceMaps(!mix.config.production);
+mix.copy('public/admin', 'public/member')
+    // .sourceMaps(!mix.config.production)
+    ;
 
 mix.babel([
     'node_modules/jquery/dist/jquery.min.js',
@@ -71,10 +76,12 @@ mix.babel([
     'resources/assets/global/js/helpers.js',
     'resources/assets/web/js/helpers.js'
 ], 'public/web/js/script.js')
-    .sourceMaps(!mix.config.production);
+    // .sourceMaps(!mix.config.production)
+    ;
 
 mix.sass('resources/assets/web/scss/style.scss', 'public/web/css')
     .copy('resources/assets/web/images', 'public/web/images')
     .copy('node_modules/swiper/dist/css/swiper.min.css', 'public/web/css')
     .copy('node_modules/swiper/dist/js/swiper.min.js', 'public/web/js')
-    .sourceMaps(!mix.config.production);
+    // .sourceMaps(!mix.config.production)
+    ;
