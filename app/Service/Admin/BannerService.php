@@ -247,11 +247,11 @@ class BannerService
 
         list($filename, $extension) = FileUtil::generateFilename($photo, $path);
 
-        $filenameToStore = $filename . '.' . $extension;
+        $filenameToStore = $filename . config('storage.size.banner.mobile.postfix') . '.' . $extension;
 
         ImageUtil::resize(
             $photo,
-            $path . '/' . $filename . config('storage.size.banner.mobile.postfix') . '.' . $extension,
+            $path . '/' . $filenameToStore,
             config('storage.size.banner.mobile.width'),
             config('storage.size.banner.mobile.height')
         );

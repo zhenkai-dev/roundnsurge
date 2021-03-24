@@ -227,13 +227,14 @@ class Banner extends Model
 
     public function getPhotoMobileUrl(): string
     {
-        $pathParts = pathinfo(Storage::path(
-            config('storage.root') . '/' . config('storage.directory.banner') . '/' . $this->getPhotoMobile()
-        ));
-        return url(Storage::url(
-            config('storage.directory.banner') . '/' . $pathParts['filename'] .
-            config('storage.size.banner.mobile.postfix') . '.' . $pathParts['extension']
-        ));
+        return url(Storage::url(config('storage.directory.banner') . '/' . $this->getPhotoMobile()));
+        // $pathParts = pathinfo(Storage::path(
+        //     config('storage.root') . '/' . config('storage.directory.banner') . '/' . $this->getPhotoMobile()
+        // ));
+        // return url(Storage::url(
+        //     config('storage.directory.banner') . '/' . $pathParts['filename'] .
+        //     config('storage.size.banner.mobile.postfix') . '.' . $pathParts['extension']
+        // ));
     }
 
     public function getPhotoThumbnailFullUrl(): string
