@@ -266,10 +266,10 @@ class BannerService
      */
     private function removePhotoMobile(Banner $banner): void
     {
-        if ($banner->getPhoto()) {
+        if ($banner->getPhotoMobile()) {
             $path = config('storage.root') . '/' . config('storage.directory.banner');
 
-            $pathParts = pathinfo(Storage::path($path . '/' . $banner->getPhoto()));
+            $pathParts = pathinfo(Storage::path($path . '/' . $banner->getPhotoMobile()));
 
             $remove = array(
                 $path . '/' . $banner->getPhotoMobile(),
