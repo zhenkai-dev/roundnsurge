@@ -73,7 +73,7 @@
                 <div><small>file size: {{ config('storage.size.banner.mobile.width') }}px x {{ config('storage.size.banner.mobile.height') }}px</small></div>
             @endslot
             @slot('more')
-                @if ($banner->getPhoto())
+                @if ($banner->getPhotoMobileUrl())
                     <div class="mt-1">
                         <div class="border d-inline-block p-1">
                             <img class="img-fluid" src="{{ $banner->getPhotoMobileUrl() }}">
