@@ -134,10 +134,12 @@
                             input[field.name] = field.value;
                         });
 
+                        var btn_txt = $this.find('[type="submit"]').text()
+
                         $.ajax({
                             type: 'POST', url: url, dataType: 'json', data: input,
                             beforeSend: function (xhr) {
-                                $this.find('[type="submit"]').attr('disabled', true);
+                                $this.find('[type="submit"]').attr('disabled', true).html('processing');
                                 $this.find('[type=submit]').button('loading');
                             },
                             success: function (data) {
@@ -146,7 +148,7 @@
                                 $('#modalContact').modal('hide');
                             },
                             complete: function(data) {
-                                $this.find('[type="submit"]').attr('disabled', false);
+                                $this.find('[type="submit"]').attr('disabled', false).html(btn_text);
                                 $this.find('[type=submit]').button('reset');
                             }
                         });

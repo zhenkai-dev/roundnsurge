@@ -26,7 +26,7 @@ class EnquiryDto
 
     private $email;
 
-    private $phone;
+    private $phone_number;
 
     private $company;
 
@@ -35,6 +35,10 @@ class EnquiryDto
     private $budget;
 
     private $description;
+
+    private $interest;
+
+    private $message;
 
     /**
      * @return string
@@ -73,7 +77,7 @@ class EnquiryDto
      */
     public function getPhone(): string
     {
-        return $this->phone;
+        return $this->phone_number;
     }
 
     /**
@@ -81,7 +85,7 @@ class EnquiryDto
      */
     public function setPhone(string $phone): void
     {
-        $this->phone = $phone;
+        $this->phone_number = $phone;
     }
 
     /**
@@ -146,6 +150,38 @@ class EnquiryDto
     public function setDescription(string $description): void
     {
         $this->description = $description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getInterest()
+    {
+        return $this->interest;
+    }
+
+    /**
+     * @param string $interest
+     */
+    public function setInterest($interest): void
+    {
+        $this->interest = $interest;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMessage(): string
+    {
+        return $this->message;
+    }
+
+    /**
+     * @param string $message
+     */
+    public function setMessage(string $message): void
+    {
+        $this->message = $message;
     }
 
 

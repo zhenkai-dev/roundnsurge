@@ -32,7 +32,7 @@ class EnquiryReceived extends Mailable
     public function build()
     {
         return $this->from(config('mail.from.address'))
-            ->subject($this->enquiryDto->getSubject())
+            ->subject('Enquiry received from '.app('Setting')->getSiteName())
             ->view('email.enquiry');
     }
 }

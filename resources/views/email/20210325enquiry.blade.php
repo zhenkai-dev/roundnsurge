@@ -28,19 +28,20 @@
         <td>{{ $enquiryDto->getPhone() }}</td>
     </tr>
     <tr>
-        <td width="100">Interest</td>
-        <td>
-            @php
-            $interests = $enquiryDto->getInterest();
-            @endphp
-            @foreach($interests as $interest)
-                {{ $interest }}<br>
-            @endforeach
-        </td>
+        <td width="100">Company</td>
+        <td>{{ $enquiryDto->getCompany() }}</td>
     </tr>
     <tr>
-        <td width="100">Message</td>
-        <td>{{ nl2br($enquiryDto->getMessage()) }}</td>
+        <td width="100">Subject</td>
+        <td>{{ $enquiryDto->getSubject() }}</td>
+    </tr>
+    <tr>
+        <td width="100">Budget</td>
+        <td>{{ $enquiryDto->getBudget() }}</td>
+    </tr>
+    <tr>
+        <td width="100">Description</td>
+        <td>{{ nl2br($enquiryDto->getDescription()) }}</td>
     </tr>
 </table>
 

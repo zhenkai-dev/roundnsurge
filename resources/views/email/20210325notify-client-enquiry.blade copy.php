@@ -11,7 +11,7 @@
 
 <div>Hi {{ $enquiryDto->getName() }},</div>
 
-<p>We received your enquiry<br />
+<p>We received your enquiry <b>{{ $enquiryDto->getSubject() }}</b><br />
     One of our colleague will get back to you as soon as possible.</p>
 
 <p>Have a nice day!</p>

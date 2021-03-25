@@ -40,6 +40,10 @@
                     <div class="page-content">
                         {!! editor_content($pageTranslation->getDescription()) !!}
                     </div>
+
+                    @if ($page->id == 14)
+                        @include('web.shared.contact-form')
+                    @endif
                 </div>
                 <div class="col-sm-4">
                     @include('web.shared.page-sidebar-component')
