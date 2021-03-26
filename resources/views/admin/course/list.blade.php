@@ -29,7 +29,7 @@
             @component('admin.shared.listing.filter-form-group')
                 @slot('label') {{ trans_choice('entity.package', 2) }} @endslot
                 @slot('input')
-                    <div>
+                    {{-- <div>
                         @component('admin.shared.input.bootstrap.radio-component',
                         ['inline' => true, 'checked' => true])
                             @slot('name') package_join @endslot
@@ -43,7 +43,7 @@
                             @slot('label') have only @endslot
                             @slot('value') and @endslot
                         @endcomponent
-                    </div>
+                    </div> --}}
                     <div>
                         @foreach(\App\Package::getMultipleChoice() as $package)
                             @component('admin.shared.input.bootstrap.checkbox-component',
