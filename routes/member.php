@@ -52,8 +52,8 @@ Route::group(['as' => 'member.', 'namespace' => 'Member'], function () {
         Route::patch('/account/password', 'PasswordController@update')->name('password.update');
         Route::get('/account/membership', 'AccountController@membership')->name('account.membership');
 
-        Route::get('api/session', 'ApiController@currentUser');
-        Route::get('api/setting', 'ApiController@setting');
+        // Route::get('api/session', 'ApiController@currentUser');
+        // Route::get('api/setting', 'ApiController@setting');
 
         Route::get('/home', 'HomeController@index')->name('home');
 

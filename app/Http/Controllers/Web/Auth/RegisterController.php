@@ -40,6 +40,7 @@ class RegisterController extends Controller
 
     private $orderService;
 
+
     /**
      * Create a new controller instance.
      *
@@ -56,7 +57,7 @@ class RegisterController extends Controller
 
     /**
      * Get a validator for an incoming registration request.
-     *
+     *r
      * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
@@ -92,9 +93,10 @@ class RegisterController extends Controller
             'email' => $data['email'],
 //            'dob' => $data['dob'],
 //            'mobile' => $data['mobile'],
-            'is_active' => true,
+            'is_active' => false, // set inactive first
             'password' => bcrypt($data['password']),
         ]);
+        $redirect_referral = true;
 
         // FREE Account
         $package = Package::where('package_type', '=', Package::BASIC)->first();
@@ -113,6 +115,10 @@ class RegisterController extends Controller
             switch ($packageCheck->getPackageType()) {
                 case Package::MEMBER:
                 case Package::PRO:
+                    // set active if paid package
+                    $member->is_active = true;
+                    $member->save();
+                    $redirect_referral = false;
 
                     // Create order
                     /* @var Currency $currency */
@@ -151,6 +157,10 @@ class RegisterController extends Controller
             }
         }
 
+        if ($redirect_referral) {
+            $this->redirectTo = route('web.register.referral');
+        }
+
         return $member;
     }
 
@@ -162,5 +172,14 @@ class RegisterController extends Controller
     public function showRegistrationForm()
     {
         return view('web.auth.register');
+    }
+
+    public function referral()
+    {
+        if (auth()->user()->is_active) {
+            abort(404);
+        }
+        
+        return view('web.auth.referral');
     }
 }

@@ -28,6 +28,7 @@ Route::group(['as' => 'web.', 'namespace' => 'Web', 'middleware' => ['web.viewCo
     });
 
     Route::group(['middleware' => ['auth:web']], function () {
+        Route::get('register/referral', 'Auth\RegisterController@referral')->name('register.referral');
         Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
         // Account routes
