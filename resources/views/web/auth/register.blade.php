@@ -73,7 +73,7 @@
                                     <strong>{{ $errors->first('dob') }}</strong>
                                 </span>
                             @endif
-                        </div>
+                        </div>--}}
 
                         <div class="form-group{{ $errors->has('mobile') ? ' has-error' : '' }}">
                             <label for="mobile" class="control-label">{{ __('member.mobile') }}</label>
@@ -84,7 +84,7 @@
                                     <strong>{{ $errors->first('mobile') }}</strong>
                                 </span>
                             @endif
-                        </div>--}}
+                        </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="control-label">Password</label>
@@ -141,6 +141,8 @@
             inputAddRules($form);
         });
 
-        $('#main-container > .container > .row > div').matchHeight();
+        $('#main-container > .container > .row > div').matchHeight({
+            property: 'min-height'
+        });
     </script>
 @endsection

@@ -67,7 +67,7 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:' . Member::getTableName(),
 //            'dob' => 'required|date|date_format:"m/d/Y"',
-//            'mobile' => 'required|string|max:255',
+            'mobile' => 'required|string|max:20',
             'password' => 'required|string|min:8|confirmed',
             //'package' => 'nullable|integer|exists:' . Package::getTableName() . ',id'
             'package' => array(
@@ -92,7 +92,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
 //            'dob' => $data['dob'],
-//            'mobile' => $data['mobile'],
+            'mobile' => $data['mobile'],
             'is_active' => false, // set inactive first
             'password' => bcrypt($data['password']),
         ]);

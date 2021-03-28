@@ -65,9 +65,10 @@ class Member extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password', 'is_active'
-    ];
+    // protected $fillable = [
+    //     'name', 'email', 'mobile', 'dob', 'password', 'is_active'
+    // ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for arrays.
