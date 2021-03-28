@@ -177,9 +177,13 @@ class RegisterController extends Controller
     public function referral()
     {
         if (auth()->user()->is_active) {
-            abort(404);
+            // abort(404);
         }
-        
-        return view('web.auth.referral');
+
+        $page = \App\Page::where('id', 15)->where('is_active', true)->first();
+
+        $pageTranslation = $page->pageTranslation(app('Language')->getId())->first();
+
+        return view('web.auth.referral', compact('page', 'pageTranslation'));
     }
 }

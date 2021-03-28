@@ -12,8 +12,6 @@
         <div class="row justify-content-center my-5 py-5">
             <div class="col-md-12">
                 <div class="content">
-                    <h1 class="card-title">THANK YOU FOR YOUR REGISTRATION</h1>
-
                     @php /* @var \Illuminate\Support\ViewErrorBag $errors */ @endphp
                     @if (count($errors))
                         @component('web.shared.alert-component')
@@ -31,8 +29,7 @@
                         @endcomponent
                     @endif
 
-                    <p>In order to process your member registration, please sign up MPLUS account <a href="https://www.mplusonline.com.my/macsecos/index.asp" target="_blank">here</a>.</p>
-                    <p>Once registered, please email to us for account validation and we will process your membership at soonest.</p>
+                    {!! editor_content($pageTranslation->getDescription()) !!}
                 </div>
             </div>
         </div>
