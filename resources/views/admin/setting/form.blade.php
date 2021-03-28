@@ -93,6 +93,16 @@
             @endslot
         @endcomponent
 
+        @component('admin.shared.form.form-group')
+            @slot('label') Maintenance Mode @endslot
+            @slot('input')
+                <select name="is_maintenance_mode" class="form-control">
+                    <option value="0" @if(old('is_maintenance_mode', $setting->getIsMaintenanceMode()) == '0') selected @endif>No</option>
+                    <option value="1" @if(old('is_maintenance_mode', $setting->getIsMaintenanceMode()) == '1') selected @endif>Yes</option>
+                </select>
+            @endslot
+        @endcomponent
+
         @if (is_edit())
             @include('admin.shared.form.template.timestamp-component',
             [

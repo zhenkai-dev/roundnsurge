@@ -38,7 +38,8 @@ class SettingService
                 'embed_script_bottom' => 'nullable',
                 'default_meta_title' => 'nullable',
                 'default_meta_keywords' => 'nullable',
-                'default_meta_description' => 'nullable'
+                'default_meta_description' => 'nullable',
+                'is_maintenance_mode' => 'boolean'
             ]);
         } else {
             return Validator::make($request->all(), [
@@ -48,7 +49,8 @@ class SettingService
                 'embed_script_bottom' => 'nullable',
                 'default_meta_title' => 'nullable',
                 'default_meta_keywords' => 'nullable',
-                'default_meta_description' => 'nullable'
+                'default_meta_description' => 'nullable',
+                'is_maintenance_mode' => 'boolean'
             ]);
         }
     }
@@ -69,6 +71,7 @@ class SettingService
         $setting->setDefaultMetaTitle($request->input('default_meta_title'));
         $setting->setDefaultMetaKeywords($request->input('default_meta_keywords'));
         $setting->setDefaultMetaDescription($request->input('default_meta_description'));
+        $setting->setIsMaintenanceMode($request->input('is_maintenance_mode'));
 
         // save
         $setting->save();

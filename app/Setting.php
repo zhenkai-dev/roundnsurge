@@ -47,6 +47,7 @@ class Setting extends Model
 {
     protected $casts = [
         'smtp' => 'boolean',
+        'is_maintenance_mode' => 'boolean',
     ];
 
     private $itemPerPage = 20;
@@ -299,6 +300,22 @@ class Setting extends Model
     public function getEmbedScriptBottom(): ?string
     {
         return $this->embed_script_bottom;
+    }
+
+    /**
+     * @param null|string $embed_script_bottom
+     */
+    public function setIsMaintenanceMode($is_maintenance_mode): void
+    {
+        $this->is_maintenance_mode = $is_maintenance_mode;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getIsMaintenanceMode(): ?bool
+    {
+        return $this->is_maintenance_mode;
     }
 
     /**
