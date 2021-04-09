@@ -10,20 +10,20 @@
 
     <meta name="keywords" content="{{ (!empty($metaKeywords) ? $metaKeywords : setting()->getDefaultMetaKeywords()) }}">
     <meta name="description" content="{{ (!empty($metaDescription) ? $metaDescription : setting()->getDefaultMetaDescription()) }}">
-    <meta itemprop="name" content="{{ (!empty($browserTitle) ? config('app.name', 'Laravel') : '') }}">
+    <meta itemprop="name" content="{{ (!empty($browserTitle) ? $browserTitle . ' - ' . setting()->getSiteName() : setting()->getDefaultMetaTitle() . ' - ' . setting()->getSiteName()) }}">
     <meta itemprop="description" content="{{ (!empty($metaDescription) ? $metaDescription : setting()->getDefaultMetaDescription()) }}">
     <meta itemprop="image" content="{{ url(get_social_cover()) }}">
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@publisher_handle">
     <meta name="twitter:creator" content="@author_handle">
-    <meta property="og:title" content="{{ (!empty($browserTitle) ? $browserTitle : setting()->getSiteName()) }}">
+    <meta property="og:title" content="{{ (!empty($browserTitle) ? $browserTitle . ' - ' . setting()->getSiteName() : setting()->getSiteName()) }}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:image" content="{{ url(get_social_cover()) }}">
     <meta property="og:site_name" content="{{ setting()->getSiteName() }}">
     <meta property="og:description" content="{{ (!empty($metaDescription) ? $metaDescription : setting()->getDefaultMetaDescription()) }}">
 
-    <title>{{ (!empty($browserTitle) ? $browserTitle : setting()->getSiteName()) }}</title>
+    <title>{{ (!empty($browserTitle) ? $browserTitle . ' - ' . setting()->getSiteName() : setting()->getDefaultMetaTitle() . ' - ' . setting()->getSiteName()) }}</title>
 
     <!-- Icons -->
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
@@ -57,11 +57,23 @@
                                 @endcomponent
                             </ul>
                         @endif
-                        @component('web.shared.menu.login')
-                        @endcomponent
-                        <div class="my-2 my-lg-0">
-                            <a href="{{ route('web.register') }}" class="btn btn-theme px-3 d-sm-block">Sign Up</a>
-                        </div>
+                        @auth
+                            <div class="my-2 my-lg-0 mr-3">
+                                <div class="dropdown">
+                                    <button class="btn btn-theme dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ auth()->user()->getName() }}</button>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="{{ route('member.home') }}">Member Portal</a>
+                                        <a class="dropdown-item" href="{{ route('member.logout') }}">Logout</a>
+                                    </div>
+                                </div>
+                            </div>
+                        @else
+                            @component('web.shared.menu.login')
+                            @endcomponent
+                            <div class="my-2 my-lg-0">
+                                <a href="{{ route('web.register') }}" class="btn btn-theme px-3 d-sm-block">Sign Up</a>
+                            </div>
+                        @endauth
                     </div>
                 </div>
             </nav>

@@ -51,6 +51,12 @@ class NewsController extends Controller
         /* @var \App\News $news */
         $newsTranslation = $news->newsTranslation(app('Language')->getId())->first();
 
-        return view('web.pages.news.view', compact('news', 'newsTranslation'));
+        $news_prev = News::where('updated_at', '<', $news->updated_at)->first();
+        $newsPrevTranslation = $news_prev ? $news_prev->newsTranslation(app('Language')->getId())->first() : false;
+
+        $news_next = News::where('updated_at', '>', $news->updated_at)->first();
+        $newsNextTranslation = $news_next ? $news_next->newsTranslation(app('Language')->getId())->first() : false;
+
+        return view('web.pages.news.view', compact('news', 'newsTranslation', 'news_prev', 'newsPrevTranslation', 'news_next', 'newsNextTranslation'));
     }
 }

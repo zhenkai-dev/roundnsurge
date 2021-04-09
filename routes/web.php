@@ -42,6 +42,13 @@ Route::group(['as' => 'web.', 'namespace' => 'Web', 'middleware' => ['web.viewCo
 
     Route::get('/', 'HomeController@index')->name('home');
 
+    Route::get('videos', function () {
+        if (auth()->user()) {
+            return redirect()->route('member.course.index');
+        } else {
+            return redirect()->route('web.register');
+        }
+    });
     Route::get('news', 'NewsController@index')->name('news.index');
     Route::get('news/{slug}', 'NewsController@show')->name('news.show');
     Route::get('events', 'EventController@index')->name('events.index');

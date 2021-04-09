@@ -24,6 +24,9 @@ class RedirectIfAuthenticated
     {
         if ($guard == config('auth.guards.web.name')) {
             if (Auth::guard($guard)->check()) {
+                if ($request->route()->getName() == 'web.register' && $request->has('package')) {
+                    return redirect(route('member.account.membership'));
+                }
                 return redirect(route('member.home'));
             }
         } elseif ($guard == config('auth.guards.admin.name')) {

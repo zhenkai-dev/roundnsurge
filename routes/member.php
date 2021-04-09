@@ -42,6 +42,7 @@ Route::group(['as' => 'member.', 'namespace' => 'Member'], function () {
 
     Route::group(['middleware' => ['auth:web']], function () {
 
+        Route::get('logout', 'Auth\LoginController@logout')->name('logout');
         Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
         // Account routes
