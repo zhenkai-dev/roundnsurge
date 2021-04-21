@@ -38,7 +38,7 @@ class ViewComposer
                 }
             }
 
-            $footerPagesAll = Page::whereIn('id', [8, 9])
+            $footerPagesAll = Page::whereIn('id', [8, 9, 17])
                 ->where('is_active', true)
                 ->get();
             $footerPages = [];

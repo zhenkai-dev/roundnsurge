@@ -90,14 +90,9 @@
                         <div class="col-md-8 col-lg-9 footer-left">
                             <div class="row">
                                 <div class="col-sm-6 col-md-5 col-lg-3">
-                                    <div class="social">
-                                        <div class="social-heading">Stay Connected</div>
-                                        <ul class="list-inline">
-                                            <li class="list-inline-item"><a href=""><i class="fa fa-facebook"></i></a></li>
-                                            <li class="list-inline-item"><a href=""><i class="fa fa-instagram"></i></a></li>
-                                            <li class="list-inline-item"><a href=""><i class="fa fa-youtube"></i></a></li>
-                                        </ul>
-                                    </div>
+                                    @if (!empty($footerPages[17]))
+                                        {!! editor_content($footerPages[17]->pageTranslation->getDescription()) !!}
+                                    @endif
                                 </div>
                                 <div class="col-sm-6 col-md-7 col-lg-9">
                                     @if (!empty($footerPages[8]))
