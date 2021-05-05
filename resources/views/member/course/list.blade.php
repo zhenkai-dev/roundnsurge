@@ -68,7 +68,7 @@
 
         {{ $courses->links() }}
     @else
-        Hi, {{Auth::user()->getName()}}. Please register a Mplus account using this <a href="https://registration.mplusonline.com/?ref-id=R311" target="_blank">link</a>, 
+        Hi, {{Auth::user()->getName()}}. Please register a Mplus account using this <a href="{{ route('web.register.referral') }}" target="_blank">link</a>, 
         our team will verify your account in 3 working days. You can view our course once your account is activated.
     @endif
 @endsection
