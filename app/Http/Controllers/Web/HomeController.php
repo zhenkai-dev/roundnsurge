@@ -35,6 +35,7 @@ class HomeController extends Controller
         }
 
         $memberPagesAll = Page::whereIn('id', [13])
+            ->where('is_active', true)
             ->get();
         $memberPages = [];
         if (count($memberPagesAll)) {
