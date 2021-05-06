@@ -34,11 +34,22 @@ class MembershipService
 
     public function store(Member $member, Request $request)
     {
+        $package = Package::findOrFail($request->input('package_id'));
+
+        $currentMembership = $member->membership()->first();
+
         $membership = new Membership();
         $membership->setPackageId($request->input('package_id'));
-        if ($request->input('package_id') != Package::BASIC) {
+
+        if ($package->package_type != Package::BASIC) {
             if ($request->input('expiry_date') === null) {
-                $membership->setExpiryDate(Carbon::now()->addMonth(config('app.package_expiry_duration')));
+                $duration = Package::getPackageDuration($package->package_type);
+
+                $expiry_date = $currentMembership
+                    ? $currentMembership->getExpiryDate()
+                    : Carbon::now();
+
+                $membership->setExpiryDate($expiry_date->addMonth($duration));
             } else {
                 $membership->setExpiryDate(new Carbon($request->input('expiry_date')));
             }

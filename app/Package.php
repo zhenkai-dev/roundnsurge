@@ -279,4 +279,11 @@ class Package extends Model
         return self::where('package_type', '!=', self::BASIC)
             ->whereIsActive(true);
     }
+
+    public static function getPackageDuration($package_type)
+    {
+        return $package_type != self::PRO
+            ? config('app.package_expiry_duration.member')
+            : config('app.package_expiry_duration.pro');
+    }
 }
