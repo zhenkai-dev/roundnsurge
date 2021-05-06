@@ -388,12 +388,15 @@ class PaypalController extends Controller
                                     $invoiceItem->setQuantity($orderDetailDto->getQuantity());
 
                                     if ($orderDetailDto->getItemModule() == Package::class) {
+                                        $package = Package::findOrFail($orderDetailDto->getItemId());
+                                        $duration = Package::getPackageDuration($package->package_type);
+
                                         switch ($order->getOrderType()) {
                                             case Order::REGISTER_MEMBERSHIP:
                                                 $membership = new Membership();
                                                 $membership->setMemberId($member->getId());
                                                 $membership->setPackageId($orderDetailDto->getItemId());
-                                                $membership->setExpiryDate(Carbon::now()->addMonth(config('app.package_expiry_duration')));
+                                                $membership->setExpiryDate(Carbon::now()->addMonth($duration));
                                                 $membership->setIsActive(true);
                                                 $membership->save();
                                                 break;
@@ -405,12 +408,12 @@ class PaypalController extends Controller
                                                 $membership->setPackageId($orderDetailDto->getItemId());
 
                                                 if ($currentMembership->getExpiryDate() === null) {
-                                                    $membership->setExpiryDate(Carbon::now()->addMonth(config('app.package_expiry_duration')));
+                                                    $membership->setExpiryDate(Carbon::now()->addMonth($duration));
                                                 } else {
                                                     if ($currentMembership->isExpired()) {
-                                                        $membership->setExpiryDate(Carbon::now()->addMonth(config('app.package_expiry_duration')));
+                                                        $membership->setExpiryDate(Carbon::now()->addMonth($duration));
                                                     } else {
-                                                        $membership->setExpiryDate($currentMembership->getExpiryDate()->addMonth(config('app.package_expiry_duration')));
+                                                        $membership->setExpiryDate($currentMembership->getExpiryDate()->addMonth($duration));
                                                     }
                                                 }
 
