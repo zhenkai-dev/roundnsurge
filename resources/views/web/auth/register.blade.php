@@ -40,7 +40,7 @@
 
                     <form class="form-horizontal form-register" method="POST" action="{{ route('web.register') }}">
                         {{ csrf_field() }}
-
+                        @captcha
                         @php /* @var Illuminate\Support\ViewErrorBag $errors */ @endphp
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="control-label">{{ __('member.name') }}</label>
