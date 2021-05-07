@@ -15,6 +15,6 @@ return [
     'membership' => 'Membership',
     'password' => 'Password',
     'password_confirm' => 'Confirm password',
-    'status' => 'Status'
-
+    'status' => 'Status',
+    'date_joined' => 'Date joined'
 ];

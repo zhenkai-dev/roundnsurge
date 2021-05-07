@@ -61,7 +61,8 @@
                         <th>{!! sortable('name', __('member.name')) !!}</th>
                         <th>{{ __('member.membership') }}</th>
                         <th>{!! sortable('mobile', __('member.mobile')) !!}</th>
-                        <th>{!! sortable('email', __('member.email')) !!}</th>
+                        <th style="width:30%;">{!! sortable('email', __('member.email')) !!}</th>
+                        <th>{!! sortable('date_joined', __('member.date_joined')) !!}</th>
                         <th class="text-center">{{ __('common.status') }}</th>
                         <th></th>
                     </tr>
@@ -74,6 +75,7 @@
                             <td>{{ $member->membership ? $member->membership->package->packageTranslation->getName() : '-' }}</td>
                             <td>{{ $member->getMobile() }}</td>
                             <td>{{ $member->getEmail() }}</td>
+                            <td>{{ $member->getCreatedAt() }}</td>
                             <td class="text-center">{!! status_icon($member->isActive()) !!}</td>
                             <td class="text-center">
                                 @if (!Auth::user()->can(\App\Enumeration\PolicyActionEnum::UPDATE, $member))
