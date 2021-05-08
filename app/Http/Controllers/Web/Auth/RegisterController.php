@@ -93,13 +93,13 @@ class RegisterController extends Controller
             'email' => $data['email'],
 //            'dob' => $data['dob'],
             'mobile' => $data['mobile'],
-            'is_active' => false, // set inactive first
+            'is_active' => true, // by default is active
             'password' => bcrypt($data['password']),
         ]);
         $redirect_referral = true;
 
         // FREE Account
-        $package = Package::where('package_type', '=', Package::BASIC)->first();
+        $package = Package::where('package_type', '=', Package::FREE)->first();
 
         $membership = new Membership();
         $membership->setMemberId($member->getId());

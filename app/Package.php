@@ -47,6 +47,8 @@ class Package extends Model
 
     const PRO = 'pro';
 
+    const FREE = 'free';
+
     protected $casts = [
         'is_active' => 'boolean',
     ];
@@ -271,13 +273,15 @@ class Package extends Model
 
     public static function dropdown(): Builder
     {
-        return self::whereIsActive(true);
+        return self::where('id', '!=', 4)->whereIsActive(true);
     }
 
     public static function dropdownPaidPackage(): Builder
     {
-        return self::where('package_type', '!=', self::BASIC)
-            ->whereIsActive(true);
+        return self::where([
+            ['package_type', '!=', self::BASIC],
+            ['package_type', '!=', self::FREE]
+            ])->whereIsActive(true);
     }
 
     public static function getPackageDuration($package_type)

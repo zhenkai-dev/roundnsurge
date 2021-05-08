@@ -13,6 +13,7 @@ use Auth;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use DB;
 
 class CourseRepository extends Repository
 {
@@ -124,5 +125,20 @@ class CourseRepository extends Repository
     private function paginateListing(Builder $query, Request $request): LengthAwarePaginator
     {
         return $this->buildPagination($query, $request);
+    }
+
+    public function verifyMplusUser()
+    {
+        $isPOV = DB::table('memberships')
+                    ->where([
+                        ['member_id', '=', Auth::id()],
+                        ['package_id', '=', 1],
+                        ['is_active', '=', 1],
+                    ])
+                    ->count();
+        if($isPOV > 0) {
+            return true;
+        }
+        return false;
     }
 }

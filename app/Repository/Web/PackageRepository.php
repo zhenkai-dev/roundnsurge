@@ -29,6 +29,7 @@ class PackageRepository extends Repository
             PackageTranslation::getTableName() . '.package_id'
         )->where(PackageTranslation::getTableName() . '.language_id', '=', app('Language')->getId())
             ->where('is_active', '=', true)
+            ->where('id', '!=', 4)
             ->orderBy('price', 'asc')
             ->select([
                 Package::getTableName() . '.*',

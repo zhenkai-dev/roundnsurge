@@ -41,7 +41,7 @@ class MembershipService
         $membership = new Membership();
         $membership->setPackageId($request->input('package_id'));
 
-        if ($package->package_type != Package::BASIC) {
+        if ($package->package_type != Package::BASIC && $package->package_type != Package::FREE) {
             if ($request->input('expiry_date') === null) {
                 $duration = Package::getPackageDuration($package->package_type);
 

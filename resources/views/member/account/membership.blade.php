@@ -32,7 +32,7 @@
     </div>
 
     <div class="bg-light p-3">
-        @if ($package->getPackageType() === \App\Package::BASIC)
+        @if ($package->getPackageType() === \App\Package::BASIC || \App\Package::FREE)
             <form action="{{ route('member.account.upgradeMembership') }}" method="post">
                 {{ csrf_field() }}
 

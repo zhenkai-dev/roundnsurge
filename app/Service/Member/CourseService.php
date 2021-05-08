@@ -36,4 +36,9 @@ class CourseService
     {
         return $this->courseRepository->findListing($request);
     }
+
+    public function isMplusUser()
+    {
+        return $this->courseRepository->verifyMplusUser();
+    }
 }
