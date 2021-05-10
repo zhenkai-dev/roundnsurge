@@ -31,7 +31,7 @@
     @yield('styles')
 
     <!-- Main styles for this application -->
-    <link href="{{ mix('web/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('web/css/style.css') }}" rel="stylesheet">
 
     @if (setting()->getEmbedScriptTop())
         {!! setting()->getEmbedScriptTop() !!}
@@ -115,7 +115,7 @@
     @yield('modals')
 
     <!-- Scripts -->
-    <script src="{{ mix('web/js/script.js') }}"></script>
+    <script src="{{ asset('web/js/script.js') }}"></script>
     <script>
         $(document).ready(function() {
             $.ajaxSetup({
