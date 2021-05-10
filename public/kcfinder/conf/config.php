@@ -25,7 +25,7 @@ if (isset($_SERVER['HTTP_COOKIE'])) {
            See http://kcfinder.sunhater.com/install for setting descriptions */
 
         $uploadUrl = '/storage/editor_files';
-        $uploadDir = realpath($_SERVER['DOCUMENT_ROOT'].'/storage/editor_files/');
+        $uploadDir = realpath($_SERVER['DOCUMENT_ROOT'].'/storage/app/public/editor_files/');
 
         $_CONFIG = array(
 
