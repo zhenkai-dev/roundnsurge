@@ -76,7 +76,8 @@ class RegisterController extends Controller
                 Rule::exists(Package::getTableName(), 'id')->where(function (Builder $query) {
                     $query->where('is_active', '=', true);
                 })
-            )
+            ),
+            'g-recaptcha-response' => 'required|captcha'
         ]);
     }
 

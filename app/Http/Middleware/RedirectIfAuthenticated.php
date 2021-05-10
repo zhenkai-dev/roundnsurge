@@ -24,8 +24,10 @@ class RedirectIfAuthenticated
     {
         if ($guard == config('auth.guards.web.name')) {
             if (Auth::guard($guard)->check()) {
-                if ($request->route()->getName() == 'web.register' && $request->has('package')) {
+                if ($request->route()->getName() == 'web.register' && $request->has('package') && ($request->package == '2' || $request->package == '3')) {
                     return redirect(route('member.account.membership'));
+                } elseif($request->route()->getName() == 'web.register' && $request->has('package') && $request->package == '1') {
+                    return redirect(route('web.register.referral'));
                 }
                 return redirect(route('member.home'));
             }
