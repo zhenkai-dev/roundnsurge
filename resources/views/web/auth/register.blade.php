@@ -129,16 +129,25 @@
     <script>
         $('.form-register').each(function () {
             var $form = $(this);
-            $form.validate({
+            var $form_validation = $form.validate({
                 errorClass: 'text-danger',
-                submitHandler: function (form) {
-                    $("*[type=submit]").attr("disabled", true);
-                    $(form).find('[type=submit]').button('loading');
-                    form.submit();
-                }
+                // submitHandler: function (form) {
+                //     $("*[type=submit]").attr("disabled", true);
+                //     $(form).find('[type=submit]').button('loading');
+                //     form.submit();
+                // }
             });
 
             inputAddRules($form);
+
+            _beforeSubmit = function(e) {
+                return $form_validation.form();
+            }
+            _submitEvent = function() {
+                $("*[type=submit]").attr("disabled", true);
+                $('.form-register').find('[type=submit]').button('loading');
+                $('.form-register').submit();
+            }
         });
 
         $('#main-container > .container > .row > div').matchHeight({
