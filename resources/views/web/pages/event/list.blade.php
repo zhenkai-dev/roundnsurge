@@ -44,7 +44,7 @@
                             {{ $eventList->links() }}
                         </div>
                     @else
-                        <div>Now events updated yet.</div>
+                        <div>No events updated yet.</div>
                     @endif
                 </div>
             </div>
