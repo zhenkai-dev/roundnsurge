@@ -37,8 +37,9 @@ class CourseController extends Controller
 
         $title = trans_choice('entity.course', 2);
         $courses = $this->courseService->getListing($request);
+        $isPOV = $this->courseService->isMplusUser();
 
-        return view('member.course.list', compact('title', 'courses'));
+        return view('member.course.list', compact('title', 'courses', 'isPOV'));
     }
 
     /**

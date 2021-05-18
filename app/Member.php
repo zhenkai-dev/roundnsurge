@@ -354,7 +354,7 @@ class Member extends Authenticatable
     public function allowPackageToViewCourse(): Package
     {
         $membership = $this->membership()->first();
-        $package = Package::wherePackageType(Package::BASIC)->first();
+        $package = Package::wherePackageType(Package::FREE)->first();
         if (!$membership->isExpired()) {
             $package = $membership->package()->first();
         }

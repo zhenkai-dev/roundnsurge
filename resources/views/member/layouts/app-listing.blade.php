@@ -1,6 +1,7 @@
 @extends('member.layouts.app')
 
 @section('content')
+    @yield('notification')
     <div class="animated fadeIn">
         <div class="row">
             <div class="col-lg-12">
