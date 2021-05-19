@@ -45,5 +45,6 @@ return [
     'url' => 'URL',
     'view' => 'View',
     'view_front' => 'View front site',
-    'view_official' => 'Back to official site'
+    'view_official' => 'Back to official site',
+    'thank_you' => 'Thank you',
 ];
