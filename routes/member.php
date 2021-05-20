@@ -73,4 +73,6 @@ Route::group(['as' => 'member.', 'namespace' => 'Member'], function () {
     Route::get('membership-fee', function() {
         echo 'Redirect to payment page.';
     })->name('membershipFee');
+
+    Route::get('/invoice/{invoice}/download','InvoiceController@downloadAsPDF')->name('download.as.pdf');
 });

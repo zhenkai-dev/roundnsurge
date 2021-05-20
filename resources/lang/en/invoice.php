@@ -19,4 +19,14 @@ return [
     'invoice_status_pending' => 'Pending',
     'invoice_status_cancelled' => 'Cancelled',
 
+    'invoice' => 'INVOICE',
+    'business_name' => 'Round &amp; Surge (002437172-H)',
+    'business_address1' => '19-2A, Jalan PJU 1/3C',
+    'business_address2' => 'Sunway Mas Commercial Centre',
+    'business_postcode' => '47301',
+    'business_city' => 'Petaling Jaya',
+    'business_state' => 'Selangor',
+    'phone' => 'Phone',
+    'business_contactno' => '+6019-556 7829',
+    'date' => 'DATE',
 ];

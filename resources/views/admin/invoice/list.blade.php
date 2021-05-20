@@ -55,6 +55,11 @@
                                 {!! view_icon_muted() !!}
                             @else
                                 {!! view_icon_link(route('admin.invoice.show', $invoice->getId())) !!}
+                                &nbsp;
+                                <a class="d-inline-block text-info" href="{{ route('admin.download.as.pdf', $invoice->getId()) }}">
+                                    <span title="{{ __('common.download') }}" class="text-info"><i class="fa fa-download"></i>
+                                    </span>
+                                </a>
                             @endif
                         </td>
                     </tr>

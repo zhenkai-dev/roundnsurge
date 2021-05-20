@@ -1,32 +1,22 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Kit Loong
- * Date: 29/7/2018
- * Time: 1:14 AM
- */
-?>
-
-@extends('member.layouts.app-show')
-
-@section('heading')
-    {!! $title !!}
-@endsection
-
-@section('show')
-
-    @php /* @var \App\Invoice $invoice */ @endphp
-    @php /* @var \Illuminate\Database\Eloquent\Collection $invoiceItem */ @endphp
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ __('invoice.invoice') }} #{{ $invoice->getInvoiceNo() }}</title>
+    <link href="{{ public_path('member/css/style.css') }}" rel="stylesheet" type="text/css" />
+</head>
+<body style="background:none;">
     <div class="row">
         <div class="col-sm-6">
-            <img src="{{ asset('images/logo.png')}}" alt="logo" title="logo" />
+            <img src="{{ public_path('images/logo.png')}}" alt="logo" title="logo" />
         </div>
-        <div class="col-sm-6 text-right">
+        <div class="col-sm-6" style="margin-left:510px;">
             <h1>{{ __('invoice.invoice') }}</h1>
         </div>
     </div>
-
+    
     <div class="row">
         <div class="col-md-6">
             <br>
@@ -72,8 +62,8 @@
                 </tbody>
             </table>
         </div>
-
-        <div class="col-md-6" id="main-subtable">
+    
+        <div class="col-md-6" id="main-subtable" style="margin-left:510px;">
             <table id="subtable">
                 <tr>
                     <th>{{ __('invoice.invoice') }}#</th>
@@ -86,9 +76,9 @@
             </table>
         </div>
     </div>
-
+    
     <hr id="line-break" />
-
+    
     @if (count($invoiceItems))
         <div style="overflow-x:auto;">
             <table class="table" id="no-border-table">
@@ -116,7 +106,7 @@
             </table>
         </div>
     @endif
-
+    
     <!-- START Unlayer html template-->
     <div class="u-row-container" style="padding: 0px;background-color: transparent;overflow-x:auto;">
         <div class="u-row" style="overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;">
@@ -152,7 +142,7 @@
         <table style="font-family:'Open Sans',sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
         <tbody>
             <tr>
-            <td style="overflow-wrap:break-word;word-break:break-word;padding:92px 0px 20px;font-family:'Open Sans',sans-serif;" align="left">
+            <td style="overflow-wrap:break-word;word-break:break-word;padding:104px 0px 20px;font-family:'Open Sans',sans-serif;" align="left">
                 
         <div class="v-text-align" style="color: #ffffff; line-height: 140%; text-align: left; word-wrap: break-word;">
             <p style="font-size: 14px; line-height: 140%; text-align: right;"><strong><span style="font-size: 14px; line-height: 19.6px;">{{ __('invoice_item.total') }}</span></strong></p>
@@ -172,15 +162,12 @@
     </div>
     <!-- END Unlayer html template-->
     <br>
-
+    
     <div class="row">
         <div class="col-sm-12 text-center">
             <h1>{{ __('common.thank_you') }}.</h1>
         </div>
     </div>
-    <br>
-
-    <a href="{{ URL::previous() }}" class="btn btn-light border" role="button">{{ __('common.back_to_previous') }}</a>
-
-@endsection
+</body>
+</html>
 

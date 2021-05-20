@@ -7,10 +7,19 @@
  */
 
 return [
-    'item_name' => 'Name',
-    'amount' => 'amount',
-    'quantity' => 'Quantity',
+    'item' => 'ITEM',
+    'description' => 'DESCRIPTION',
+    'amount' => 'AMOUNT',
+    'quantity' => 'QTY',
 
-    'total' => 'Total',
-    'grand_total' => 'Grand total'
+    'total' => 'TOTAL',
+    'grand_total' => 'Grand total',
+
+    'bill_to' => 'BILL TO',
+    'price' => 'PRICE',
+    'notes' => 'NOTES',
+    'notes1' => 'Subscription will start once payment is verified.',
+    'notes2' => 'All services included in the subscribed package are not refundable or transferable.',
+    'notes3' => 'This is a computer generated invoice. No signature is required.',
+    'currency' => 'RM',
 ];
