@@ -168,6 +168,7 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -232,8 +233,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Currency' => \Torann\Currency\Facades\Currency::class,
-        'PDF' => Elibyy\TCPDF\Facades\TCPDF::class
-
+        'PDF' => Elibyy\TCPDF\Facades\TCPDF::class,
+        'DownloadAsPDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
     'admin_prefix' => 'my-admin',
