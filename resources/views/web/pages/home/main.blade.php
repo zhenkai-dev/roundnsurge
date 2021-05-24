@@ -135,6 +135,10 @@
 
         if ($('#banner').length) {
             new Swiper('#banner .swiper-container', {
+                autoplay: {
+                    delay: 3500,
+                    disableOnInteraction: false,
+                },
                 navigation: {
                     nextEl: '#banner .swiper-button-next',
                     prevEl: '#banner .swiper-button-prev'
