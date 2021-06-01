@@ -55,11 +55,19 @@ class InvoiceRepository extends Repository
     {
         $this->filterableList[] = function (string $key = 'invoice_no') use ($query, $request): Builder {
             if ($request->filled($key)) {
-                $query->where(
-                    Invoice::getTableName() . '.invoice_no',
-                    'like',
-                    '%' . $request->input($key) . '%'
-                );
+                if($request->input($key) == "10000000") {
+                    $query->where(
+                        Invoice::getTableName() . '.invoice_no',
+                        'like',
+                        '%' . $request->input($key) . '%'
+                    );
+                } else {
+                    $query->where(
+                        Invoice::getTableName() . '.invoice_no',
+                        'like',
+                        '%' . substr($request->input($key), 4) . '%'
+                    );
+                }
             }
             return $query;
         };

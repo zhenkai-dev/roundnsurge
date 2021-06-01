@@ -4,20 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ __('invoice.invoice') }} #{{ $invoice->getInvoiceNo() }}</title>
+    <title>{{ __('invoice.invoice') }} #{{ $invoice->formatInvoiceNo() }}</title>
     <link href="{{ public_path('member/css/style.css') }}" rel="stylesheet" type="text/css" />
+    <style>        
+        #subtable td, th {
+            padding: 12px 5px !important;
+        }  
+    </style>
 </head>
-<body style="background:none;">
+<body style="background:none;font-family:'Courier New',monospace;">
     <div class="row">
         <div class="col-sm-6">
             <img src="{{ public_path('images/logo.png')}}" alt="logo" title="logo" />
         </div>
-        <div class="col-sm-6" style="margin-left:510px;">
-            <h1>{{ __('invoice.invoice') }}</h1>
+        <div class="col-sm-6" style="position:absolute;right:-236px;">
+            <h1 style="font-weight:normal;">{{ __('invoice.invoice') }}</h1>
         </div>
     </div>
     
-    <div class="row">
+    <div class="row" style="margin-top: -110px !important;">
         <div class="col-md-6">
             <br>
             <table cellpadding="0" cellspacing="0" width="100%" border="0">
@@ -37,7 +42,7 @@
                 </tbody>
             </table>
                 
-            <table cellpadding="0" cellspacing="0" width="100%" border="0">
+            <table class="mt-4" cellpadding="0" cellspacing="0" width="100%" border="0">
                 <tbody>
                     <tr>
                         <td align="left">  
@@ -64,14 +69,14 @@
         </div>
     
         <div class="col-md-6" id="main-subtable" style="margin-left:510px;">
-            <table id="subtable">
+            <table width="100%" id="subtable" style="margin-top:31px;">
                 <tr>
-                    <th>{{ __('invoice.invoice') }}#</th>
-                    <th>{{ __('invoice.date') }}</th>
+                    <th width="50%">{{ __('invoice.invoice') }}#</th>
+                    <th width="50%">{{ __('invoice.date') }}</th>
                 </tr>
                 <tr>
-                    <td>{{ $invoice->getInvoiceNo() }}</td>
-                    <td>{{ date('d-m-Y', strtotime($invoice->getPaidDate())) }}</td>
+                    <td width="50%">{{ $invoice->formatInvoiceNo() }}</td>
+                    <td width="50%">{{ date('d-m-Y', strtotime($invoice->getPaidDate())) }}</td>
                 </tr>
             </table>
         </div>
@@ -86,9 +91,9 @@
                     <tr>
                         <th>{{ __('invoice_item.item') }}</th>
                         <th>{{ __('invoice_item.description') }}</th>
-                        <th class="text-right">{{ __('invoice_item.quantity') }}</th>
-                        <th class="text-right">{{ __('invoice_item.price') }}</th>
-                        <th class="text-right">{{ __('invoice_item.amount') }}</th>
+                        <th>{{ __('invoice_item.quantity') }}</th>
+                        <th>{{ __('invoice_item.price') }}</th>
+                        <th>{{ __('invoice_item.amount') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -97,9 +102,9 @@
                         <tr>
                             <td class="text-center">{{ $loop->iteration }}</td>
                             <td class="text-center">{{ $invoiceItem->getItemName() }}</td>
-                            <td class="text-right">{{ $invoiceItem->getQuantity() }}</td>
-                            <td class="text-right">{{ currency($invoiceItem->getAmount()) }}</td>
-                            <td class="text-right">{{ currency($invoiceItem->getAmount() * $invoiceItem->getQuantity()) }}</td>
+                            <td class="text-center">{{ $invoiceItem->getQuantity() }}</td>
+                            <td class="text-center">{{ $invoiceItem->getAmount() }}</td>
+                            <td class="text-center">{{ $invoiceItem->getAmount() * $invoiceItem->getQuantity() }}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -107,66 +112,32 @@
         </div>
     @endif
     
-    <!-- START Unlayer html template-->
-    <div class="u-row-container" style="padding: 0px;background-color: transparent;overflow-x:auto;">
-        <div class="u-row" style="overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;">
-            <div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">
-        <div class="u-col u-col-66p83" style="max-width: 320px;min-width: 401px;display: table-cell;vertical-align: top;">
-        <div style="background-color: #c2e0f4;width: 100% !important;">
-        <div style="padding: 55px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;">
+    <div class="mt-5">
+        <div style="display: flex;width: 100%;">
+            <div style="background-color: #c2e0f4;width:48%;float:left;padding:20px;border:none;">
+                <div style="flex: 1;color: #5c5757;">
+                    <p style="font-size: 14px; line-height: 140%;"><strong><span style="font-size: 14px; line-height: 19.6px;">{{ __('invoice_item.notes') }}:</span></strong></p>
+                    <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 12px; line-height: 16.8px;">- {{ __('invoice_item.notes1') }}</span></p>
+                    <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 12px; line-height: 16.8px;">- {{ __('invoice_item.notes2') }}</span></p>
+                    <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 12px; line-height: 16.8px;">- {{ __('invoice_item.notes3') }}</span></p>
+                </div>
+            </div>
         
-        <table style="font-family:'Open Sans',sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
-        <tbody>
-            <tr>
-            <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:'Open Sans',sans-serif;" align="left">
-                
-        <div class="v-text-align" style="color: #5c5757; line-height: 140%; text-align: left; word-wrap: break-word;">
-            <p style="font-size: 14px; line-height: 140%;"><strong><span style="font-size: 14px; line-height: 19.6px;">{{ __('invoice_item.notes') }}:</span></strong></p>
-        <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 12px; line-height: 16.8px;">- {{ __('invoice_item.notes1') }}</span></p>
-        <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 12px; line-height: 16.8px;">- {{ __('invoice_item.notes2') }}</span></p>
-        <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 12px; line-height: 16.8px;">- {{ __('invoice_item.notes3') }}</span></p>
-        </div>
-        
-            </td>
-            </tr>
-        </tbody>
-        </table>
-        
-        </div>
-        </div>
-        </div>
-        <div class="u-col u-col-33p17" style="max-width: 320px;min-width: 199px;display: table-cell;vertical-align: top;">
-        <div style="background-color: #054169;width: 100% !important;">
-        <div style="padding: 35px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;">
-        
-        <table style="font-family:'Open Sans',sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
-        <tbody>
-            <tr>
-            <td style="overflow-wrap:break-word;word-break:break-word;padding:104px 0px 20px;font-family:'Open Sans',sans-serif;" align="left">
-                
-        <div class="v-text-align" style="color: #ffffff; line-height: 140%; text-align: left; word-wrap: break-word;">
-            <p style="font-size: 14px; line-height: 140%; text-align: right;"><strong><span style="font-size: 14px; line-height: 19.6px;">{{ __('invoice_item.total') }}</span></strong></p>
-        <p style="font-size: 14px; line-height: 140%; text-align: right;"><span style="font-size: 26px; line-height: 36.4px;"><strong><span style="line-height: 36.4px; font-size: 26px;">{{ __('invoice_item.currency') }}{{ number_format($invoice->getPaidAmount(), 2) }} </span></strong></span></p>
-        </div>
-        
-            </td>
-            </tr>
-        </tbody>
-        </table>
-        
-        </div>
-        </div>
-        </div>
-        </div>
+            <div style="background-color: #054169;width:46.5%;height:207px;float:left;border:none;position:relative;">
+                <div style="flex: 1;color: #ffffff;position: absolute;top: 120px;">
+                    <p style="font-size: 14px; line-height: 140%; text-align: right;padding-right: 24px;"><strong><span style="font-size: 14px; line-height: 19.6px;">{{ __('invoice_item.total') }}</span></strong></p>
+                    <p style="font-size: 14px; line-height: 140%; text-align: right;"><span style="font-size: 26px; line-height: 36.4px;"><strong><span style="line-height: 36.4px; font-size: 36px;">{{ __('invoice_item.currency') }}{{ number_format($invoice->getPaidAmount(), 2) }} </span></strong></span></p>
+                </div>
+            </div>
         </div>
     </div>
-    <!-- END Unlayer html template-->
     <br>
     
-    <div class="row">
-        <div class="col-sm-12 text-center">
-            <h1>{{ __('common.thank_you') }}.</h1>
+    <div class="row" style="clear:both;">
+        <div class="col-sm-12 mt-5 text-center">
+            <h1 style="font-weight:normal;">{{ __('common.thank_you') }}.</h1>
         </div>
     </div>
 </body>
 </html>
+
