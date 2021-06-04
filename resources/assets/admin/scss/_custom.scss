@@ -68,23 +68,49 @@
 
 #subtable td, th {
   border: 1px solid #000;
-  padding: 10px;
   text-align: center !important;
 }    
 
 #subtable th {
   background-color: #dddddd;
+  padding: 5px 10px;
+}
+
+#subtable td {
+  padding: 15px 10px;
+  font-size: 13px;
+}
+
+.no-fontbold {
+  font-weight: normal;
 }
 
 .custom-h1 {
-  font-weight: 200; 
+  font-weight: 500;
+  font-size: 46px;
 }
 
-#cursive-handwriting {
-  font-family: "Brush Script MT", "Brush Script Std", "cursive" !important;
+.custom-fontweight {
+  font-weight: 200;
 }
 
-@media screen and (max-width: 919px) {
+.font-verdana {
+  font-family: Verdana;
+}
+
+.font-arial {
+  font-family: Arial;
+}
+
+.font-cambria {
+  font-family: 'Cambria';
+}
+
+.font-calibri {
+  font-family: 'Calibri';
+}
+
+@media screen and (max-width: 992px) {
   .u-col-33p17 {
       display: table-row-group !important;
   }
@@ -97,8 +123,18 @@
   }
 }
 
-@media screen and (max-width: 1287px) and (min-width:920px) {
+@media screen and (max-width: 1247px) and (min-width:1058px) {
   #responsive-notes {
-    padding: 15px !important;
+    padding: 3px 10px 0 !important;
+  }
+}
+
+@media screen and (max-width: 1057px) and (min-width:993px) {
+  #responsive-notes {
+    padding: 0 10px !important;
+  }
+
+  #responsive-notes p {
+    font-size: 8px !important;
   }
 }
