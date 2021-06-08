@@ -135,12 +135,12 @@
     
     <div style="margin-top:5rem;">
         <div style="display: flex;width: 100%;">
-            <div style="background-color: #c2e0f4;width:48%;float:left;padding:5px 20px;border:none;">
+            <div style="background-color: #c2e0f4;width:48%;float:left;padding:30px 20px 13px;border:none;">
                 <div style="flex: 1;color: #5c5757;font-family:'Calibri';">
-                    <p style="font-size: 14px; line-height: 140%;"><strong><span style="font-size: 14px; line-height: 19.6px;">{{ __('invoice_item.notes') }}:</span></strong></p>
-                    <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 12px; line-height: 16.8px;">- {{ __('invoice_item.notes1') }}</span></p>
-                    <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 12px; line-height: 16.8px;">- {{ __('invoice_item.notes2') }}</span></p>
-                    <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 12px; line-height: 16.8px;">- {{ __('invoice_item.notes3') }}</span></p>
+                    <p style="font-size: 14px; line-height: 70%;"><strong><span style="font-size: 14px; line-height: 10.6px;">{{ __('invoice_item.notes') }}:</span></strong></p>
+                    <p style="font-size: 14px; line-height: 70%;"><span style="font-size: 12px; line-height: 10.6px;">- {{ __('invoice_item.notes1') }}</span></p>
+                    <p style="font-size: 14px; line-height: 70%;"><span style="font-size: 12px; line-height: 10.6px;">- {{ __('invoice_item.notes2') }}</span></p>
+                    <p style="font-size: 14px; line-height: 70%;"><span style="font-size: 12px; line-height: 10.6px;">- {{ __('invoice_item.notes3') }}</span></p>
                 </div>
             </div>
         

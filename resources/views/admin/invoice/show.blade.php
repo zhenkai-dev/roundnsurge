@@ -127,12 +127,12 @@
                             <table style="font-family:'Open Sans',sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
                                 <tbody>
                                     <tr>
-                                        <td id="responsive-notes" style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:'Calibri';" align="left">                                  
-                                            <div class="v-text-align" style="color: #5c5757; line-height: 140%; text-align: left; word-wrap: break-word;">
-                                                <p style="font-size: 14px; line-height: 140%;"><strong><span style="font-size: 14px; line-height: 19.6px;">{{ __('invoice_item.notes') }}:</span></strong></p>
-                                                <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 12px; line-height: 16.8px;">- {{ __('invoice_item.notes1') }}</span></p>
-                                                <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 12px; line-height: 16.8px;">- {{ __('invoice_item.notes2') }}</span></p>
-                                                <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 12px; line-height: 16.8px;">- {{ __('invoice_item.notes3') }}</span></p>
+                                        <td id="responsive-notes" style="overflow-wrap:break-word;word-break:break-word;padding:30px 10px 22px;font-family:'Calibri';" align="left">                                  
+                                            <div class="v-text-align" style="color: #5c5757; line-height: 70%; text-align: left; word-wrap: break-word;">
+                                                <p style="font-size: 14px; line-height: 70%;"><strong><span style="font-size: 14px; line-height: 10.6px;">{{ __('invoice_item.notes') }}:</span></strong></p>
+                                                <p style="font-size: 14px; line-height: 70%;"><span style="font-size: 12px; line-height: 10.6px;">- {{ __('invoice_item.notes1') }}</span></p>
+                                                <p style="font-size: 14px; line-height: 70%;"><span style="font-size: 12px; line-height: 10.6px;">- {{ __('invoice_item.notes2') }}</span></p>
+                                                <p style="font-size: 14px; line-height: 70%;"><span style="font-size: 12px; line-height: 10.6px;">- {{ __('invoice_item.notes3') }}</span></p>
                                             </div>                             
                                         </td>
                                     </tr>
