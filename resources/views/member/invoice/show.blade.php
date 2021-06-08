@@ -144,13 +144,13 @@
 
                 <div class="u-col u-col-33p17" style="max-width: 320px;min-width: 300px;display: table-cell;vertical-align: top;">
                     <div style="background-color: #054169;width: 100% !important;">
-                        <div style="padding:0 35px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;">
+                        <div style="padding:5px 35px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;">
                             <table style="font-family:'Open Sans',sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
                                 <tbody>
                                     <tr>
                                         <td style="overflow-wrap:break-word;word-break:break-word;padding:48px 0px 7px;font-family:Arial;" align="left">
                                             <div class="v-text-align" style="color: #ffffff; line-height: 140%; text-align: left; word-wrap: break-word;">
-                                                <p style="font-size: 14px; line-height: 140%; text-align: right;"><strong><span style="font-size: 46px; line-height: 19.6px;">{{ __('invoice_item.total') }}</span></strong></p>
+                                                <p style="font-size: 14px; line-height: 140%; text-align: right;"><strong><span style="font-size: 16px; line-height: 19.6px;padding-right:3px;">{{ __('invoice_item.total') }}</span></strong></p>
                                                 <p style="font-size: 14px; line-height: 140%; text-align: right;"><span style="font-size: 26px; line-height: 36.4px;"><strong><span style="line-height: 36.4px; font-size: 46px;">{{ __('invoice_item.currency') }}{{ number_format($invoice->getPaidAmount(), 2) }} </span></strong></span></p>
                                             </div>
                                         </td>
