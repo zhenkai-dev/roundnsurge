@@ -8,7 +8,7 @@
     <link href="{{ public_path('member/css/style.css') }}" rel="stylesheet" type="text/css" />
     <style>        
         #subtable th {
-            padding: 6px 5px !important;
+            padding: 0 5px !important;
         }
 
         #subtable td {
@@ -146,7 +146,7 @@
         
             <div style="background-color: #054169;width:46.5%;height:159px;float:left;border:none;position:relative;">
                 <div style="flex: 1;color: #ffffff;position: absolute;top: 74px;font-family:Arial;">
-                    <p style="font-size: 14px; line-height: 140%; text-align: right;padding-right: 24px;"><strong><span style="font-size: 46px; line-height: 19.6px;">{{ __('invoice_item.total') }}</span></strong></p>
+                    <p style="font-size: 14px; line-height: 140%; text-align: right;padding-right: 26px;"><strong><span style="font-size: 16px; line-height: 19.6px;">{{ __('invoice_item.total') }}</span></strong></p>
                     <p style="font-size: 14px; line-height: 140%; text-align: right;padding-right: 12px;"><span style="font-size: 26px; line-height: 36.4px;"><strong><span style="line-height: 36.4px; font-size: 46px;">{{ __('invoice_item.currency') }}{{ number_format($invoice->getPaidAmount(), 2) }} </span></strong></span></p>
                 </div>
             </div>
