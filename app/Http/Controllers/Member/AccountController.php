@@ -142,7 +142,16 @@ class AccountController extends Controller
                 $orderDetail = new OrderDetailDto();
                 $orderDetail->setItemId($package->getId());
                 $orderDetail->setItemModule(get_class($package));
-                $orderDetail->setItemName('Register as package "' . $package->packageTranslation->getName() . '"');
+                switch ($request->input('package_id')) {
+                    case 3:
+                        $orderDetail->setItemName('PRO PACKAGE ADVANCED-LEARNING');
+                        break;
+                    case 2:
+                        $orderDetail->setItemName('BASIC PACKAGE SELF-LEARNING VIDEO');
+                        break;
+                    default:
+                }
+                // $orderDetail->setItemName('Register as package "' . $package->packageTranslation->getName() . '"');
                 $orderDetail->setAmount($package->getPrice());
                 $orderDetail->setQuantity(1);
                 $order->setOrderDetails(serialize([$orderDetail->toArray()]));

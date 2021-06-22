@@ -122,7 +122,7 @@
                         @php /* @var \App\InvoiceItem $invoiceItem */ @endphp
                         <tr class="font-verdana">
                             <td class="text-center">{{ $loop->iteration }}</td>
-                            <td class="text-left">{{ $invoiceItem->getItemName() }}</td>
+                            <td class="text-left">{{ strtoupper($invoiceItem->getItemName()) }}</td>
                             <td class="text-center">{{ $invoiceItem->getQuantity() }}</td>
                             <td class="text-center">{{ $invoiceItem->getAmount() }}</td>
                             <td class="text-center">{{ $invoiceItem->getAmount() * $invoiceItem->getQuantity() }}</td>

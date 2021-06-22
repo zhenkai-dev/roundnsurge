@@ -144,7 +144,16 @@ class RegisterController extends Controller
                     $orderDetail = new OrderDetailDto();
                     $orderDetail->setItemId($packageCheck->getId());
                     $orderDetail->setItemModule(get_class($packageCheck));
-                    $orderDetail->setItemName('Register as package "' . $packageCheck->packageTranslation->getName() . '"');
+                    switch ($data['package']) {
+                        case 3:
+                            $orderDetail->setItemName('PRO PACKAGE ADVANCED-LEARNING');
+                            break;
+                        case 2:
+                            $orderDetail->setItemName('BASIC PACKAGE SELF-LEARNING VIDEO');
+                            break;
+                        default:
+                    }
+                    // $orderDetail->setItemName('Register as package "' . $packageCheck->packageTranslation->getName() . '"');
                     $orderDetail->setAmount($packageCheck->getPrice());
                     $orderDetail->setQuantity(1);
                     $order->setOrderDetails(serialize([$orderDetail->toArray()]));
