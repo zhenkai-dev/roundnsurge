@@ -75,7 +75,7 @@
                             <td>{{ $member->membership ? $member->membership->package->packageTranslation->getName() : '-' }}</td>
                             <td>{{ $member->getMobile() }}</td>
                             <td>{{ $member->getEmail() }}</td>
-                            <td>{{ $member->getCreatedAt() }}</td>
+                            <td>{{ $member->getCreatedAt()->setTimezone(session('timezone'))->toDayDateTimeString() }}</td>
                             <td class="text-center">{!! status_icon($member->isActive()) !!}</td>
                             <td class="text-center">
                                 @if (!Auth::user()->can(\App\Enumeration\PolicyActionEnum::UPDATE, $member))
