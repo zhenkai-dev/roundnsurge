@@ -23,5 +23,6 @@ return [
     'page' => 'Page|Pages',
     'setting' => 'Setting|Settings',
     'user' => 'User|Users',
-
+    'upgrade_orders' => 'Upgrade Membership|Upgrade Membership',
+    'register_orders' => 'Register Membership|Register Membership',
 ];

@@ -9,6 +9,9 @@
 
     @component('admin.shared.listing.listing-header-component', ['module' => \App\Invoice::class])
         @slot('total') {{ $invoices->total() }} @endslot
+        @section('add_new_invoice')
+            <a href="{{ route('admin.invoice.form') }}" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> {{ __('common.add_new') }}</a>
+        @endsection
     @endcomponent
 
     @component('admin.shared.listing.filter-form')

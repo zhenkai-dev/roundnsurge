@@ -29,4 +29,5 @@ return [
     'phone' => 'Phone',
     'business_contactno' => '+6019-556 7829',
     'date' => 'DATE',
+    'add_new_invoice' => 'Add new invoice',
 ];
