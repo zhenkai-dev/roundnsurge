@@ -84,6 +84,11 @@ try {
         );
     });
 
+    Breadcrumbs::register('admin.invoice.form', function (BreadcrumbsGenerator $breadcrumbs) {
+        $breadcrumbs->parent('admin.invoice.index');
+        $breadcrumbs->push(__('invoice.add_new_invoice'), route('admin.invoice.form'));
+    });
+
     Breadcrumbs::register('admin.page.index', function (BreadcrumbsGenerator $breadcrumbs) {
         $breadcrumbs->parent('admin.home');
         $breadcrumbs->push(trans_choice('entity.page', 2), route('admin.page.index'));

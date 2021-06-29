@@ -76,5 +76,7 @@ Route::group(['as' => 'admin.', 'namespace' => 'Admin'], function () {
         Route::resource('course', 'CourseController');
 
         Route::get('/invoice/{invoice}/download','InvoiceController@downloadAsPDF')->name('download.as.pdf');
+        Route::get('/invoice/create', 'InvoiceController@create')->name('invoice.form');
+        Route::post('/invoice/store', 'InvoiceController@store')->name('invoice.store');
     });
 });

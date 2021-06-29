@@ -17,5 +17,6 @@
                 {!! add_new_button($addNewUrl) !!}
             @endcan
         @endif
+        @yield('add_new_invoice')
     </div>
 </div>

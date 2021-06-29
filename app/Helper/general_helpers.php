@@ -364,3 +364,10 @@ if (!function_exists('can_access_module')) {
         }
     }
 }
+
+if (!function_exists('get_order_list')) {
+    function get_order_list(): array
+    {
+        return \App\Service\Admin\OrderService::getOrderList();
+    }
+}

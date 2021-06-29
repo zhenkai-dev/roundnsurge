@@ -25,7 +25,7 @@ class InvoiceService
             $invoiceNo = config('payment.invoice_initial_number');
             /* @var \App\Invoice $lastInvoice */
             if ($lastInvoice != null) {
-                if($lastInvoice == 10000000) {
+                if($lastInvoice == "10000000") {
                     $invoiceNo = $invoiceNo;
                 } else {
                     $invoiceNo = $lastInvoice->getInvoiceNo() + 1;

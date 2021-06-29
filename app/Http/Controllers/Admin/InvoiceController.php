@@ -8,6 +8,7 @@ use App\Invoice;
 use App\Service\Admin\InvoiceService;
 use Illuminate\Http\Request;
 use DownloadAsPDF;
+use Validator;
 
 class InvoiceController extends Controller
 {
@@ -70,5 +71,43 @@ class InvoiceController extends Controller
         $pdf = DownloadAsPDF::loadView('admin.invoice.detail', compact('invoice', 'invoiceItems'));
 
         return $pdf->download('invoice-'.$invoice->formatInvoiceNo().'.pdf');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function create(Invoice $invoice)
+    {
+        $this->authorize(PolicyActionEnum::CREATE, $invoice);
+
+        $title = __('invoice.add_new_invoice');
+        return view('admin.invoice.form', compact('title', 'invoice'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function store(Request $request)
+    {
+        $this->authorize(PolicyActionEnum::CREATE, Invoice::class);
+
+        $validator = Validator::make($request->all(), [
+            'order_id' => 'required|integer',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        $this->invoiceService->save($request);
+
+        return redirect()->route('admin.invoice.index');
     }
 }

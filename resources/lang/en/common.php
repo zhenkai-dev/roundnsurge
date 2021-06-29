@@ -48,4 +48,5 @@ return [
     'view_official' => 'Back to official site',
     'thank_you' => 'Thank you',
     'download' => 'Download',
+    'orderNo' => 'Order No.',
 ];
