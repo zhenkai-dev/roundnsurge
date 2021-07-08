@@ -18,7 +18,7 @@
                                     <li>{{ $error }}</li>
                                 @endforeach
                             @endcomponent
-                        @elseif (count(session('status')))
+                        @elseif (session('status'))
                             @component('member.shared.alert-component')
                                 @slot('type') success @endslot
 
